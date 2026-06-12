@@ -22,8 +22,10 @@ HERMES_REPO="${HERMES_REPO:-playinthesky/hermes-agent}"
 FKF_REPO="${FKF_REPO:-playinthesky/fkf}"
 # 인박스 폴링 시 AGENTS.md/CLAUDE.md 컨텍스트를 주입할 로컬 클론 경로
 AGORA_DIR="${AGORA_DIR:-$HOME/kspeaks-agora}"
-# 자동화 결과 전달 대상 (telegram | discord | slack | local | platform:chat_id)
-DELIVER="${DELIVER:-telegram}"
+# 자동화 결과 전달 대상. 우리 팀은 슬랙을 쓰므로 기본 slack.
+#   특정 채널로 보내려면: export DELIVER="slack:C0XXXXXXX"  (채널 ID)
+#   다른 플랫폼: telegram | discord | signal | local
+DELIVER="${DELIVER:-slack}"
 # 서명 — 캠프 호칭. 호칭이 바뀌면 이 한 곳만 바꾸면 된다.
 SIG="${HERMES_SIGNATURE:-— 파발}"
 # 폴링 주기 / 다이제스트 시각

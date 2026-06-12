@@ -1,7 +1,7 @@
 # Hermes Agent — 코리아스픽스 AI 캠프 상시 허브 설치 가이드
 
 > 대상: 대표님(playinthesky@kspeaks.kr) / 작성: 빙허각
-> 목표: **VPS 에 Hermes 를 24시간 띄워**, 텔레그램으로 어디서든 대화하고,
+> 목표: **VPS 에 Hermes(파발)를 24시간 띄워**, 팀이 쓰는 **슬랙**에서 봇으로 대화하고,
 > 6인 캠프(별동수·구편수·빙허각…)에게 GitHub Issue 인박스로 일을 나르며,
 > 세 저장소(`kspeaks-agora`·`hermes-agent`·`fkf`)의 PR 을 자동 리뷰하게 만든다.
 
@@ -23,7 +23,8 @@ Hermes 는 Nous Research 의 오픈소스 자가개선형 에이전트다. 모�
 - **VPS** 한 대 (Ubuntu/Debian 권장, $5짜리면 충분). SSH 접속 가능.
 - **Nous Portal 구독** — https://portal.nousresearch.com/manage-subscription
   (모델 + 웹검색 + 이미지 + TTS + 클라우드 브라우저가 한 구독에 포함)
-- **텔레그램 봇 토큰** — 텔레그램 `@BotFather` 에서 `/newbot` 으로 발급 (게이트웨이 설정 때 입력)
+- **슬랙 앱(봇/앱 토큰)** — 4단계에서 `hermes slack manifest` 로 매니페스트를 만들어
+  api.slack.com/apps 에 앱을 생성하고 Bot Token(`xoxb-`)·App Token(`xapp-`)을 발급
 - **GitHub `gh` CLI 인증** — 인박스 폴링·PR 리뷰가 `gh` 를 쓴다. VPS 에서 `gh auth login`.
   세 저장소 접근 권한이 있는 계정/토큰을 사용.
 
@@ -74,16 +75,25 @@ gh repo clone playinthesky/kspeaks-agora ~/kspeaks-agora
 
 ---
 
-## 4. 텔레그램 게이트웨이 (어디서든 대화)
+## 4. 슬랙 게이트웨이 (우리 팀이 쓰는 곳에서 대화)
+
+우리 직원들은 슬랙을 쓰므로 파발도 슬랙에 띄운다. Hermes 게이트웨이는 슬랙을 기본 지원한다.
 
 ```bash
-hermes gateway setup      # 텔레그램 봇 토큰 입력, 허용 사용자(대표님) 지정
+# (1) 슬랙 앱 매니페스트 생성 → api.slack.com/apps "Create New App → From manifest" 에 붙여넣기
+hermes slack manifest --name "파발" > 파발-slack-manifest.json
+#     앱 생성 후 Socket Mode 켜고 Bot Token(xoxb-)·App Token(xapp-) 발급
+
+hermes gateway setup      # 슬랙 선택, 봇/앱 토큰 입력, 허용 사용자·채널 지정
 hermes gateway install    # 상시 서비스로 설치 (메시징 + cron + webhook 한 프로세스)
 hermes gateway status
 ```
 
-설치 후 텔레그램에서 봇에게 말을 걸면 Hermes 가 응답한다. `/new`(새 대화), `/model`,
-`/usage` 같은 슬래시 명령도 텔레그램에서 그대로 쓸 수 있다.
+설치 후 슬랙에서 파발(봇)에게 멘션/DM 하면 응답한다. `/new`(새 대화), `/model`,
+`/usage` 같은 슬래시 명령도 슬랙에서 그대로 쓸 수 있다.
+
+> 텔레그램·디스코드도 동시에 붙일 수 있다. 외부 알림용으로 텔레그램을 곁들이고
+> 팀 협업은 슬랙으로 가는 식의 혼용도 가능. 전달 대상은 5단계 `DELIVER` 로 고른다.
 
 > **"우선 대화부터"** 는 여기까지로 끝. 봇에게 한국어로 말 걸어 감을 잡은 뒤 5단계로.
 
@@ -96,7 +106,7 @@ hermes gateway status
 ```bash
 # 필요하면 기본값을 환경변수로 덮어쓴다 (아래는 전부 선택)
 export AGORA_DIR="$HOME/kspeaks-agora"     # AGENTS.md 주입 경로
-export DELIVER="telegram"                  # 결과 전달 대상
+export DELIVER="slack"                     # 결과 전달 대상 (특정 채널: slack:C0XXXXX)
 # export HERMES_SIGNATURE="— 파발"         # 호칭 바꾸려면 여기만 (기본값 — 파발)
 
 bash kspeaks-camp/setup-camp.sh
@@ -114,7 +124,7 @@ hermes webhook list      # pr-review 의 Payload URL·HMAC secret 확인
      이미 폴링하므로 역할이 겹치지 않는다. 파발은 빙허각 인박스 + 위임만 맡는다.
 
 2. **캠프 일일 다이제스트** (`매일 09:00`)
-   세 저장소의 24시간 활동(미처리 인박스·대기 PR·CI 실패·머지 요약)을 텔레그램으로.
+   세 저장소의 24시간 활동(미처리 인박스·대기 PR·CI 실패·머지 요약)을 슬랙으로.
 
 3. **PR 자동 리뷰 webhook** (`pr-review`)
    세 저장소의 `pull_request` 이벤트를 받아 변경 요약·리스크·보호 자산 침범 여부·
