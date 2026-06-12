@@ -67,6 +67,22 @@ hermes cron create "$DIGEST_CRON" \
   --deliver "$DELIVER"
 echo "✓ 일일 다이제스트 cron 등록"
 
+# ── 2.5) 주간보고 봇 (MVP — 매주 금요일 17시, 한 주 마감) ───────────────────
+# "분리된 별채"의 실체: 아고라 앱을 건드리지 않고 파발 cron 으로 도는 독립 자동화.
+# 데이터 소스는 GitHub(추가 키 0). 시트·슬랙 지표는 후속 버전에서 확장.
+WEEKLY_CRON="${WEEKLY_CRON:-0 17 * * 5}"   # 매주 금요일 17:00
+hermes cron create "$WEEKLY_CRON" \
+  "이번 주(지난 7일) 캠프 주간보고를 한국어로 작성하라. 세 저장소
+($AGORA_REPO, $HERMES_REPO, $FKF_REPO)를 \`gh\` 로 집계한다:
+1) 이번 주 머지된 PR (저장소별 건수 + 핵심 항목),
+2) 아직 열린 PR·리뷰 대기 (특히 CI 실패),
+3) claude/codex/antigravity 인박스의 미처리 Issue 수,
+4) 한 줄 총평(이번 주 진척 / 다음 주 막힌 곳).
+슬랙용으로 짧은 불릿 + 핵심 숫자 표. 각 항목 링크. 끝에 '$SIG' 서명." \
+  --name "캠프 주간보고 봇" \
+  --deliver "$DELIVER"
+echo "✓ 주간보고 봇 cron 등록 (금 17:00)"
+
 # ── 3) PR 자동 리뷰 webhook (세 저장소 공용 라우트) ────────────────────────
 # 한 라우트로 세 저장소를 받는다. 각 저장소 Settings→Webhooks 에서
 # Payload URL = https://<VPS도메인>/webhooks/pr-review 로 추가하고,
