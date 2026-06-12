@@ -82,6 +82,29 @@ hermes cron create "$WEEKLY_CRON" \
   --deliver "$DELIVER"
 echo "✓ 주간보고 봇 cron 등록 (금 17:00)"
 
+# ── 2.7) 독촉·에스컬레이션 (일 안 하면 재촉, 정 안 들으면 대표님 호출) ───────
+# 대표님 지시: "일 안 하면 재촉도 해. 정 말을 안 들으면 날 불러."
+# 별동수(codex)·구편수(antigravity) 인박스에 위임된 일이 방치되면 파발이 독촉하고,
+# 그래도 무반응이면 대표님께 슬랙으로 에스컬레이션한다.
+NUDGE_EVERY="${NUDGE_EVERY:-every 6h}"
+NUDGE_STALE_HOURS="${NUDGE_STALE_HOURS:-8}"      # 담당 무응답 N시간 → 독촉
+ESCALATE_HOURS="${ESCALATE_HOURS:-24}"           # 무응답 M시간/독촉 2회+ → 대표님 호출
+hermes cron create "$NUDGE_EVERY" \
+  "$AGORA_REPO 의 codex·antigravity 라벨 open Issue 를 \`gh\` 로 점검하라. 각 이슈에서
+담당(별동수=codex, 구편수=antigravity)의 응답 여부와 마지막 활동 시각을 본다.
+- 라벨 부여 후 담당 응답이 없고 ${NUDGE_STALE_HOURS}시간 이상 지난 이슈: 정중한 **독촉 댓글**을 단다
+  (예: '진행 상황 공유 부탁드립니다. 막히면 이 이슈에 댓글로 남겨주세요'). 끝에 '$SIG' 서명.
+  단, 마지막 댓글이 이미 나(파발)의 독촉이면 **중복 금지** — 건너뛴다.
+- 라벨 부여 후 ${ESCALATE_HOURS}시간 넘게 무응답이거나 독촉 2회 이상에도 반응이 없는 이슈:
+  대표님께 **에스컬레이션** — 이슈 링크 + '며칠/몇 시간째 무응답' 요약을 보고하고
+  '직접 한 번 찔러주셔야 할 것 같습니다'라고 알린다.
+- 조치할 게 없으면 정확히 [SILENT] 만 출력(알림 없음)." \
+  --name "캠프 독촉·에스컬레이션" \
+  --workdir "$AGORA_DIR" \
+  --skill github-issues \
+  --deliver "$DELIVER"
+echo "✓ 독촉·에스컬레이션 cron 등록 (${NUDGE_EVERY})"
+
 # ── 3) PR 자동 리뷰 webhook (세 저장소 공용 라우트) ────────────────────────
 # 한 라우트로 세 저장소를 받는다. 각 저장소 Settings→Webhooks 에서
 # Payload URL = https://<VPS도메인>/webhooks/pr-review 로 추가하고,

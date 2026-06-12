@@ -131,6 +131,11 @@ hermes webhook list      # pr-review 의 Payload URL·HMAC secret 확인
    아고라 본체를 안 건드리는 **분리된 파발 cron**이 곧 "별채 서비스"의 실체. 시트·슬랙 지표는 후속 확장.
    (요일·시간은 `WEEKLY_CRON` 으로 변경)
 
+2.7. **독촉·에스컬레이션** (`6시간마다`)
+   별동수(`codex`)·구편수(`antigravity`)에 위임한 일이 방치되면 **정중히 독촉 댓글**을 달고,
+   그래도 무반응이면(기본 24시간/독촉 2회+) **대표님께 슬랙으로 호출**한다. "일 안 하면 재촉, 정 안 들으면 호출".
+   임계값은 `NUDGE_STALE_HOURS`·`ESCALATE_HOURS` 로 조정.
+
 3. **PR 자동 리뷰 webhook** (`pr-review`)
    세 저장소의 `pull_request` 이벤트를 받아 변경 요약·리스크·보호 자산 침범 여부·
    머지 가능성(Doc-only 자동 머지 조건 포함)을 한국어로 리뷰.
