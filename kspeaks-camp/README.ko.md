@@ -12,7 +12,7 @@ Hermes 는 Nous Research 의 오픈소스 자가개선형 에이전트다. 모�
 
 | 파일 | 용도 |
 |---|---|
-| `SOUL.md` | 헤르메스의 페르소나(캠프 정체성·규칙). `~/.hermes/SOUL.md` 로 복사 |
+| `SOUL.md` | 파발의 페르소나(캠프 정체성·규칙). `~/.hermes/SOUL.md` 로 복사 |
 | `setup-camp.sh` | 캠프 cron(인박스·다이제스트) + PR 리뷰 webhook 일괄 등록 |
 | `README.ko.md` | 이 문서 |
 
@@ -97,7 +97,7 @@ hermes gateway status
 # 필요하면 기본값을 환경변수로 덮어쓴다 (아래는 전부 선택)
 export AGORA_DIR="$HOME/kspeaks-agora"     # AGENTS.md 주입 경로
 export DELIVER="telegram"                  # 결과 전달 대상
-# export HERMES_SIGNATURE="— 헤르메스"      # 호칭 정식 부여 시 여기만 바꾸면 됨
+# export HERMES_SIGNATURE="— 파발"         # 호칭 바꾸려면 여기만 (기본값 — 파발)
 
 bash kspeaks-camp/setup-camp.sh
 hermes cron list
@@ -111,7 +111,7 @@ hermes webhook list      # pr-review 의 Payload URL·HMAC secret 확인
    별동수(`codex`)·구편수(`antigravity`) 라벨 Issue 로 **위임**하고, 원본에 서명 댓글로 보고.
    처리할 게 없으면 `[SILENT]` → 알림 없음(스팸 방지).
    → 별동수·구편수의 기존 런타임(`byeoldongsu_runtime`/`gupyeonsu_runtime`)이 자기 라벨을
-     이미 폴링하므로 역할이 겹치지 않는다. 헤르메스는 빙허각 인박스 + 위임만 맡는다.
+     이미 폴링하므로 역할이 겹치지 않는다. 파발은 빙허각 인박스 + 위임만 맡는다.
 
 2. **캠프 일일 다이제스트** (`매일 09:00`)
    세 저장소의 24시간 활동(미처리 인박스·대기 PR·CI 실패·머지 요약)을 텔레그램으로.
@@ -163,11 +163,11 @@ hermes send <대상> "메시지"   # 스크립트/CI 에서 직접 전달
 - **`main` 직접 commit 금지** — 모든 변경은 PR(기본 draft). force push 금지.
 - **보호 자산** 변경 금지(`app.py`·`tools/`·`templates/`·`static/`·`db/`·`infra/` 등).
 - **Doc-only 자동 머지**는 AGENTS.md 의 4개 조건을 모두 충족할 때만.
-- 모든 외부 메시지에 **서명**(`— 빙허각 (Hermes)`). 호칭이 정식 부여되면 한 곳(`HERMES_SIGNATURE`)만 변경.
+- 모든 외부 메시지에 **서명**(`— 파발`). 호칭이 바뀌면 한 곳(`HERMES_SIGNATURE`)만 변경.
 
-## 호칭 결정 노트 (대표님 판단 필요)
+## 호칭 (2026-06-12 대표님 명명)
 
-헤르메스는 현재 **빙허각의 상시 분신**으로 동작하도록 설정돼 있다(서명 `— 빙허각 (Hermes)`).
-정식 7번째 멤버로 올릴지, 별도 호(號)를 줄지는 6인 캠프 표준을 바꾸는 일이라 **대표님 결정 영역**이다.
-결정되면 (1) `SOUL.md` 의 정체성 단락, (2) `setup-camp.sh` 의 `HERMES_SIGNATURE`,
-(3) 필요 시 `kspeaks-agora/AGENTS.md` 한 줄 추가 — 세 곳만 손보면 된다.
+이 허브의 캠프 호칭은 **파발(擺撥)** — 조선의 24시간 릴레이 전령망에서 따왔다(실체: Hermes Agent).
+서명은 `— 파발`. 호칭을 바꾸려면 (1) `SOUL.md` 의 정체성 단락, (2) `setup-camp.sh` 의 `HERMES_SIGNATURE`,
+(3) 필요 시 `kspeaks-agora/AGENTS.md` 명단 한 줄 — 세 곳만 손보면 된다.
+정식 명단(6인) 등재 여부는 대표님이 `AGENTS.md` 갱신으로 확정한다.

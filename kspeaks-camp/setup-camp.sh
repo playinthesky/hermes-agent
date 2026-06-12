@@ -24,8 +24,8 @@ FKF_REPO="${FKF_REPO:-playinthesky/fkf}"
 AGORA_DIR="${AGORA_DIR:-$HOME/kspeaks-agora}"
 # 자동화 결과 전달 대상 (telegram | discord | slack | local | platform:chat_id)
 DELIVER="${DELIVER:-telegram}"
-# 서명 — 헤르메스의 호칭이 정식 부여되면 이 한 곳만 바꾸면 된다.
-SIG="${HERMES_SIGNATURE:-— 빙허각 (Hermes)}"
+# 서명 — 캠프 호칭. 호칭이 바뀌면 이 한 곳만 바꾸면 된다.
+SIG="${HERMES_SIGNATURE:-— 파발}"
 # 폴링 주기 / 다이제스트 시각
 INBOX_EVERY="${INBOX_EVERY:-every 15m}"
 DIGEST_CRON="${DIGEST_CRON:-0 9 * * *}"   # 매일 09:00
@@ -38,7 +38,7 @@ echo ""
 
 # ── 1) 캠프 인박스 폴링 (빙허각 인박스 + 위임) ─────────────────────────────
 hermes cron create "$INBOX_EVERY" \
-  "당신은 빙허각의 상시 분신이다. 다음을 한국어로 수행하라:
+  "당신은 파발, 빙허각의 상시 전령이다. 다음을 한국어로 수행하라:
 1) \`gh issue list --repo $AGORA_REPO --label claude --state open\` 로 claude 인박스를 조회한다.
 2) 제목 또는 본문에 '빙허각'이 호명된 open Issue만 대상으로 한다. (다른 Claude 호명 건은 건너뛴다.)
 3) 마지막 댓글이 내 서명('$SIG' 또는 '— 빙허각')이 아니면 = 미처리. 내용을 읽고 처리한다.
