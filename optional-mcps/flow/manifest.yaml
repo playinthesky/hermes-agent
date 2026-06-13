@@ -1,0 +1,50 @@
+# Nous-approved MCP catalog entry.
+# Presence in this directory = approval. Merged via PR review.
+manifest_version: 1
+
+name: flow
+description: Read Flow (flow.team) projects, posts, tasks, chats, members, and search results.
+source: https://github.com/playinthesky/hermes-agent/tree/main/optional-mcps/flow
+
+transport:
+  type: stdio
+  command: "${INSTALL_DIR}/optional-mcps/flow/.venv/bin/python"
+  args:
+    - "${INSTALL_DIR}/optional-mcps/flow/server.py"
+
+install:
+  type: git
+  url: https://github.com/playinthesky/hermes-agent.git
+  ref: main
+  bootstrap:
+    - "cd optional-mcps/flow && python3 -m venv .venv"
+    - "cd optional-mcps/flow && .venv/bin/pip install -r requirements.txt"
+
+auth:
+  type: api_key
+  env:
+    - name: FLOW_API_TOKEN
+      prompt: "Flow OpenAPI API key"
+      required: true
+      secret: true
+
+tools:
+  default_enabled:
+    - flow_list_projects
+    - flow_list_project_participants
+    - flow_list_project_posts
+    - flow_list_project_tasks
+    - flow_search_posts
+    - flow_search_projects
+    - flow_list_members
+    - flow_list_chats
+    - flow_get_chat
+
+post_install: |
+  Generate a Flow OpenAPI API key in the Flow Developer Portal with a company
+  administrator account. Hermes stores it as FLOW_API_TOKEN in ~/.hermes/.env.
+
+  This MCP is read-only. It exposes only GET-based Flow endpoints and does not
+  call post creation, notification, invite, task mutation, or message-send APIs.
+
+  Start a new Hermes session to load the Flow tools.
