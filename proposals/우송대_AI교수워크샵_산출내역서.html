@@ -185,19 +185,35 @@
 
   /* ============================== PRINT ============================== */
   @media print {
-    @page { size: A4; margin: 0; }   /* 실제 여백(2cm)은 렌더러에서 지정 */
+    @page { size: A4; margin: 0; }          /* 실제 여백(2cm)은 렌더러에서 지정 */
     body { background: #fff; padding: 0; }
-    .doc { width: auto; box-shadow: none; border-radius: 0; }
-    .pad { padding: 0; }                 /* 가로폭 확보 — 화면용 좌우 패딩 제거 */
-    .cover { padding: 0 0 20px; }
-    .doc-footer { padding: 14px 0 0; }
-    section, .bio, .contact, table, .ohi, .flow, .callout { break-inside: avoid; }
-    h2 { break-after: avoid; }
-    /* §4 산출내역서 + §4.1 총괄집계는 한 페이지에 */
-    section.cost { break-before: page; }
-    .cost-keep { break-inside: avoid; }
-    /* §2 토의 프레임 + §3 운영 구성을 한 페이지에 */
-    .keep2 { break-inside: avoid; }
+    .doc { width: auto; box-shadow: none; border-radius: 0; font-size: 12.5px; line-height: 1.42; }
+    /* 좌우 여백 복원(스파인과 간격) — 페이지 2cm 여백과 별개의 안쪽 간격 */
+    .pad { padding: 0 26px; }
+    .cover { padding: 10px 26px 12px; }
+    .doc-footer { padding: 10px 26px 0; }
+    /* 행간·여백 조이기 (벙벙함 제거) */
+    section { padding-top: 0; }
+    h2 { margin: 20px 0 8px; padding-bottom: 7px; }
+    h3 { margin: 13px 0 5px; }
+    p  { margin: 0 0 7px; }
+    .lead { margin-bottom: 8px; }
+    table { margin: 6px 0 12px; }
+    thead th { padding: 6px 11px; }
+    tbody td { padding: 5px 11px; }
+    table.compact td, table.compact th { padding: 4px 11px; }
+    tfoot td, .summary tfoot td { padding: 7px 11px; }
+    .summary tbody td { padding: 6px 12px; }
+    .phase-row td { padding: 4px 11px; }
+    .meta-block .it { padding: 12px 18px 12px 0; }
+    .ohi { margin: 10px 0 12px; } .ohi .d { padding: 10px 10px 12px; }
+    .flow { margin: 10px 0 14px; } .flow .ph { padding: 11px 12px 12px; }
+    .callout { margin: 12px 0; padding: 10px 14px; }
+    .bio { margin: 8px 0 4px; }
+    .contact { margin-top: 18px; padding: 18px 24px; }
+    /* 작은 블록만 페이지 분할 금지(섹션 전체는 자연스럽게 흐르게) */
+    .bio, .contact, table, .ohi, .flow, .callout, .cost-keep { break-inside: avoid; }
+    h2, h3 { break-after: avoid; }
   }
 </style>
 </head>
