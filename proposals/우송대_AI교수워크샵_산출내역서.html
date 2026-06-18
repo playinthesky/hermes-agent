@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>INsights from INside · 산출내역서 — 우송대학교 AI 교수 워크샵</title>
+<style>
+  :root{
+    --ink:#1a1f2b; --muted:#5b6472; --line:#d9dee6; --soft:#f4f6f9;
+    --brand:#0f4c81; --brand2:#1769aa; --accent:#e8714a;
+    --add-bg:#fff6ee; --add-line:#f0c9b3; --ok:#1f7a4d; --ok-bg:#eef7f1;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    color:var(--ink); margin:0; background:#eceff3; line-height:1.55;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .page{
+    max-width:880px; margin:24px auto; background:#fff; padding:40px 44px;
+    box-shadow:0 2px 18px rgba(20,30,50,.08); border-radius:6px;
+  }
+  header.doc{display:flex; justify-content:space-between; align-items:flex-start; border-bottom:3px solid var(--brand); padding-bottom:16px;}
+  .brand{font-size:13px; letter-spacing:.06em; color:var(--brand); font-weight:800;}
+  .brand small{display:block; font-weight:500; color:var(--muted); letter-spacing:.02em; margin-top:3px; font-size:11px;}
+  h1.title{font-size:26px; margin:2px 0 0; letter-spacing:.22em; color:var(--ink);}
+  .meta{font-size:12px; color:var(--muted); text-align:right;}
+  .meta b{color:var(--ink);}
+
+  .recv{margin:18px 0 6px; font-size:14px;}
+  .recv .edit{background:#fff7d6; border:1px dashed #d9c25e; padding:0 4px; border-radius:3px;}
+
+  .overview{display:grid; grid-template-columns:1fr 1fr; gap:6px 22px; background:var(--soft);
+    border:1px solid var(--line); border-radius:6px; padding:14px 18px; margin:14px 0 6px; font-size:12.5px;}
+  .overview div span{color:var(--muted); display:inline-block; min-width:74px;}
+
+  .callout{border-left:4px solid var(--accent); background:var(--add-bg); padding:12px 16px; margin:18px 0;
+    border-radius:0 6px 6px 0; font-size:12.5px;}
+  .callout b{color:#b5481f;}
+  .callout ul{margin:6px 0 0; padding-left:18px;}
+
+  h2.sec{font-size:16px; margin:30px 0 8px; padding:7px 12px; color:#fff;
+    background:linear-gradient(90deg,var(--brand),var(--brand2)); border-radius:5px; letter-spacing:.02em;}
+  h2.sec .tag{float:right; font-size:11px; font-weight:600; opacity:.92;}
+
+  table{width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;}
+  th,td{border:1px solid var(--line); padding:7px 9px; vertical-align:middle;}
+  thead th{background:#eef2f7; color:var(--ink); font-weight:700; text-align:center;}
+  td.cat{background:#f7f9fc; font-weight:700; width:90px; text-align:center; color:var(--brand);}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  td.ctr{text-align:center; white-space:nowrap;}
+  td.note{color:var(--muted); font-size:11px;}
+  tr.add td{background:var(--add-bg);}
+  tr.add td.cat{background:#fbe9dd;}
+  .badge{display:inline-block; font-size:9.5px; font-weight:800; color:#fff; background:var(--accent);
+    border-radius:3px; padding:1px 5px; margin-left:5px; vertical-align:middle; letter-spacing:.03em;}
+  .badge.up{background:var(--brand2);}
+  tr.sub td{background:#f0f3f8; font-weight:700;}
+  tr.total td{background:var(--brand); color:#fff; font-weight:800; font-size:13px;}
+  tr.vat td{background:#dfe7f1;}
+
+  .uni-bear{border:1px dashed var(--ok); background:var(--ok-bg); border-radius:6px; padding:12px 16px; margin:12px 0; font-size:12px;}
+  .uni-bear b{color:var(--ok);}
+  .uni-bear table{margin-top:8px;}
+  .uni-bear th{background:#dff0e6;}
+
+  .compare{margin-top:10px;}
+  .compare td.num{font-weight:700;}
+  .compare tr.hl td{background:#fff3ec;}
+
+  .notes{font-size:11.5px; color:var(--muted); margin-top:26px; border-top:1px solid var(--line); padding-top:14px;}
+  .notes li{margin-bottom:3px;}
+  footer.doc{margin-top:30px; display:flex; justify-content:space-between; align-items:flex-end;
+    border-top:2px solid var(--brand); padding-top:14px; font-size:12px;}
+  .sign{text-align:right;}
+  .sign .co{font-weight:800; color:var(--brand); font-size:14px;}
+  .stamp{display:inline-block; width:46px; height:46px; border:2px solid var(--accent); border-radius:50%;
+    color:var(--accent); font-size:10px; line-height:1.1; text-align:center; padding-top:11px; margin-left:10px; opacity:.65;}
+
+  @media print{
+    body{background:#fff;}
+    .page{box-shadow:none; margin:0; max-width:none; border-radius:0; padding:18mm 16mm;}
+    h2.sec{break-after:avoid;}
+    table{break-inside:avoid;}
+    .no-print{display:none;}
+  }
+  .toolbar{max-width:880px; margin:14px auto -8px; text-align:right;}
+  .toolbar button{font-size:12px; padding:7px 14px; border:1px solid var(--brand); background:var(--brand);
+    color:#fff; border-radius:5px; cursor:pointer;}
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <button onclick="window.print()">🖨 인쇄 / PDF 저장</button>
+</div>
+
+<div class="page">
+  <header class="doc">
+    <div>
+      <div class="brand">INsights&nbsp;from&nbsp;INside
+        <small>워크샵 기획 · 퍼실리테이션 · 조직혁신 파트너</small>
+      </div>
+      <h1 class="title">산 출 내 역 서</h1>
+    </div>
+    <div class="meta">
+      <div>견적일자 : <b>2026. 06. 18.</b></div>
+      <div>견적번호 : <b>IFI-2026-WSU-AI</b></div>
+      <div>유효기간 : <b>견적일로부터 30일</b></div>
+    </div>
+  </header>
+
+  <div class="recv">
+    수신 : <b><span class="edit" title="문서 기준 표기 — 우석대인 경우 수정">우송대학교</span></b> 귀중
+    &nbsp;|&nbsp; 프로젝트 : <b>’26년 여름 AI 교수 워크샵 (우송대학교 AI 비전 수립 워크샵)</b>
+  </div>
+
+  <div class="overview">
+    <div><span>대주제</span> AI 시대 우송대학교의 미래교육과 대학혁신 전략</div>
+    <div><span>일시</span> 2026년 7월 중순 (1일 · 10:00~17:30)</div>
+    <div><span>장소</span> 우송대학교 (전체 회의실 + 조별 회의실 약 10실)</div>
+    <div><span>참석</span> 약 100명 (10개 조 편성 기준)</div>
+    <div><span>진행</span> 기조강연 · 분임토의 · 조별발표 · 우선순위 투표 · 시상</div>
+    <div><span>산출물</span> AI 비전 초안 / 분야별 전략과제 / 우선 실행과제</div>
+  </div>
+
+  <div class="callout">
+    <b>본 산출내역서는 두 가지 안(案)으로 구성됩니다.</b>
+    <ul>
+      <li><b>[안 1] 역할분담형</b> — 식음·시상·인쇄·장비 등은 <b>우송대학교가 직접 집행</b>하고, INsights from INside는 전문 영역(기획·퍼실리테이션·교보재 설계·결과보고)만 수행 → <b>견적 절감</b></li>
+      <li><b>[안 2] 턴키형</b> — 기획부터 식음·시상·현장운영까지 <b>전 과정을 INsights from INside가 일괄 수행</b> (대학은 장소만 제공)</li>
+    </ul>
+    <div style="margin-top:8px;">
+      <b>※ 우송대 초안 대비 보강(우리 기준) 반영 항목</b> :
+      <span class="badge">추가</span> 총괄 기획자(PD) &nbsp;
+      <span class="badge">추가</span> 교보재(워크북·키트·기록지·발표양식) &nbsp;
+      <span class="badge up">보강</span> 테이블 퍼실리테이터 5명 → <b>10명</b>(100명/10조 기준) &nbsp;
+      <span class="badge up">보강</span> 사전 설문 설계·분석 / 결과보고서 명시
+    </div>
+  </div>
+
+  <!-- ===================== 안 1 ===================== -->
+  <h2 class="sec">[ 안 1 ] 역할분담형 — INsights from INside 수행분 <span class="tag">VAT 별도</span></h2>
+  <table>
+    <thead>
+      <tr><th style="width:90px;">구분</th><th>항목</th><th style="width:110px;">산출기준</th><th style="width:62px;">수량</th><th style="width:92px;">단가(원)</th><th style="width:104px;">금액(원)</th><th style="width:130px;">비고</th></tr>
+    </thead>
+    <tbody>
+      <tr class="add"><td class="cat" rowspan="3">기획·설계</td><td>워크샵 총괄 기획·운영 (PD)<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">3,500,000</td><td class="num">3,500,000</td><td class="note">프로그램 설계·총괄 디렉팅</td></tr>
+      <tr><td>사전 설문 설계 및 결과 분석</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note">전체교수 인식조사</td></tr>
+      <tr><td>토의 주제·산출물·진행시나리오 설계</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="note">5개 분과 설계</td></tr>
+
+      <tr><td class="cat" rowspan="2">퍼실리<br>테이션</td><td>메인 퍼실리테이터</td><td class="ctr">1명/1일</td><td class="ctr">1</td><td class="num">2,500,000</td><td class="num">2,500,000</td><td class="note">전체 진행 총괄</td></tr>
+      <tr><td>테이블 퍼실리테이터<span class="badge up">10명</span></td><td class="ctr">명/1일</td><td class="ctr">10</td><td class="num">500,000</td><td class="num">5,000,000</td><td class="note">조별 1인 (10조)</td></tr>
+
+      <tr class="add"><td class="cat" rowspan="2">교보재</td><td>워크북·기록지·발표양식 기획/디자인<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note">인쇄용 원고 제공(인쇄 대학)</td></tr>
+      <tr class="add"><td>조별 운영키트·명찰 디자인/사양<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">500,000</td><td class="num">500,000</td><td class="note">제작·구매 대학 집행</td></tr>
+
+      <tr><td class="cat">현장운영</td><td>현장 운영 총괄 (대학 지원인력 협업)</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">800,000</td><td class="num">800,000</td><td class="note">진행 감독·조율</td></tr>
+
+      <tr><td class="cat">결과물</td><td>결과보고서 · AI 비전/전략과제 초안</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">2,000,000</td><td class="num">2,000,000</td><td class="note">워크샵 후 2주 내</td></tr>
+
+      <tr class="sub"><td colspan="5">공급가액 합계</td><td class="num">18,300,000</td><td></td></tr>
+      <tr class="vat"><td colspan="5">부가가치세 (10%)</td><td class="num">1,830,000</td><td></td></tr>
+      <tr class="total"><td colspan="5">[ 안 1 ] 합계 금액</td><td class="num">20,130,000</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="uni-bear">
+    <b>＋ 우송대학교 직접 집행(별도 · 본 견적 제외)</b> — 안 1 채택 시 대학이 자체 예산으로 집행하는 항목입니다.
+    <table>
+      <thead><tr><th>항목</th><th style="width:130px;">산출기준</th><th style="width:120px;">예상금액(원)</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>중식</td><td class="ctr">100명 × 20,000</td><td class="num">2,000,000</td><td class="note">도시락/레스토랑</td></tr>
+        <tr><td>다과</td><td class="ctr">100명 × 10,000</td><td class="num">1,000,000</td><td class="note"></td></tr>
+        <tr><td>시상품/상금</td><td class="ctr">최우수·우수조</td><td class="num">2,000,000</td><td class="note"></td></tr>
+        <tr><td>교보재 인쇄·제작</td><td class="ctr">100부 + 조별키트</td><td class="num">약 2,000,000</td><td class="note">대학 인쇄팀/구매</td></tr>
+        <tr><td>음향·영상·장비, 지원인력</td><td class="ctr">대학 시설/직원</td><td class="num">대학 자원</td><td class="note">현물 지원</td></tr>
+        <tr class="sub"><td colspan="2">대학 직접 집행 합계(예상)</td><td class="num">약 7,000,000</td><td></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:6px;"><b>안 1 총 사업비(우리 견적 + 대학 직접집행) ≈ 27,130,000원</b> (단, 대학 직접집행분은 우리 청구 대상 아님)</div>
+  </div>
+
+  <!-- ===================== 안 2 ===================== -->
+  <h2 class="sec">[ 안 2 ] 턴키형 — INsights from INside 일괄 수행 <span class="tag">VAT 별도</span></h2>
+  <table>
+    <thead>
+      <tr><th style="width:90px;">구분</th><th>항목</th><th style="width:110px;">산출기준</th><th style="width:62px;">수량</th><th style="width:92px;">단가(원)</th><th style="width:104px;">금액(원)</th><th style="width:130px;">비고</th></tr>
+    </thead>
+    <tbody>
+      <tr class="add"><td class="cat" rowspan="3">기획·설계</td><td>워크샵 총괄 기획·운영 (PD)<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">3,500,000</td><td class="num">3,500,000</td><td class="note">프로그램 설계·총괄</td></tr>
+      <tr><td>사전 설문 설계 및 결과 분석</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note"></td></tr>
+      <tr><td>토의 주제·산출물·진행시나리오 설계</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="note">5개 분과</td></tr>
+
+      <tr><td class="cat" rowspan="2">퍼실리<br>테이션</td><td>메인 퍼실리테이터</td><td class="ctr">1명/1일</td><td class="ctr">1</td><td class="num">2,500,000</td><td class="num">2,500,000</td><td class="note"></td></tr>
+      <tr><td>테이블 퍼실리테이터<span class="badge up">10명</span></td><td class="ctr">명/1일</td><td class="ctr">10</td><td class="num">500,000</td><td class="num">5,000,000</td><td class="note">조별 1인 (10조)</td></tr>
+
+      <tr class="add"><td class="cat" rowspan="4">교보재</td><td>워크북·기록지·발표양식 기획/디자인<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note"></td></tr>
+      <tr class="add"><td>워크북 인쇄·제작<span class="badge">추가</span></td><td class="ctr">부 × 15,000</td><td class="ctr">100</td><td class="num">15,000</td><td class="num">1,500,000</td><td class="note">참가자 배포본</td></tr>
+      <tr class="add"><td>조별 운영키트(전지·포스트잇·마커 등)<span class="badge">추가</span></td><td class="ctr">조 × 50,000</td><td class="ctr">10</td><td class="num">50,000</td><td class="num">500,000</td><td class="note"></td></tr>
+      <tr class="add"><td>명찰·사이니지·현수막<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">500,000</td><td class="num">500,000</td><td class="note"></td></tr>
+
+      <tr><td class="cat" rowspan="2">현장운영</td><td>현장 운영·기록 인력</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note">진행감독+기록</td></tr>
+      <tr><td>음향·영상·장비 운영</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="note">대학 시설 활용 시 조정</td></tr>
+
+      <tr><td class="cat" rowspan="3">부대비</td><td>중식</td><td class="ctr">100명 × 20,000</td><td class="ctr">100</td><td class="num">20,000</td><td class="num">2,000,000</td><td class="note">도시락/레스토랑</td></tr>
+      <tr><td>다과</td><td class="ctr">100명 × 10,000</td><td class="ctr">100</td><td class="num">10,000</td><td class="num">1,000,000</td><td class="note"></td></tr>
+      <tr><td>시상품/상금</td><td class="ctr">최우수·우수조</td><td class="ctr">1</td><td class="num">2,000,000</td><td class="num">2,000,000</td><td class="note"></td></tr>
+
+      <tr><td class="cat">결과물</td><td>결과보고서 · AI 비전/전략과제 초안</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">2,000,000</td><td class="num">2,000,000</td><td class="note">워크샵 후 2주 내</td></tr>
+
+      <tr class="sub"><td colspan="5">공급가액 합계</td><td class="num">27,000,000</td><td></td></tr>
+      <tr class="vat"><td colspan="5">부가가치세 (10%)</td><td class="num">2,700,000</td><td></td></tr>
+      <tr class="total"><td colspan="5">[ 안 2 ] 합계 금액</td><td class="num">29,700,000</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===================== 비교 ===================== -->
+  <h2 class="sec">안 비교 요약</h2>
+  <table class="compare">
+    <thead>
+      <tr><th>구분</th><th>안 1 · 역할분담형</th><th>안 2 · 턴키형</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="cat">수행 범위</td><td class="ctr">기획·퍼실·교보재 설계·결과보고</td><td class="ctr">기획~식음·시상·현장운영 전 과정</td></tr>
+      <tr><td class="cat">대학 역할</td><td class="ctr">식음·시상·인쇄·장비·인력 직접 집행</td><td class="ctr">장소 제공</td></tr>
+      <tr><td class="cat">INsights 공급가</td><td class="num">18,300,000</td><td class="num">27,000,000</td></tr>
+      <tr><td class="cat">부가세(10%)</td><td class="num">1,830,000</td><td class="num">2,700,000</td></tr>
+      <tr class="hl"><td class="cat">우리 청구 합계</td><td class="num">20,130,000</td><td class="num">29,700,000</td></tr>
+      <tr><td class="cat">대학 직접집행</td><td class="num">약 7,000,000</td><td class="num">—</td></tr>
+      <tr><td class="cat">총 사업비(참고)</td><td class="num">약 27,130,000</td><td class="num">29,700,000</td></tr>
+    </tbody>
+  </table>
+
+  <ul class="notes">
+    <li>본 견적의 모든 금액은 <b>부가가치세 별도</b>이며, 단가는 협의 가능한 <b>가안</b>입니다. (우송대 초안 단가를 기준으로 산정)</li>
+    <li>메인/테이블 퍼실리테이터 구성은 참석 인원·조 편성 확정에 따라 조정됩니다. (우송대 초안: 퍼실리테이터 견적 진행중)</li>
+    <li>외국인 교수 조 등 별도 운영이 필요한 경우 통역·이중언어 교보재가 추가될 수 있습니다.</li>
+    <li>안 2의 음향·영상·장비는 우송대 교내 시설 활용 시 해당 금액만큼 차감 조정합니다.</li>
+    <li>기조강연(센터장 등) 사례비는 교내 인사로 가정하여 미포함했습니다. 외부 강연자 섭외 시 별도 견적합니다.</li>
+    <li>일정·인원·산출물 범위 변경 시 재견적될 수 있습니다.</li>
+  </ul>
+
+  <footer class="doc">
+    <div style="font-size:11px;color:var(--muted);">
+      본 산출내역서는 제안용 참고 자료이며, 최종 금액은 계약 시 확정됩니다.
+    </div>
+    <div class="sign">
+      <div class="co">INsights from INside</div>
+      <div style="color:var(--muted);font-size:11px;">담당 : ___________ &nbsp; 연락처 : ___________
+        <span class="stamp">직인<br>(인)</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
