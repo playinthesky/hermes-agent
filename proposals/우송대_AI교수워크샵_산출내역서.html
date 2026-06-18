@@ -1,259 +1,428 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>INsights from INside · 산출내역서 — 우송대학교 AI 교수 워크샵</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>코리아스픽스 · 산출내역서 — 우송대학교 AI 교수 워크샵</title>
+<link rel="stylesheet" href="colors_and_type.css">
 <style>
-  :root{
-    --ink:#1a1f2b; --muted:#5b6472; --line:#d9dee6; --soft:#f4f6f9;
-    --brand:#0f4c81; --brand2:#1769aa; --accent:#e8714a;
-    --add-bg:#fff6ee; --add-line:#f0c9b3; --ok:#1f7a4d; --ok-bg:#eef7f1;
+  /* ============================== PAGE ============================== */
+  body { background: #E7EAED; margin: 0; padding: 44px 0 80px; }
+
+  .doc {
+    width: 880px; margin: 0 auto;
+    background: var(--white);
+    box-shadow: var(--shadow-4);
+    border-radius: 4px;
+    color: var(--fg-1);
+    font-size: 14px; line-height: 1.62;
+    word-break: keep-all;
+    position: relative; overflow: hidden;
   }
-  *{box-sizing:border-box;}
-  body{
-    font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
-    color:var(--ink); margin:0; background:#eceff3; line-height:1.55;
-    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  /* left spine — navy → teal → gold, the AX document signature */
+  .doc::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; z-index: 5;
+    background: linear-gradient(180deg, var(--ax-blue) 0%, var(--ax-blue) 58%, var(--ax-teal) 58%, var(--ax-teal) 80%, var(--ax-gold) 80%);
   }
-  .page{
-    max-width:880px; margin:24px auto; background:#fff; padding:40px 44px;
-    box-shadow:0 2px 18px rgba(20,30,50,.08); border-radius:6px;
+
+  .pad { padding: 0 76px; }
+
+  /* ============================== COVER ============================== */
+  .cover { padding: 52px 76px 30px; position: relative; }
+
+  .topbar { display: flex; justify-content: space-between; align-items: flex-start; }
+  .logotype { line-height: 1.15; }
+  .logotype .ks { font-size: 19px; font-weight: 800; letter-spacing: -0.04em; }
+  .logotype .ks .a { color: var(--ks-navy); }
+  .logotype .ks .b { color: var(--ks-blue); }
+  .logotype .sub { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--fg-2); text-transform: uppercase; margin-top: 5px; }
+  .docmark { text-align: right; font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); letter-spacing: 0.04em; line-height: 1.7; }
+  .docmark .pill { display: inline-block; background: var(--ax-blue); color: #fff; font-weight: 600; padding: 4px 11px; border-radius: 4px; letter-spacing: 0.06em; }
+
+  .cover .goldrule { height: 1px; background: var(--ax-gold); margin: 34px 0 40px; position: relative; }
+  .cover .goldrule::after { content: ""; position: absolute; left: 0; top: -1px; width: 64px; height: 3px; background: var(--ax-gold); }
+
+  .cover .kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.2em; color: var(--ax-teal); text-transform: uppercase; font-weight: 600; margin-bottom: 20px; }
+  .cover h1 { font-size: 50px; line-height: 1.05; letter-spacing: -0.05em; color: var(--ax-blue); margin: 0 0 16px; font-weight: 800; }
+  .cover h1 .in { color: var(--ax-teal); }
+  .cover .program { font-size: 22px; color: var(--dark-gray); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 28px; }
+  .cover .ethos { font-size: 16px; font-style: italic; color: var(--ax-blue); border-left: 3px solid var(--ax-teal); padding: 4px 0 4px 18px; margin: 0 0 44px; letter-spacing: -0.01em; }
+
+  /* meta block */
+  .meta-block {
+    border-top: 1px solid var(--border-1); border-bottom: 1px solid var(--border-1);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
   }
-  header.doc{display:flex; justify-content:space-between; align-items:flex-start; border-bottom:3px solid var(--brand); padding-bottom:16px;}
-  .brand{font-size:13px; letter-spacing:.06em; color:var(--brand); font-weight:800;}
-  .brand small{display:block; font-weight:500; color:var(--muted); letter-spacing:.02em; margin-top:3px; font-size:11px;}
-  h1.title{font-size:26px; margin:2px 0 0; letter-spacing:.22em; color:var(--ink);}
-  .meta{font-size:12px; color:var(--muted); text-align:right;}
-  .meta b{color:var(--ink);}
+  .meta-block .it { padding: 18px 22px 18px 0; border-right: 1px solid var(--border-2); }
+  .meta-block .it:last-child { border-right: 0; padding-right: 0; }
+  .meta-block .it:not(:first-child) { padding-left: 22px; }
+  .meta-block dt { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--fg-2); text-transform: uppercase; font-weight: 600; }
+  .meta-block dd { margin: 7px 0 0; font-size: 15px; color: var(--ax-blue); font-weight: 700; letter-spacing: -0.02em; }
+  .meta-block dd small { display: block; font-weight: 500; font-size: 11.5px; color: var(--fg-2); margin-top: 2px; letter-spacing: 0; }
 
-  .recv{margin:18px 0 6px; font-size:14px;}
-  .recv .edit{background:#fff7d6; border:1px dashed #d9c25e; padding:0 4px; border-radius:3px;}
+  /* ============================== SECTIONS ============================== */
+  section { padding-top: 6px; }
+  .pad > section:first-child > h2 { margin-top: 24px; }
+  h2 { font-size: 21px; color: var(--ax-blue); margin: 46px 0 14px; padding-bottom: 9px; border-bottom: 1px solid var(--border-1); letter-spacing: -0.035em; font-weight: 700; display: flex; align-items: baseline; gap: 12px; }
+  h2 .num { font-family: var(--font-mono); color: var(--ax-teal); font-weight: 700; font-size: 16px; }
+  h2 .en { margin-left: auto; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--fg-3); text-transform: uppercase; font-weight: 500; align-self: center; }
+  h3 { font-size: 15px; color: var(--ax-blue); margin: 26px 0 9px; font-weight: 700; letter-spacing: -0.02em; }
+  h3 .num { font-family: var(--font-mono); color: var(--ax-teal); margin-right: 8px; font-weight: 700; }
+  p { margin: 0 0 13px; }
+  .lead { font-size: 15px; color: var(--fg-1); }
+  .lead strong { color: var(--ax-blue); }
+  .lead .lead-em { font-style: italic; color: var(--fg-2); }
+  .lead .lead-em strong { color: var(--ax-teal); }
 
-  .overview{display:grid; grid-template-columns:1fr 1fr; gap:6px 22px; background:var(--soft);
-    border:1px solid var(--line); border-radius:6px; padding:14px 18px; margin:14px 0 6px; font-size:12.5px;}
-  .overview div span{color:var(--muted); display:inline-block; min-width:74px;}
+  /* ============================== TABLES ============================== */
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 20px; font-size: 13px; }
+  thead th { background: var(--ax-blue); color: #fff; text-align: left; padding: 9px 13px; font-weight: 600; letter-spacing: 0.01em; font-size: 12px; }
+  thead th.num { text-align: right; }
+  tbody td { padding: 9px 13px; border-bottom: 1px solid var(--off-white); vertical-align: top; }
+  tbody td.num { text-align: right; font-family: var(--font-mono); font-feature-settings: "tnum" 1; color: var(--ax-blue); letter-spacing: 0; white-space: nowrap; }
+  tbody tr:nth-child(even) td { background: var(--paper); }
+  tbody td .code { display: inline-block; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #fff; background: var(--ax-blue); padding: 2px 7px; border-radius: 3px; letter-spacing: 0.02em; white-space: nowrap; }
+  tbody td .code.i { background: var(--ax-teal); }
+  tbody td .code.e { background: #8A6A1F; }
+  tbody td .code.p { background: var(--mid-gray); }
+  tbody td.lbl { color: var(--ax-blue); font-weight: 600; }
+  tbody td .ev { display: block; color: var(--fg-2); font-size: 11.5px; margin-top: 2px; letter-spacing: -0.01em; }
+  tfoot td { background: rgba(30,58,95,0.06); font-weight: 700; color: var(--ax-blue); border-top: 2px solid var(--ax-blue); padding: 11px 13px; }
+  tfoot td.num { text-align: right; font-family: var(--font-mono); letter-spacing: 0; white-space: nowrap; }
+  .phase-row td { background: var(--ax-blue-10) !important; font-weight: 700; color: var(--ax-blue); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 13px; }
+  table.compact td, table.compact th { padding: 7px 13px; }
+  table.compact { font-size: 12.5px; }
 
-  .callout{border-left:4px solid var(--accent); background:var(--add-bg); padding:12px 16px; margin:18px 0;
-    border-radius:0 6px 6px 0; font-size:12.5px;}
-  .callout b{color:#b5481f;}
-  .callout ul{margin:6px 0 0; padding-left:18px;}
+  /* total summary table — emphasised */
+  .summary { margin-top: 4px; }
+  .summary tbody td { padding: 10px 14px; font-size: 13.5px; }
+  .summary tbody td.lbl { font-weight: 600; color: var(--dark-gray); }
+  .summary tbody td.basis { color: var(--fg-2); font-size: 12px; }
+  .summary tfoot td { background: var(--ax-blue); color: #fff; border: 0; padding: 14px 14px; font-size: 15px; }
+  .summary tfoot td.num { color: var(--ax-gold); font-size: 17px; font-weight: 700; }
+  .summary tfoot td .won { font-family: var(--font-sans); font-size: 12px; color: #fff; opacity: .8; margin-left: 4px; }
 
-  h2.sec{font-size:16px; margin:30px 0 8px; padding:7px 12px; color:#fff;
-    background:linear-gradient(90deg,var(--brand),var(--brand2)); border-radius:5px; letter-spacing:.02em;}
-  h2.sec .tag{float:right; font-size:11px; font-weight:600; opacity:.92;}
+  /* ============================== CALLOUTS / LISTS ============================== */
+  .callout { background: rgba(233,196,106,0.15); border-left: 4px solid var(--ax-gold); padding: 13px 18px; border-radius: 0 6px 6px 0; margin: 18px 0; font-size: 13px; }
+  .callout .lab { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: #8A6A1F; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px; }
+  .callout strong { color: var(--ax-blue); }
 
-  table{width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;}
-  th,td{border:1px solid var(--line); padding:7px 9px; vertical-align:middle;}
-  thead th{background:#eef2f7; color:var(--ink); font-weight:700; text-align:center;}
-  td.cat{background:#f7f9fc; font-weight:700; width:90px; text-align:center; color:var(--brand);}
-  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;}
-  td.ctr{text-align:center; white-space:nowrap;}
-  td.note{color:var(--muted); font-size:11px;}
-  tr.add td{background:var(--add-bg);}
-  tr.add td.cat{background:#fbe9dd;}
-  .badge{display:inline-block; font-size:9.5px; font-weight:800; color:#fff; background:var(--accent);
-    border-radius:3px; padding:1px 5px; margin-left:5px; vertical-align:middle; letter-spacing:.03em;}
-  .badge.up{background:var(--brand2);}
-  tr.sub td{background:#f0f3f8; font-weight:700;}
-  tr.total td{background:var(--brand); color:#fff; font-weight:800; font-size:13px;}
-  tr.vat td{background:#dfe7f1;}
+  ul.bullets { list-style: none; padding-left: 0; margin: 4px 0 14px; }
+  ul.bullets li { position: relative; padding: 3px 0 3px 18px; }
+  ul.bullets li::before { content: "●"; position: absolute; left: 0; top: 6px; color: var(--ax-teal); font-size: 8px; line-height: 1; }
+  ul.bullets li strong { color: var(--ax-blue); }
 
-  .uni-bear{border:1px dashed var(--ok); background:var(--ok-bg); border-radius:6px; padding:12px 16px; margin:12px 0; font-size:12px;}
-  .uni-bear b{color:var(--ok);}
-  .uni-bear table{margin-top:8px;}
-  .uni-bear th{background:#dff0e6;}
+  /* two-up grid */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 6px 0 8px; }
+  .grid2 > div > h3:first-child { margin-top: 8px; }
 
-  .compare{margin-top:10px;}
-  .compare td.num{font-weight:700;}
-  .compare tr.hl td{background:#fff3ec;}
+  /* discussion-theme chips (reused OHI grid) */
+  .ohi { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 14px 0 18px; }
+  .ohi .d { background: var(--paper); border-top: 3px solid var(--ax-teal); border-radius: 0 0 6px 6px; padding: 14px 12px 16px; box-shadow: var(--shadow-1); }
+  .ohi .d:nth-child(3) { border-top-color: var(--ax-gold); }
+  .ohi .d .en { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--ax-teal); text-transform: uppercase; font-weight: 700; }
+  .ohi .d .ko { font-size: 15px; font-weight: 700; color: var(--ax-blue); margin: 7px 0 6px; letter-spacing: -0.03em; }
+  .ohi .d .pt { font-size: 11.5px; color: var(--fg-2); line-height: 1.45; }
 
-  .notes{font-size:11.5px; color:var(--muted); margin-top:26px; border-top:1px solid var(--line); padding-top:14px;}
-  .notes li{margin-bottom:3px;}
-  footer.doc{margin-top:30px; display:flex; justify-content:space-between; align-items:flex-end;
-    border-top:2px solid var(--brand); padding-top:14px; font-size:12px;}
-  .sign{text-align:right;}
-  .sign .co{font-weight:800; color:var(--brand); font-size:14px;}
-  .stamp{display:inline-block; width:46px; height:46px; border:2px solid var(--accent); border-radius:50%;
-    color:var(--accent); font-size:10px; line-height:1.1; text-align:center; padding-top:11px; margin-left:10px; opacity:.65;}
+  /* phase flow */
+  .flow { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr; align-items: stretch; margin: 14px 0 20px; }
+  .flow .ph { background: var(--off-white); border-top: 3px solid var(--ax-blue); border-radius: 0 0 6px 6px; padding: 16px 16px 18px; }
+  .flow .ph:nth-child(3) { border-top-color: var(--ax-teal); }
+  .flow .ph:nth-child(5) { border-top-color: var(--ax-gold); }
+  .flow .ph .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--ax-teal); text-transform: uppercase; font-weight: 700; }
+  .flow .ph .nm { font-size: 18px; font-weight: 800; color: var(--ax-blue); margin: 6px 0 10px; letter-spacing: -0.03em; }
+  .flow .ph ul { margin: 0; padding-left: 0; list-style: none; }
+  .flow .ph ul li { font-size: 12px; color: var(--dark-gray); padding: 2px 0 2px 12px; position: relative; }
+  .flow .ph ul li::before { content: "—"; position: absolute; left: 0; color: var(--ax-teal); }
+  .flow .arrow { display: flex; align-items: center; justify-content: center; color: var(--ax-teal); font-size: 18px; font-weight: 700; }
 
-  @media print{
-    body{background:#fff;}
-    .page{box-shadow:none; margin:0; max-width:none; border-radius:0; padding:18mm 16mm;}
-    h2.sec{break-after:avoid;}
-    table{break-inside:avoid;}
-    .no-print{display:none;}
+  /* facilitator / about cards */
+  .bio { display: grid; grid-template-columns: 132px 1fr; gap: 26px; margin: 10px 0 6px; }
+  .bio .portrait { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: 50% 30%; border: 1px solid var(--border-1); border-radius: 6px; display: block; }
+  .bio .name { font-size: 22px; font-weight: 800; color: var(--ax-blue); letter-spacing: -0.04em; }
+  .bio .role { font-size: 12.5px; color: var(--fg-2); margin: 4px 0 14px; font-family: var(--font-mono); letter-spacing: 0.02em; }
+
+  /* contact block */
+  .contact { margin-top: 44px; background: var(--ax-blue); color: #fff; border-radius: 8px; padding: 30px 34px; display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+  .contact .l .lt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--ax-gold); text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
+  .contact .l .org { font-size: 18px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.4; }
+  .contact .r { text-align: right; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.9; letter-spacing: 0.02em; }
+  .contact .r .k { color: var(--ax-gold); margin-right: 8px; }
+
+  /* footer chrome */
+  .doc-footer { margin: 0; padding: 18px 76px 26px; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-2); letter-spacing: 0.04em; border-top: 1px solid var(--border-1); margin-top: 12px; }
+  .doc-footer .g { color: var(--ax-gold); margin: 0 7px; }
+
+  .note { font-size: 11.5px; color: var(--fg-2); margin: -8px 0 16px; letter-spacing: -0.01em; }
+  .vat { font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); letter-spacing: 0.02em; }
+
+  /* template fill-in fields — visible on screen, neutralised on print */
+  .fill { background: var(--ax-gold-10, rgba(233,196,106,0.22)); border-bottom: 1.5px dashed #B8902E; border-radius: 2px; padding: 0 3px; color: #6E5410; font-style: normal; }
+  dd .fill, .docmark .fill { background: rgba(233,196,106,0.28); color: #6E5410; }
+  @media print { .fill { background: transparent; border-bottom: 0; color: inherit; padding: 0; } }
+
+  /* ============================== PRINT ============================== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    body { background: #fff; padding: 0; }
+    .doc { width: auto; box-shadow: none; border-radius: 0; }
+    section, .bio, .contact, table, .ohi, .flow, .callout { break-inside: avoid; }
+    h2 { break-after: avoid; }
   }
-  .toolbar{max-width:880px; margin:14px auto -8px; text-align:right;}
-  .toolbar button{font-size:12px; padding:7px 14px; border:1px solid var(--brand); background:var(--brand);
-    color:#fff; border-radius:5px; cursor:pointer;}
 </style>
 </head>
 <body>
+<!-- =====================================================================
+     코리아스픽스 · 우송대학교 AI 교수 워크샵 산출내역서
+     ▶ 고객사별로 바꿀 부분은 노란색 하이라이트(.fill)로 표시.
+       — 표지: 제출일 · 발주처 · 사업명 · 총 견적
+       — 산출내역: 인원·단가 등 협의 시 조정 (가안)
+       — 푸터 하이라이트는 인쇄/PDF에서 자동으로 사라집니다.
+     ===================================================================== -->
+<article class="doc" data-screen-label="산출내역서">
 
-<div class="toolbar no-print">
-  <button onclick="window.print()">🖨 인쇄 / PDF 저장</button>
-</div>
-
-<div class="page">
-  <header class="doc">
-    <div>
-      <div class="brand">INsights&nbsp;from&nbsp;INside
-        <small>워크샵 기획 · 퍼실리테이션 · 조직혁신 파트너</small>
+  <!-- ============ COVER ============ -->
+  <header class="cover">
+    <div class="topbar">
+      <div class="logotype">
+        <div class="ks"><span class="a">코리아</span><span class="b">스픽스</span></div>
+        <div class="sub">fKF 한국퍼실리테이터연합회</div>
       </div>
-      <h1 class="title">산 출 내 역 서</h1>
+      <div class="docmark">
+        <div><span class="pill">산출내역서 · QUOTE</span></div>
+        <div style="margin-top:9px">제출 <span class="fill">2026. 6.</span></div>
+        <div>대외비 · CONFIDENTIAL</div>
+      </div>
     </div>
-    <div class="meta">
-      <div>견적일자 : <b>2026. 06. 18.</b></div>
-      <div>견적번호 : <b>IFI-2026-WSU-AI</b></div>
-      <div>유효기간 : <b>견적일로부터 30일</b></div>
-    </div>
+
+    <div class="goldrule"></div>
+
+    <div class="kicker">Participatory Workshop · AX Facilitation</div>
+    <h1>AI 교수 워크샵<br><span class="in">운영·퍼실리테이션</span></h1>
+    <div class="program">우송대학교 AI 비전 수립 워크샵</div>
+    <p class="ethos">“AX = Human + AI” — 구성원의 집단지성으로 대학의 AI 비전을 세운다.</p>
+
+    <dl class="meta-block">
+      <div class="it"><dt>발주처</dt><dd><span class="fill">우송대학교</span></dd></div>
+      <div class="it"><dt>사업명</dt><dd>AI 교수 워크샵<small>AI 비전 수립 워크샵</small></dd></div>
+      <div class="it"><dt>과정 구성</dt><dd>1일 워크샵<small>약 100명 · 10개 조</small></dd></div>
+      <div class="it"><dt>총 견적</dt><dd><span class="fill">23,430,000원</span><small>공급가 21,300,000 · VAT 포함</small></dd></div>
+    </dl>
   </header>
 
-  <div class="recv">
-    수신 : <b><span class="edit" title="문서 기준 표기 — 우석대인 경우 수정">우송대학교</span></b> 귀중
-    &nbsp;|&nbsp; 프로젝트 : <b>’26년 여름 AI 교수 워크샵 (우송대학교 AI 비전 수립 워크샵)</b>
-  </div>
+  <div class="pad">
 
-  <div class="overview">
-    <div><span>대주제</span> AI 시대 우송대학교의 미래교육과 대학혁신 전략</div>
-    <div><span>일시</span> 2026년 7월 중순 (1일 · 10:00~17:30)</div>
-    <div><span>장소</span> 우송대학교 (전체 회의실 + 조별 회의실 약 10실)</div>
-    <div><span>참석</span> 약 100명 (10개 조 편성 기준)</div>
-    <div><span>진행</span> 기조강연 · 분임토의 · 조별발표 · 우선순위 투표 · 시상</div>
-    <div><span>산출물</span> AI 비전 초안 / 분야별 전략과제 / 우선 실행과제</div>
-  </div>
+    <!-- ============ 1. OVERVIEW ============ -->
+    <section>
+      <h2><span class="num">1</span>사업 개요<span class="en">Program Overview</span></h2>
+      <p class="lead"><strong>우송대학교 AI 비전 수립 워크샵</strong>은 전체 교수 약 100명이 참여하여 AI 시대 대학의 미래교육과 혁신 전략을 직접 토의·합의하는 <strong>참여형 워크샵</strong>이다. 코리아스픽스는 <strong>AX(Human + AI) 방법론</strong> 기반의 퍼실리테이션으로 분임토의를 설계·운영하고, 사전 설문부터 결과보고서까지 전 과정을 책임진다.<br><span class="lead-em">중립적 진행과 구조화된 토의 설계로 <strong>구성원이 직접 비전과 우선 실행과제를 도출</strong>하도록 한다.</span></p>
 
-  <div class="callout">
-    <b>본 산출내역서는 두 가지 안(案)으로 구성됩니다.</b>
-    <ul>
-      <li><b>[안 1] 역할분담형</b> — 식음·시상·인쇄·장비 등은 <b>우송대학교가 직접 집행</b>하고, INsights from INside는 전문 영역(기획·퍼실리테이션·교보재 설계·결과보고)만 수행 → <b>견적 절감</b></li>
-      <li><b>[안 2] 턴키형</b> — 기획부터 식음·시상·현장운영까지 <b>전 과정을 INsights from INside가 일괄 수행</b> (대학은 장소만 제공)</li>
-    </ul>
-    <div style="margin-top:8px;">
-      <b>※ 우송대 초안 대비 보강(우리 기준) 반영 항목</b> :
-      <span class="badge">추가</span> 총괄 기획자(PD) &nbsp;
-      <span class="badge">추가</span> 교보재(워크북·키트·기록지·발표양식) &nbsp;
-      <span class="badge up">보강</span> 테이블 퍼실리테이터 5명 → <b>10명</b>(100명/10조 기준) &nbsp;
-      <span class="badge up">보강</span> 사전 설문 설계·분석 / 결과보고서 명시
-    </div>
-  </div>
+      <table class="compact">
+        <thead><tr><th style="width:24%">구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">대주제</td><td>AI 시대, 우송대학교의 미래교육과 대학혁신 전략</td></tr>
+          <tr><td class="lbl">규모 · 편성</td><td>약 100명 / 10개 조 (외국인 교수 조 별도 운영)</td></tr>
+          <tr><td class="lbl">진행 방식</td><td>기조강연 · 분임토의 · 조별 발표 · 전자투표(우선순위) · 시상</td></tr>
+          <tr><td class="lbl">Method</td><td>AX(Human + AI) 퍼실리테이션 — 설문(정량) + 토의(정성) 병행</td></tr>
+        </tbody>
+      </table>
 
-  <!-- ===================== 안 1 ===================== -->
-  <h2 class="sec">[ 안 1 ] 역할분담형 — INsights from INside 수행분 <span class="tag">VAT 별도</span></h2>
-  <table>
-    <thead>
-      <tr><th style="width:90px;">구분</th><th>항목</th><th style="width:110px;">산출기준</th><th style="width:62px;">수량</th><th style="width:92px;">단가(원)</th><th style="width:104px;">금액(원)</th><th style="width:130px;">비고</th></tr>
-    </thead>
-    <tbody>
-      <tr class="add"><td class="cat" rowspan="3">기획·설계</td><td>워크샵 총괄 기획·운영 (PD)<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">3,500,000</td><td class="num">3,500,000</td><td class="note">프로그램 설계·총괄 디렉팅</td></tr>
-      <tr><td>사전 설문 설계 및 결과 분석</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note">전체교수 인식조사</td></tr>
-      <tr><td>토의 주제·산출물·진행시나리오 설계</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="note">5개 분과 설계</td></tr>
-
-      <tr><td class="cat" rowspan="2">퍼실리<br>테이션</td><td>메인 퍼실리테이터</td><td class="ctr">1명/1일</td><td class="ctr">1</td><td class="num">2,500,000</td><td class="num">2,500,000</td><td class="note">전체 진행 총괄</td></tr>
-      <tr><td>테이블 퍼실리테이터<span class="badge up">10명</span></td><td class="ctr">명/1일</td><td class="ctr">10</td><td class="num">500,000</td><td class="num">5,000,000</td><td class="note">조별 1인 (10조)</td></tr>
-
-      <tr class="add"><td class="cat" rowspan="2">교보재</td><td>워크북·기록지·발표양식 기획/디자인<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note">인쇄용 원고 제공(인쇄 대학)</td></tr>
-      <tr class="add"><td>조별 운영키트·명찰 디자인/사양<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">500,000</td><td class="num">500,000</td><td class="note">제작·구매 대학 집행</td></tr>
-
-      <tr><td class="cat">현장운영</td><td>현장 운영 총괄 (대학 지원인력 협업)</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">800,000</td><td class="num">800,000</td><td class="note">진행 감독·조율</td></tr>
-
-      <tr><td class="cat">결과물</td><td>결과보고서 · AI 비전/전략과제 초안</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">2,000,000</td><td class="num">2,000,000</td><td class="note">워크샵 후 2주 내</td></tr>
-
-      <tr class="sub"><td colspan="5">공급가액 합계</td><td class="num">18,300,000</td><td></td></tr>
-      <tr class="vat"><td colspan="5">부가가치세 (10%)</td><td class="num">1,830,000</td><td></td></tr>
-      <tr class="total"><td colspan="5">[ 안 1 ] 합계 금액</td><td class="num">20,130,000</td><td></td></tr>
-    </tbody>
-  </table>
-
-  <div class="uni-bear">
-    <b>＋ 우송대학교 직접 집행(별도 · 본 견적 제외)</b> — 안 1 채택 시 대학이 자체 예산으로 집행하는 항목입니다.
-    <table>
-      <thead><tr><th>항목</th><th style="width:130px;">산출기준</th><th style="width:120px;">예상금액(원)</th><th>비고</th></tr></thead>
-      <tbody>
-        <tr><td>중식</td><td class="ctr">100명 × 20,000</td><td class="num">2,000,000</td><td class="note">도시락/레스토랑</td></tr>
-        <tr><td>다과</td><td class="ctr">100명 × 10,000</td><td class="num">1,000,000</td><td class="note"></td></tr>
-        <tr><td>시상품/상금</td><td class="ctr">최우수·우수조</td><td class="num">2,000,000</td><td class="note"></td></tr>
-        <tr><td>교보재 인쇄·제작</td><td class="ctr">100부 + 조별키트</td><td class="num">약 2,000,000</td><td class="note">대학 인쇄팀/구매</td></tr>
-        <tr><td>음향·영상·장비, 지원인력</td><td class="ctr">대학 시설/직원</td><td class="num">대학 자원</td><td class="note">현물 지원</td></tr>
-        <tr class="sub"><td colspan="2">대학 직접 집행 합계(예상)</td><td class="num">약 7,000,000</td><td></td></tr>
-      </tbody>
-    </table>
-    <div style="margin-top:6px;"><b>안 1 총 사업비(우리 견적 + 대학 직접집행) ≈ 27,130,000원</b> (단, 대학 직접집행분은 우리 청구 대상 아님)</div>
-  </div>
-
-  <!-- ===================== 안 2 ===================== -->
-  <h2 class="sec">[ 안 2 ] 턴키형 — INsights from INside 일괄 수행 <span class="tag">VAT 별도</span></h2>
-  <table>
-    <thead>
-      <tr><th style="width:90px;">구분</th><th>항목</th><th style="width:110px;">산출기준</th><th style="width:62px;">수량</th><th style="width:92px;">단가(원)</th><th style="width:104px;">금액(원)</th><th style="width:130px;">비고</th></tr>
-    </thead>
-    <tbody>
-      <tr class="add"><td class="cat" rowspan="3">기획·설계</td><td>워크샵 총괄 기획·운영 (PD)<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">3,500,000</td><td class="num">3,500,000</td><td class="note">프로그램 설계·총괄</td></tr>
-      <tr><td>사전 설문 설계 및 결과 분석</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note"></td></tr>
-      <tr><td>토의 주제·산출물·진행시나리오 설계</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="note">5개 분과</td></tr>
-
-      <tr><td class="cat" rowspan="2">퍼실리<br>테이션</td><td>메인 퍼실리테이터</td><td class="ctr">1명/1일</td><td class="ctr">1</td><td class="num">2,500,000</td><td class="num">2,500,000</td><td class="note"></td></tr>
-      <tr><td>테이블 퍼실리테이터<span class="badge up">10명</span></td><td class="ctr">명/1일</td><td class="ctr">10</td><td class="num">500,000</td><td class="num">5,000,000</td><td class="note">조별 1인 (10조)</td></tr>
-
-      <tr class="add"><td class="cat" rowspan="4">교보재</td><td>워크북·기록지·발표양식 기획/디자인<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note"></td></tr>
-      <tr class="add"><td>워크북 인쇄·제작<span class="badge">추가</span></td><td class="ctr">부 × 15,000</td><td class="ctr">100</td><td class="num">15,000</td><td class="num">1,500,000</td><td class="note">참가자 배포본</td></tr>
-      <tr class="add"><td>조별 운영키트(전지·포스트잇·마커 등)<span class="badge">추가</span></td><td class="ctr">조 × 50,000</td><td class="ctr">10</td><td class="num">50,000</td><td class="num">500,000</td><td class="note"></td></tr>
-      <tr class="add"><td>명찰·사이니지·현수막<span class="badge">추가</span></td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">500,000</td><td class="num">500,000</td><td class="note"></td></tr>
-
-      <tr><td class="cat" rowspan="2">현장운영</td><td>현장 운영·기록 인력</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,500,000</td><td class="num">1,500,000</td><td class="note">진행감독+기록</td></tr>
-      <tr><td>음향·영상·장비 운영</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="note">대학 시설 활용 시 조정</td></tr>
-
-      <tr><td class="cat" rowspan="3">부대비</td><td>중식</td><td class="ctr">100명 × 20,000</td><td class="ctr">100</td><td class="num">20,000</td><td class="num">2,000,000</td><td class="note">도시락/레스토랑</td></tr>
-      <tr><td>다과</td><td class="ctr">100명 × 10,000</td><td class="ctr">100</td><td class="num">10,000</td><td class="num">1,000,000</td><td class="note"></td></tr>
-      <tr><td>시상품/상금</td><td class="ctr">최우수·우수조</td><td class="ctr">1</td><td class="num">2,000,000</td><td class="num">2,000,000</td><td class="note"></td></tr>
-
-      <tr><td class="cat">결과물</td><td>결과보고서 · AI 비전/전략과제 초안</td><td class="ctr">1식</td><td class="ctr">1</td><td class="num">2,000,000</td><td class="num">2,000,000</td><td class="note">워크샵 후 2주 내</td></tr>
-
-      <tr class="sub"><td colspan="5">공급가액 합계</td><td class="num">27,000,000</td><td></td></tr>
-      <tr class="vat"><td colspan="5">부가가치세 (10%)</td><td class="num">2,700,000</td><td></td></tr>
-      <tr class="total"><td colspan="5">[ 안 2 ] 합계 금액</td><td class="num">29,700,000</td><td></td></tr>
-    </tbody>
-  </table>
-
-  <!-- ===================== 비교 ===================== -->
-  <h2 class="sec">안 비교 요약</h2>
-  <table class="compare">
-    <thead>
-      <tr><th>구분</th><th>안 1 · 역할분담형</th><th>안 2 · 턴키형</th></tr>
-    </thead>
-    <tbody>
-      <tr><td class="cat">수행 범위</td><td class="ctr">기획·퍼실·교보재 설계·결과보고</td><td class="ctr">기획~식음·시상·현장운영 전 과정</td></tr>
-      <tr><td class="cat">대학 역할</td><td class="ctr">식음·시상·인쇄·장비·인력 직접 집행</td><td class="ctr">장소 제공</td></tr>
-      <tr><td class="cat">INsights 공급가</td><td class="num">18,300,000</td><td class="num">27,000,000</td></tr>
-      <tr><td class="cat">부가세(10%)</td><td class="num">1,830,000</td><td class="num">2,700,000</td></tr>
-      <tr class="hl"><td class="cat">우리 청구 합계</td><td class="num">20,130,000</td><td class="num">29,700,000</td></tr>
-      <tr><td class="cat">대학 직접집행</td><td class="num">약 7,000,000</td><td class="num">—</td></tr>
-      <tr><td class="cat">총 사업비(참고)</td><td class="num">약 27,130,000</td><td class="num">29,700,000</td></tr>
-    </tbody>
-  </table>
-
-  <ul class="notes">
-    <li>본 견적의 모든 금액은 <b>부가가치세 별도</b>이며, 단가는 협의 가능한 <b>가안</b>입니다. (우송대 초안 단가를 기준으로 산정)</li>
-    <li>메인/테이블 퍼실리테이터 구성은 참석 인원·조 편성 확정에 따라 조정됩니다. (우송대 초안: 퍼실리테이터 견적 진행중)</li>
-    <li>외국인 교수 조 등 별도 운영이 필요한 경우 통역·이중언어 교보재가 추가될 수 있습니다.</li>
-    <li>안 2의 음향·영상·장비는 우송대 교내 시설 활용 시 해당 금액만큼 차감 조정합니다.</li>
-    <li>기조강연(센터장 등) 사례비는 교내 인사로 가정하여 미포함했습니다. 외부 강연자 섭외 시 별도 견적합니다.</li>
-    <li>일정·인원·산출물 범위 변경 시 재견적될 수 있습니다.</li>
-  </ul>
-
-  <footer class="doc">
-    <div style="font-size:11px;color:var(--muted);">
-      본 산출내역서는 제안용 참고 자료이며, 최종 금액은 계약 시 확정됩니다.
-    </div>
-    <div class="sign">
-      <div class="co">INsights from INside</div>
-      <div style="color:var(--muted);font-size:11px;">담당 : ___________ &nbsp; 연락처 : ___________
-        <span class="stamp">직인<br>(인)</span>
+      <div class="callout">
+        <span class="lab">📌 제안 범위</span>
+        본 견적은 제안요청(RFP) 조건에 따라 <strong>코리아스픽스 수행분(기획·퍼실리테이션·교보재·전자투표·결과보고)</strong>만 산정한다. 대학이 자체 집행하는 식음·시상·장소·기본 장비는 산출내역에서 제외하고 §4.2에 별도 표기한다.
       </div>
-    </div>
-  </footer>
-</div>
+    </section>
 
+    <!-- ============ 2. DISCUSSION FRAME ============ -->
+    <section>
+      <h2><span class="num">2</span>토의 프레임<span class="en">Discussion Themes · 5</span></h2>
+      <p>공통 주제(우송대 AI 비전·목표)를 중심으로, 5개 분과 주제를 병행 토의한다.</p>
+      <div class="ohi">
+        <div class="d"><div class="en">Education</div><div class="ko">교육</div><div class="pt">학생 핵심역량 · 수업·평가 혁신</div></div>
+        <div class="d"><div class="en">Teaching·Research</div><div class="ko">수업·연구</div><div class="pt">교수 역량 · AI 지원 교수법</div></div>
+        <div class="d"><div class="en">Administration</div><div class="ko">행정</div><div class="pt">일하는 방식 · 학생지원 체계</div></div>
+        <div class="d"><div class="en">Industry</div><div class="ko">산학협력</div><div class="pt">산업체 요구 · 협력 인프라</div></div>
+        <div class="d"><div class="en">Infra</div><div class="ko">인프라</div><div class="pt">플랫폼 · 데이터 · 보안체계</div></div>
+      </div>
+    </section>
+
+    <!-- ============ 3. STRUCTURE / SCHEDULE ============ -->
+    <section>
+      <h2><span class="num">3</span>운영 구성 · 일정<span class="en">Process · 1 Day</span></h2>
+      <p>사전 설문으로 쟁점을 준비하고(준비), 당일 분임토의·발표·투표로 의견을 모은 뒤(숙의), 결과보고서로 비전·전략과제를 정리한다(환류).</p>
+
+      <div class="flow">
+        <div class="ph"><div class="tag">준비 · Prepare</div><div class="nm">사전 설문</div><ul><li>설문 설계·배포</li><li>인식·쟁점 분석</li><li>토의·산출물 설계</li></ul></div>
+        <div class="arrow">→</div>
+        <div class="ph"><div class="tag">숙의 · Deliberate</div><div class="nm">분임토의</div><ul><li>공통·개별 분과 토의</li><li>조별 발표</li><li>전자투표(우선순위)</li></ul></div>
+        <div class="arrow">→</div>
+        <div class="ph"><div class="tag">환류 · Follow-up</div><div class="nm">결과보고</div><ul><li>결과 종합</li><li>AI 비전·전략과제 초안</li><li>우선 실행과제</li></ul></div>
+      </div>
+
+      <h3><span class="num">3.1</span>당일 일정 (10:00–17:30)</h3>
+      <table class="compact">
+        <thead><tr><th style="width:18%">시간</th><th style="width:28%">내용</th><th>세부</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">10:00–10:30</td><td>개회 · 대학 메시지</td><td>워크샵 취지·진행 안내 / AI 추진 필요성 공유</td></tr>
+          <tr><td class="lbl">10:30–11:20</td><td>기조강연</td><td>AI 미래교육 · 글로벌 AX 혁신 · AI 연구혁신 (교내 인사)</td></tr>
+          <tr><td class="lbl">11:20–12:00</td><td>설문 공유 · 조 편성</td><td>사전 설문 결과 / 분과 주제·산출물 안내</td></tr>
+          <tr><td class="lbl">13:00–14:50</td><td>분임토의 1·2</td><td>공통 주제 + 개별 분과(5개 중 선택)</td></tr>
+          <tr><td class="lbl">15:00–16:30</td><td>마무리 · 조별 발표</td><td>발표자료 작성 / 조별 결과 발표·질의응답</td></tr>
+          <tr><td class="lbl">16:30–17:30</td><td>우선순위 투표 · 시상</td><td>전자투표로 우선 실행과제 선정 / 시상·마무리</td></tr>
+        </tbody>
+      </table>
+
+      <h3><span class="num">3.2</span>운영 인력 구성</h3>
+      <ul class="bullets">
+        <li><strong>통합관리기획자 1</strong> — 사전기획부터 당일 운영까지 총괄·관리, 대학 커뮤니케이션</li>
+        <li><strong>리딩 퍼실리테이터 1</strong> — 전체 설계·진행 총괄(전체 세션 디렉팅)</li>
+        <li><strong>테이블 퍼실리테이터 10</strong> — 10개 조 1:1 배치, 조별 토의 진행·기록 지원</li>
+        <li><strong>기술 오퍼레이터 1</strong> — 전자투표기·AV·실시간 집계 운영</li>
+      </ul>
+    </section>
+
+    <!-- ============ 4. COST BREAKDOWN (CORE) ============ -->
+    <section>
+      <h2><span class="num">4</span>산출내역서<span class="en">Cost Breakdown</span></h2>
+      <p>코드 <strong>F</strong>(Facilitation·인력) · <strong>D</strong>(Deliverable·산출물) · <strong>E</strong>(Equipment·장비)로 구분하여 산정했다. 단가는 협의 가능한 가안이며 <strong>부가가치세 별도</strong>다.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:10%">코드</th>
+            <th>항목 · 산출근거</th>
+            <th class="num" style="width:9%">수량</th>
+            <th style="width:9%">단위</th>
+            <th class="num" style="width:16%">금액(원)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="phase-row"><td colspan="5">운영 인력 · Facilitation</td></tr>
+          <tr><td><span class="code">F-01</span></td><td class="lbl">통합관리기획자<span class="ev">사전기획~당일 총괄·운영관리</span></td><td class="num">1</td><td>식</td><td class="num">3,500,000</td></tr>
+          <tr><td><span class="code">F-02</span></td><td class="lbl">리딩 퍼실리테이터<span class="ev">전체 설계·진행 총괄 · 1일</span></td><td class="num">1</td><td>명</td><td class="num">3,000,000</td></tr>
+          <tr><td><span class="code">F-03</span></td><td class="lbl">테이블 퍼실리테이터<span class="ev">10개 조 × 1인 · 1일</span></td><td class="num">10</td><td>명</td><td class="num">5,000,000</td></tr>
+          <tr><td><span class="code">F-04</span></td><td class="lbl">기술 오퍼레이터<span class="ev">투표기·AV·실시간 집계 운영 · 1일</span></td><td class="num">1</td><td>명</td><td class="num">800,000</td></tr>
+
+          <tr class="phase-row"><td colspan="5">제공 산출물 · Deliverables</td></tr>
+          <tr><td><span class="code i">D-01</span></td><td class="lbl">사전 설문 설계 및 결과 분석<span class="ev">전체교수 인식조사 · 분석 리포트</span></td><td class="num">1</td><td>식</td><td class="num">1,500,000</td></tr>
+          <tr><td><span class="code i">D-02</span></td><td class="lbl">교보재 기획 · 디자인<span class="ev">워크북·기록지·발표양식 콘텐츠·편집</span></td><td class="num">1</td><td>식</td><td class="num">1,500,000</td></tr>
+          <tr><td><span class="code i">D-03</span></td><td class="lbl">교보재 인쇄 · 제작<span class="ev">참가자 배포본</span></td><td class="num">100</td><td>부</td><td class="num">1,500,000</td></tr>
+          <tr><td><span class="code i">D-04</span></td><td class="lbl">조별 운영키트<span class="ev">전지·포스트잇·마커 등 · 10개 조</span></td><td class="num">10</td><td>조</td><td class="num">500,000</td></tr>
+          <tr><td><span class="code i">D-05</span></td><td class="lbl">결과보고서 + AI 비전·전략과제 초안<span class="ev">워크샵 후 2주 내 제출</span></td><td class="num">1</td><td>식</td><td class="num">2,500,000</td></tr>
+
+          <tr class="phase-row"><td colspan="5">운영 장비 · Equipment</td></tr>
+          <tr><td><span class="code e">E-01</span></td><td class="lbl">전자투표 단말(투표기) 렌탈 + 집계 운영<span class="ev">우선순위 투표 · 100대 기준</span></td><td class="num">100</td><td>대</td><td class="num">1,500,000</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="4">공급가액 합계 <span class="vat">(VAT 별도)</span></td><td class="num">21,300,000</td></tr>
+        </tfoot>
+      </table>
+
+      <h3><span class="num">4.1</span>총괄 집계</h3>
+      <table class="summary">
+        <thead><tr><th>항목</th><th>산출근거</th><th class="num" style="width:20%">금액(원)</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">공급가액</td><td class="basis">산출내역 합계 (F · D · E)</td><td class="num">21,300,000</td></tr>
+          <tr><td class="lbl">부가가치세</td><td class="basis">공급가액 × 10%</td><td class="num">2,130,000</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2">총 견적금액</td><td class="num">23,430,000<span class="won">원</span></td></tr>
+        </tfoot>
+      </table>
+
+      <h3><span class="num">4.2</span>불포함 사항 (대학 직접 집행)</h3>
+      <p class="note">아래 항목은 RFP 기준 우송대학교가 자체 예산·시설로 집행하며 본 견적에 포함되지 않는다.</p>
+      <table class="compact">
+        <thead><tr><th style="width:30%">항목</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">중식 · 다과</td><td>참석자 약 100명 (도시락/레스토랑 등)</td></tr>
+          <tr><td class="lbl">시상품 · 상금</td><td>최우수·우수조 시상</td></tr>
+          <tr><td class="lbl">행사 장소 · 기본 장비</td><td>회의실(10여 실), 기본 음향·빔·전원</td></tr>
+          <tr><td class="lbl">행정 지원인력 · 주차</td><td>대학 직원 현물 지원</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============ 5. DELIVERABLES ============ -->
+    <section>
+      <h2><span class="num">5</span>산출물<span class="en">Deliverables</span></h2>
+      <table class="compact">
+        <thead><tr><th style="width:30%">산출물</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">사전 설문 패키지</td><td>설문 문항 설계 · 온라인 집계 · 인식/쟁점 분석 리포트 + 워크샵 반영안</td></tr>
+          <tr><td class="lbl">교보재 일체</td><td>참가자 워크북(주제·토의가이드·기록양식) · 조별 기록지 · 발표양식 템플릿 · 조별 운영키트 · 명찰/사이니지(디자인)</td></tr>
+          <tr><td class="lbl">진행 설계 자료</td><td>퍼실리테이션 시나리오·운영 큐시트 · 조 편성표(외국인 교수 조 포함) · 테이블 퍼실 가이드</td></tr>
+          <tr><td class="lbl">전자투표 결과</td><td>전략과제·우선 실행과제 실시간 집계·시각화 · 우선순위 결과표</td></tr>
+          <tr><td class="lbl">최종 결과보고서</td><td>분임토의 종합 · AI 비전 초안 및 추진원칙 · 분야별 전략과제(교육·AX·인프라) · 2026 우선 실행과제 · 현장 기록 (워크샵 후 2주 내)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============ 6. FACILITATOR ============ -->
+    <section>
+      <h2><span class="num">6</span>퍼실리테이터<span class="en">Facilitator</span></h2>
+      <div class="bio">
+        <img class="portrait" src="bdlee.jpg" alt="이병덕 퍼실리테이터">
+        <div>
+          <div class="name">이병덕</div>
+          <div class="role">fKF 한국퍼실리테이터연합회 이사장 · 코리아스픽스 대표이사</div>
+          <ul class="bullets">
+            <li><strong>전문</strong> — 조직진단, 숙의형 프로젝트, 공론화 · 리딩 퍼실리테이션</li>
+            <li><strong>대표 공론화</strong> — 동덕여자대학교 공학전환 공론화 리딩 퍼실리테이터</li>
+            <li><strong>조직진단 실적</strong> — 국제보건의료재단(2023), 한국상하수도협회(2022–23), 교육시설안전원(2023), 금천구청 · SH공사 · 광명시 등</li>
+            <li><strong>경력</strong> — GBO R&amp;D Center (San Jose, CA, USA) 서비스기획팀장 (2001–2002)</li>
+            <li><strong>자문</strong> — NIA(한국지능정보사회진흥원) 자문위원</li>
+            <li><strong>저서</strong> — 퍼실리테이터워크북 시리즈, 기업가정신 학교에 가다, 한국인의 생각(1·2, 공저), 토론의 기술</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. ABOUT ============ -->
+    <section>
+      <h2><span class="num">7</span>About Us<span class="en">Organization</span></h2>
+      <div class="grid2">
+        <div>
+          <h3 style="margin-top:8px">fKF (사) 한국퍼실리테이터연합회</h3>
+          <table class="compact">
+            <tbody>
+              <tr><td class="lbl" style="width:30%">설립</td><td>2013년</td></tr>
+              <tr><td class="lbl">전문</td><td>퍼실리테이션, 숙의민주주의, 조직개발</td></tr>
+              <tr><td class="lbl">네트워크</td><td>행정안전부 등록 유일의 퍼실리테이터 사단법인체</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h3 style="margin-top:8px">코리아스픽스</h3>
+          <table class="compact">
+            <tbody>
+              <tr><td class="lbl" style="width:30%">설립</td><td>2012년</td></tr>
+              <tr><td class="lbl">전문</td><td>공론화, 원탁회의, 시민참여</td></tr>
+              <tr><td class="lbl">실적</td><td>동덕여대 공학전환 공론화 리딩 퍼실리테이터 · 외교부 · 국제보건의료재단 · SH공사 등 다수</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="l">
+          <div class="lt">Contact</div>
+          <div class="org">fKF 한국퍼실리테이터연합회 · 코리아스픽스</div>
+        </div>
+        <div class="r">
+          <div><span class="k">TEL</span>02-814-7773</div>
+          <div><span class="k">MAIL</span>team@kspeaks.kr</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="doc-footer">
+    <span>우송대학교 AI 교수 워크샵 · 운영 산출내역서</span>
+    <span><span class="fill">우송대학교</span><span class="g">●</span><span class="fill">2026. 6.</span><span class="g">●</span>대외비</span>
+  </footer>
+
+</article>
 </body>
 </html>

@@ -1,0 +1,275 @@
+/* =========================================================================
+   AX Design System — Foundations
+   Colors + Typography tokens (base + semantic), webfont imports.
+   Source: AX 슬라이드 디자인 지침서 v0.1.0 (playinthesky/fkf).
+   ========================================================================= */
+
+/* ----- Webfonts -------------------------------------------------------- */
+/* Pretendard is the AX standard Korean+Latin sans (a.k.a. Pretendard Variable).
+   Roboto Mono is the AX standard for numerics / data. Both are loaded from
+   public CDNs; for offline use, drop ttf/woff2 files into fonts/ and update
+   the @font-face rules below. */
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap");
+
+/* ----- Foundation: Color tokens --------------------------------------- */
+:root {
+  /* Primary — KoreaSpeaks brand */
+  --ks-navy:        #1A4A78;   /* 워드마크 "코리아" — primary navy */
+  --ks-blue:        #3A7CB8;   /* 워드마크 "스픽스" — secondary blue */
+
+  /* Primary — AX system colors (chrome / methodology palette) */
+  --ax-blue:        #1E3A5F;   /* main color, titles, emphasis */
+  --ax-blue-90:     #2C4C75;
+  --ax-blue-70:     #5A718F;
+  --ax-blue-30:     #BDC8D6;
+  --ax-blue-10:     rgba(30, 58, 95, 0.10);
+
+  --ax-teal:        #2A9D8F;   /* accents, icons, links */
+  --ax-teal-90:     #3DAEA1;
+  --ax-teal-30:     #BFE0DB;
+  --ax-teal-10:     rgba(42, 157, 143, 0.10);
+
+  --ax-gold:        #E9C46A;   /* highlights, call-outs */
+  --ax-gold-30:     #F6E3B5;
+  --ax-gold-10:     rgba(233, 196, 106, 0.12);
+
+  /* Secondary — neutrals */
+  --dark-gray:      #2D3436;   /* body text */
+  --mid-gray:       #636E72;   /* subheads, captions */
+  --light-gray:     #B2BEC3;   /* dividers, disabled */
+  --off-white:      #F5F6F7;   /* surface, boxes */
+  --paper:          #FAFBFC;   /* card surface (float) */
+  --white:          #FFFFFF;
+  --black:          #0D1218;
+
+  /* Semantic */
+  --success:        #00B894;
+  --warning:        #FDCB6E;
+  --danger:         #E17055;
+  --info:           #74B9FF;
+
+  /* Semantic foreground/background tokens */
+  --fg-1:           var(--dark-gray);   /* primary text */
+  --fg-2:           var(--mid-gray);    /* secondary text */
+  --fg-3:           var(--light-gray);  /* tertiary / disabled */
+  --fg-inv:         var(--white);       /* on dark backgrounds */
+  --fg-link:        var(--ax-teal);
+
+  --bg-1:           var(--white);       /* primary surface */
+  --bg-2:           var(--off-white);   /* secondary surface */
+  --bg-3:           var(--paper);       /* card / float */
+  --bg-inv:         var(--ax-blue);     /* inverted (dark) */
+
+  --border-1:       var(--light-gray);
+  --border-2:       rgba(45, 52, 54, 0.08);
+  --accent-1:       var(--ax-blue);
+  --accent-2:       var(--ax-teal);
+  --accent-3:       var(--ax-gold);
+
+  /* ----- Foundation: Type tokens -------------------------------------- */
+  --font-sans:      "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "맑은 고딕", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono:      "Roboto Mono", "SF Mono", Consolas, "Courier New", monospace;
+  --font-serif:     "Pretendard Variable", "Noto Serif KR", Georgia, serif; /* AX is sans-only; alias falls back */
+
+  /* Weights */
+  --fw-regular:     400;
+  --fw-medium:      500;
+  --fw-semibold:    600;
+  --fw-bold:        700;
+
+  /* Size scale (slide-targeted; pt-equivalent rounded to px at 96dpi/4:3) */
+  --fs-h1:          36pt;
+  --fs-h2:          28pt;
+  --fs-h3:          22pt;
+  --fs-body:        18pt;
+  --fs-caption:     14pt;
+  --fs-small:       12pt;
+
+  /* Web-scale alternates (for the UI kit & docs) */
+  --fs-display:     48px;
+  --fs-title:       32px;
+  --fs-headline:    24px;
+  --fs-subhead:     18px;
+  --fs-body-web:    15px;
+  --fs-meta:        13px;
+  --fs-micro:       11px;
+
+  /* Line heights */
+  --lh-tight:       1.2;
+  --lh-snug:        1.3;
+  --lh-normal:      1.5;
+  --lh-loose:       1.6;
+
+  /* Tracking — AX default is -5 (–0.05em); applied to all headings */
+  --ls-tight:       -0.05em;
+  --ls-snug:        -0.02em;
+  --ls-normal:       0;
+  --ls-wide:         0.02em;
+  --ls-button:       0.04em;
+
+  /* ----- Foundation: Spacing / radii / shadow ------------------------- */
+  --space-0:        0;
+  --space-1:        4px;
+  --space-2:        8px;
+  --space-3:        12px;
+  --space-4:        16px;
+  --space-5:        24px;
+  --space-6:        32px;
+  --space-7:        48px;
+  --space-8:        64px;
+  --space-9:        96px;
+
+  --radius-xs:      2px;
+  --radius-sm:      4px;
+  --radius-md:      8px;   /* default card / box (per guideline) */
+  --radius-lg:      12px;
+  --radius-xl:      16px;
+  --radius-pill:    9999px;
+
+  /* Layered floating-shadow system (premium feel; contact + ambient) */
+  --shadow-0:       none;
+  --shadow-1:       0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-2:       0 1px 2px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.05);
+  --shadow-3:       0 2px 4px rgba(15, 23, 42, 0.06), 0 8px 18px rgba(15, 23, 42, 0.08);
+  --shadow-4:       0 4px 8px rgba(15, 23, 42, 0.06), 0 14px 32px rgba(15, 23, 42, 0.10);
+  --shadow-inset:   inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* Border widths */
+  --bw-hair:        1px;
+  --bw-strong:      2px;
+  --bw-heavy:       3px;
+
+  /* Motion (sparing — gov reports favor stillness) */
+  --ease-standard:  cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasis:  cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast:       120ms;
+  --dur-base:       200ms;
+  --dur-slow:       320ms;
+
+  /* Grid / safe zone (slide context) */
+  --slide-margin:   0.5in;  /* per spec */
+}
+
+/* ----- Semantic element styles ---------------------------------------- */
+
+html, body {
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-web);
+  line-height: var(--lh-normal);
+  letter-spacing: -0.05em;          /* AX default 자간 −5, inherits everywhere */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--ax-blue);
+  margin: 0 0 0.4em;
+}
+
+h2, .h2 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--ax-blue);
+  margin: 0 0 0.4em;
+}
+
+h3, .h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  color: var(--dark-gray);
+  margin: 0 0 0.4em;
+}
+
+p, .body {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-web);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+  margin: 0 0 1em;
+  text-wrap: pretty;
+}
+
+.caption, figcaption {
+  font-family: var(--font-sans);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-snug);
+  color: var(--fg-2);
+}
+
+small, .small {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+a {
+  color: var(--ax-teal);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
+}
+a:hover { color: var(--ax-blue); border-bottom-color: currentColor; }
+
+strong, b { font-weight: var(--fw-semibold); color: var(--ax-blue); }
+
+code, kbd, samp, .mono, .numeric {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  letter-spacing: 0;                 /* mono / numeric: no negative tracking */
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-1);
+  margin: var(--space-5) 0;
+}
+
+/* ----- Utility classes (used by preview cards & UI kits) -------------- */
+.ax-blue   { color: var(--ax-blue); }
+.ax-teal   { color: var(--ax-teal); }
+.ax-gold   { color: var(--ax-gold); }
+.bg-blue   { background: var(--ax-blue); color: var(--white); }
+.bg-teal   { background: var(--ax-teal); color: var(--white); }
+.bg-gold   { background: var(--ax-gold); color: var(--dark-gray); }
+.bg-paper  { background: var(--paper); }
+.bg-offwhite { background: var(--off-white); }
+
+.card {
+  background: var(--bg-3);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-3);
+  padding: var(--space-5);
+  border-top: 3px solid var(--ax-teal); /* teal "lifted-edge" accent */
+}
+
+.accent-left {
+  border-left: 8px solid var(--ax-gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: linear-gradient(180deg, #fff, var(--off-white));
+  padding: var(--space-4) var(--space-5);
+}
+
+.quote {
+  border-left: 4px solid var(--ax-teal);
+  padding: var(--space-3) var(--space-5);
+  color: var(--fg-1);
+  font-style: italic;
+}
