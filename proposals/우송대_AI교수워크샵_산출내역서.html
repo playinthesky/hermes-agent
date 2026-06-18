@@ -156,6 +156,26 @@
   .note { font-size: 11.5px; color: var(--fg-2); margin: -8px 0 16px; letter-spacing: -0.01em; }
   .vat { font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); letter-spacing: 0.02em; }
 
+  /* ============================== EXECUTIVE SUMMARY ============================== */
+  .exsum { background: var(--paper); border-top: 3px solid var(--ax-teal); border-radius: 0 0 8px 8px; box-shadow: var(--shadow-2); padding: 26px 30px 22px; margin: 30px 0 8px; }
+  .exsum .head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+  .exsum .head .t { font-size: 18px; font-weight: 800; color: var(--ax-blue); letter-spacing: -0.035em; }
+  .exsum .head .en { margin-left: auto; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--fg-3); text-transform: uppercase; font-weight: 500; }
+  .exsum .summary-lead { font-size: 14px; color: var(--fg-1); margin: 0 0 18px; }
+  .exsum .summary-lead strong { color: var(--ax-blue); }
+  .exsum .pts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 26px; margin: 0 0 20px; }
+  .exsum .pt { display: flex; gap: 11px; }
+  .exsum .pt .n { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: var(--ax-blue); color: #fff; font-family: var(--font-mono); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .exsum .pt .b { font-size: 12.5px; line-height: 1.5; }
+  .exsum .pt .b b { color: var(--ax-blue); display: block; font-weight: 700; letter-spacing: -0.02em; }
+  .exsum .pt .b span { color: var(--fg-2); }
+  .exsum .strip { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--ax-blue); border-radius: 6px; overflow: hidden; }
+  .exsum .strip .m { padding: 13px 16px; border-right: 1px solid rgba(255,255,255,0.14); }
+  .exsum .strip .m:last-child { border-right: 0; }
+  .exsum .strip .m .k { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em; color: var(--ax-gold); text-transform: uppercase; font-weight: 600; }
+  .exsum .strip .m .v { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.03em; margin-top: 3px; }
+  .exsum .strip .m .v small { font-weight: 500; font-size: 11px; opacity: 0.8; }
+
   /* template fill-in fields — visible on screen, neutralised on print */
   .fill { background: var(--ax-gold-10, rgba(233,196,106,0.22)); border-bottom: 1.5px dashed #B8902E; border-radius: 2px; padding: 0 3px; color: #6E5410; font-style: normal; }
   dd .fill, .docmark .fill { background: rgba(233,196,106,0.28); color: #6E5410; }
@@ -211,6 +231,29 @@
   </header>
 
   <div class="pad">
+
+    <!-- ============ EXECUTIVE SUMMARY ============ -->
+    <div class="exsum">
+      <div class="head">
+        <span class="t">제안 요약</span>
+        <span class="en">Executive Summary</span>
+      </div>
+      <p class="summary-lead">우송대학교는 전체 교수 약 <strong>100명</strong>이 참여하는 <strong>1일 워크샵</strong>을 통해 AI 시대 대학의 미래교육·혁신 비전과 우선 실행과제를 구성원이 직접 도출하고자 한다. 코리아스픽스는 <strong>AX(Human + AI) 방법론</strong> 기반의 참여형 퍼실리테이션으로 <strong>사전 설문부터 분임토의·전자투표·결과보고까지 전 과정</strong>을 설계·운영한다. 본 제안은 RFP 조건에 따라 식음·시상·장소 등 대학 직접 집행분을 제외한 코리아스픽스 수행분으로 구성한다.</p>
+
+      <div class="pts">
+        <div class="pt"><span class="n">1</span><span class="b"><b>참여형 합의 도출</b><span>외부 진단이 아닌 교수 100명의 집단지성으로 AI 비전·전략과제·우선 실행과제를 직접 합의</span></span></div>
+        <div class="pt"><span class="n">2</span><span class="b"><b>AX 퍼실리테이션 체계</b><span>10개 조 1:1 배치 — 통합관리기획자·리딩 퍼실·테이블 퍼실 10·기술 오퍼레이터 등 운영진 13인</span></span></div>
+        <div class="pt"><span class="n">3</span><span class="b"><b>책임 산출물</b><span>사전 설문 분석 · 교보재 일체 · 전자투표 결과 · AI 비전/전략과제 초안 결과보고서(2주 내)</span></span></div>
+        <div class="pt"><span class="n">4</span><span class="b"><b>역할분담형 견적</b><span>대학 직접 집행분(식음·시상·장소·장비)은 제외, 코리아스픽스 전문 수행분만 단일 산정</span></span></div>
+      </div>
+
+      <div class="strip">
+        <div class="m"><div class="k">Scale</div><div class="v">100명 <small>· 10조</small></div></div>
+        <div class="m"><div class="k">Duration</div><div class="v">1일 <small>10:00–17:30</small></div></div>
+        <div class="m"><div class="k">Team</div><div class="v">운영진 13인</div></div>
+        <div class="m"><div class="k">Total</div><div class="v">23,430,000원 <small>VAT 포함</small></div></div>
+      </div>
+    </div>
 
     <!-- ============ 1. OVERVIEW ============ -->
     <section>
