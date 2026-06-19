@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>산출내역서 — {{사업명}}</title>
+<!-- CSS/이미지는 상위 proposals/ 폴더 공용 자원을 참조 -->
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  /* ============================== PAGE ============================== */
+  body { background: #E7EAED; margin: 0; padding: 44px 0 80px; }
+
+  .doc {
+    width: 880px; margin: 0 auto;
+    background: var(--white);
+    box-shadow: var(--shadow-4);
+    border-radius: 4px;
+    color: var(--fg-1);
+    font-size: 14px; line-height: 1.62;
+    word-break: keep-all;
+    position: relative; overflow: hidden;
+  }
+  /* left spine — navy → teal → gold, the AX document signature */
+  .doc::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; z-index: 5;
+    background: linear-gradient(180deg, var(--ax-blue) 0%, var(--ax-blue) 58%, var(--ax-teal) 58%, var(--ax-teal) 80%, var(--ax-gold) 80%);
+  }
+
+  .pad { padding: 0 76px; }
+
+  /* ============================== COVER ============================== */
+  .cover { padding: 52px 76px 30px; position: relative; }
+
+  .topbar { display: flex; justify-content: space-between; align-items: flex-start; }
+  .logotype { line-height: 1.15; }
+  .logotype .ks { font-size: 19px; font-weight: 800; letter-spacing: -0.04em; }
+  .logotype .ks .a { color: var(--ks-navy); }
+  .logotype .ks .b { color: var(--ks-blue); }
+  .logotype .sub { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--fg-2); text-transform: uppercase; margin-top: 5px; }
+  .docmark { text-align: right; font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); letter-spacing: 0.04em; line-height: 1.7; }
+  .docmark .pill { display: inline-block; background: var(--ax-blue); color: #fff; font-weight: 600; padding: 4px 11px; border-radius: 4px; letter-spacing: 0.06em; }
+
+  .cover .goldrule { height: 1px; background: var(--ax-gold); margin: 34px 0 40px; position: relative; }
+  .cover .goldrule::after { content: ""; position: absolute; left: 0; top: -1px; width: 64px; height: 3px; background: var(--ax-gold); }
+
+  .cover .kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.2em; color: var(--ax-teal); text-transform: uppercase; font-weight: 600; margin-bottom: 20px; }
+  .cover h1 { font-size: 50px; line-height: 1.05; letter-spacing: -0.05em; color: var(--ax-blue); margin: 0 0 16px; font-weight: 800; }
+  .cover h1 .in { color: var(--ax-teal); }
+  .cover .program { font-size: 22px; color: var(--dark-gray); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 28px; }
+  .cover .ethos { font-size: 16px; font-style: italic; color: var(--ax-blue); border-left: 3px solid var(--ax-teal); padding: 4px 0 4px 18px; margin: 0 0 44px; letter-spacing: -0.01em; }
+
+  /* meta block */
+  .meta-block {
+    border-top: 1px solid var(--border-1); border-bottom: 1px solid var(--border-1);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  }
+  .meta-block .it { padding: 18px 22px 18px 0; border-right: 1px solid var(--border-2); }
+  .meta-block .it:last-child { border-right: 0; padding-right: 0; }
+  .meta-block .it:not(:first-child) { padding-left: 22px; }
+  .meta-block dt { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--fg-2); text-transform: uppercase; font-weight: 600; }
+  .meta-block dd { margin: 7px 0 0; font-size: 15px; color: var(--ax-blue); font-weight: 700; letter-spacing: -0.02em; }
+  .meta-block dd small { display: block; font-weight: 500; font-size: 11.5px; color: var(--fg-2); margin-top: 2px; letter-spacing: 0; }
+
+  /* ============================== SECTIONS ============================== */
+  section { padding-top: 6px; }
+  .pad > section:first-child > h2 { margin-top: 24px; }
+  h2 { font-size: 21px; color: var(--ax-blue); margin: 46px 0 14px; padding-bottom: 9px; border-bottom: 1px solid var(--border-1); letter-spacing: -0.035em; font-weight: 700; display: flex; align-items: baseline; gap: 12px; }
+  h2 .num { font-family: var(--font-mono); color: var(--ax-teal); font-weight: 700; font-size: 16px; }
+  h2 .en { margin-left: auto; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--fg-3); text-transform: uppercase; font-weight: 500; align-self: center; }
+  h3 { font-size: 15px; color: var(--ax-blue); margin: 26px 0 9px; font-weight: 700; letter-spacing: -0.02em; }
+  h3 .num { font-family: var(--font-mono); color: var(--ax-teal); margin-right: 8px; font-weight: 700; }
+  p { margin: 0 0 13px; }
+  .lead { font-size: 15px; color: var(--fg-1); }
+  .lead strong { color: var(--ax-blue); }
+  .lead .lead-em { font-style: italic; color: var(--fg-2); }
+  .lead .lead-em strong { color: var(--ax-teal); }
+
+  /* ============================== TABLES ============================== */
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 20px; font-size: 13px; }
+  thead th { background: var(--ax-blue); color: #fff; text-align: left; padding: 9px 13px; font-weight: 600; letter-spacing: 0.01em; font-size: 12px; }
+  thead th.num { text-align: right; }
+  tbody td { padding: 9px 13px; border-bottom: 1px solid var(--off-white); vertical-align: top; }
+  tbody td.num { text-align: right; font-family: var(--font-mono); font-feature-settings: "tnum" 1; color: var(--ax-blue); letter-spacing: 0; white-space: nowrap; }
+  tbody tr:nth-child(even) td { background: var(--paper); }
+  tbody td .code { display: inline-block; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #fff; background: var(--ax-blue); padding: 2px 7px; border-radius: 3px; letter-spacing: 0.02em; white-space: nowrap; }
+  tbody td .code.i { background: var(--ax-teal); }
+  tbody td .code.e { background: #8A6A1F; }
+  tbody td .code.p { background: var(--mid-gray); }
+  tbody td.lbl { color: var(--ax-blue); font-weight: 600; }
+  tbody td .ev { display: block; color: var(--fg-2); font-size: 11.5px; margin-top: 2px; letter-spacing: -0.01em; }
+  tfoot td { background: rgba(30,58,95,0.06); font-weight: 700; color: var(--ax-blue); border-top: 2px solid var(--ax-blue); padding: 11px 13px; }
+  tfoot td.num { text-align: right; font-family: var(--font-mono); letter-spacing: 0; white-space: nowrap; }
+  .phase-row td { background: var(--ax-blue-10) !important; font-weight: 700; color: var(--ax-blue); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 13px; }
+  table.compact td, table.compact th { padding: 7px 13px; }
+  table.compact { font-size: 12.5px; }
+
+  /* total summary table — emphasised */
+  .summary { margin-top: 4px; }
+  .summary tbody td { padding: 10px 14px; font-size: 13.5px; }
+  .summary tbody td.lbl { font-weight: 600; color: var(--dark-gray); }
+  .summary tbody td.basis { color: var(--fg-2); font-size: 12px; }
+  .summary tfoot td { background: var(--ax-blue); color: #fff; border: 0; padding: 14px 14px; font-size: 15px; }
+  .summary tfoot td.num { color: var(--ax-gold); font-size: 17px; font-weight: 700; }
+  .summary tfoot td .won { font-family: var(--font-sans); font-size: 12px; color: #fff; opacity: .8; margin-left: 4px; }
+
+  /* ============================== CALLOUTS / LISTS ============================== */
+  .callout { background: rgba(233,196,106,0.15); border-left: 4px solid var(--ax-gold); padding: 13px 18px; border-radius: 0 6px 6px 0; margin: 18px 0; font-size: 13px; }
+  .callout .lab { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: #8A6A1F; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px; }
+  .callout strong { color: var(--ax-blue); }
+
+  ul.bullets { list-style: none; padding-left: 0; margin: 4px 0 14px; }
+  ul.bullets li { position: relative; padding: 3px 0 3px 18px; }
+  ul.bullets li::before { content: "●"; position: absolute; left: 0; top: 6px; color: var(--ax-teal); font-size: 8px; line-height: 1; }
+  ul.bullets li strong { color: var(--ax-blue); }
+
+  /* two-up grid */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 6px 0 8px; }
+  .grid2 > div > h3:first-child { margin-top: 8px; }
+
+  /* discussion-theme chips (reused OHI grid) */
+  .ohi { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 14px 0 18px; }
+  .ohi .d { background: var(--paper); border-top: 3px solid var(--ax-teal); border-radius: 0 0 6px 6px; padding: 14px 12px 16px; box-shadow: var(--shadow-1); }
+  .ohi .d:nth-child(3) { border-top-color: var(--ax-gold); }
+  .ohi .d .en { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--ax-teal); text-transform: uppercase; font-weight: 700; }
+  .ohi .d .ko { font-size: 15px; font-weight: 700; color: var(--ax-blue); margin: 7px 0 6px; letter-spacing: -0.03em; }
+  .ohi .d .pt { font-size: 11.5px; color: var(--fg-2); line-height: 1.45; }
+
+  /* phase flow */
+  .flow { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr; align-items: stretch; margin: 14px 0 20px; }
+  .flow .ph { background: var(--off-white); border-top: 3px solid var(--ax-blue); border-radius: 0 0 6px 6px; padding: 16px 16px 18px; }
+  .flow .ph:nth-child(3) { border-top-color: var(--ax-teal); }
+  .flow .ph:nth-child(5) { border-top-color: var(--ax-gold); }
+  .flow .ph .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--ax-teal); text-transform: uppercase; font-weight: 700; }
+  .flow .ph .nm { font-size: 18px; font-weight: 800; color: var(--ax-blue); margin: 6px 0 10px; letter-spacing: -0.03em; }
+  .flow .ph ul { margin: 0; padding-left: 0; list-style: none; }
+  .flow .ph ul li { font-size: 12px; color: var(--dark-gray); padding: 2px 0 2px 12px; position: relative; }
+  .flow .ph ul li::before { content: "—"; position: absolute; left: 0; color: var(--ax-teal); }
+  .flow .arrow { display: flex; align-items: center; justify-content: center; color: var(--ax-teal); font-size: 18px; font-weight: 700; }
+
+  /* facilitator / about cards */
+  .bio { display: grid; grid-template-columns: 132px 1fr; gap: 26px; margin: 10px 0 6px; }
+  .bio .portrait { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: 50% 30%; border: 1px solid var(--border-1); border-radius: 6px; display: block; }
+  .bio .name { font-size: 22px; font-weight: 800; color: var(--ax-blue); letter-spacing: -0.04em; }
+  .bio .role { font-size: 12.5px; color: var(--fg-2); margin: 4px 0 14px; font-family: var(--font-mono); letter-spacing: 0.02em; }
+
+  /* contact block */
+  .contact { margin-top: 44px; background: var(--ax-blue); color: #fff; border-radius: 8px; padding: 30px 34px; display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+  .contact .l .lt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--ax-gold); text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
+  .contact .l .org { font-size: 18px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.4; }
+  .contact .r { text-align: right; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.9; letter-spacing: 0.02em; }
+  .contact .r .k { color: var(--ax-gold); margin-right: 8px; }
+
+  /* footer chrome */
+  .doc-footer { margin: 0; padding: 18px 76px 26px; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-2); letter-spacing: 0.04em; border-top: 1px solid var(--border-1); margin-top: 12px; }
+  .doc-footer .g { color: var(--ax-gold); margin: 0 7px; }
+
+  .note { font-size: 11.5px; color: var(--fg-2); margin: -8px 0 16px; letter-spacing: -0.01em; }
+  .vat { font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); letter-spacing: 0.02em; }
+
+  /* template fill-in fields — visible on screen, neutralised on print */
+  .fill { background: var(--ax-gold-10, rgba(233,196,106,0.22)); border-bottom: 1.5px dashed #B8902E; border-radius: 2px; padding: 0 3px; color: #6E5410; font-style: normal; }
+  dd .fill, .docmark .fill { background: rgba(233,196,106,0.28); color: #6E5410; }
+  @media print { .fill { background: transparent; border-bottom: 0; color: inherit; padding: 0; } }
+
+  .sched td.lbl { white-space: nowrap; }
+
+  /* ============================== PRINT ============================== */
+  @media print {
+    @page { size: A4; margin: 0; }          /* 실제 여백(2cm)은 렌더러에서 지정 */
+    body { background: #fff; padding: 0; }
+    .doc { width: auto; box-shadow: none; border-radius: 0; font-size: 12.5px; line-height: 1.42; }
+    /* 좌우 여백 복원(스파인과 간격) — 페이지 2cm 여백과 별개의 안쪽 간격 */
+    .pad { padding: 0 26px; }
+    .cover { padding: 10px 26px 12px; }
+    .doc-footer { padding: 10px 26px 0; }
+    /* 행간·여백 조이기 (벙벙함 제거) */
+    section { padding-top: 0; }
+    h2 { margin: 20px 0 8px; padding-bottom: 7px; }
+    h3 { margin: 13px 0 5px; }
+    p  { margin: 0 0 7px; }
+    .lead { margin-bottom: 8px; }
+    table { margin: 6px 0 12px; }
+    thead th { padding: 6px 11px; }
+    tbody td { padding: 5px 11px; }
+    table.compact td, table.compact th { padding: 4px 11px; }
+    tfoot td, .summary tfoot td { padding: 7px 11px; }
+    .summary tbody td { padding: 6px 12px; }
+    .phase-row td { padding: 4px 11px; }
+    .meta-block .it { padding: 12px 18px 12px 0; }
+    .ohi { margin: 10px 0 12px; } .ohi .d { padding: 10px 10px 12px; }
+    .flow { margin: 10px 0 14px; } .flow .ph { padding: 11px 12px 12px; }
+    .callout { margin: 12px 0; padding: 10px 14px; }
+    .bio { margin: 8px 0 4px; }
+    .contact { margin-top: 18px; padding: 18px 24px; }
+    /* 작은 블록만 페이지 분할 금지; .cost-keep 으로 §4 표+집계를 한 페이지에 */
+    .bio, .contact, table, .ohi, .flow, .callout, .cost-keep { break-inside: avoid; }
+    h2, h3 { break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<!-- =====================================================================
+     코리아스픽스 / fKF · AX 산출내역서 — 빈 템플릿
+     ▶ {{...}} 및 노란색 하이라이트(.fill)가 고객사별 가변부.
+       작성 순서·산정 규칙은 같은 폴더의 WORKFLOW.md 참고.
+       — 발주 경로에 따라 표지 logotype/Contact 주체(fKF↔코리아스픽스) 조정
+       — 단가는 협의 시 조정(가안) — .fill 로 표기
+       — 푸터 .fill 하이라이트는 인쇄/PDF에서 자동으로 사라짐
+       — 선택 섹션(§2 토의 프레임 등)은 건이 단순하면 통째로 삭제 가능
+     ===================================================================== -->
+<article class="doc" data-screen-label="산출내역서">
+
+  <!-- ============ COVER ============ -->
+  <header class="cover">
+    <div class="topbar">
+      <div class="logotype">
+        <!-- 발주 경로대로 주체 표기. fKF 발주면 fKF 메인 / 코리아스픽스 발주면 순서 교체 -->
+        <div class="ks"><span class="a">fKF</span> <span class="b">한국퍼실리테이터연합회</span></div>
+        <div class="sub">코리아스픽스 KoreaSpeaks</div>
+      </div>
+      <div class="docmark">
+        <div><span class="pill">산출내역서</span></div>
+        <div style="margin-top:9px">제출 <span class="fill">{{제출연월}}</span></div>
+        <div>대외비</div>
+      </div>
+    </div>
+
+    <div class="goldrule"></div>
+
+    <h1>{{사업 제목}}<br><span class="in">{{부제·강조어}}</span></h1>
+    <div class="program">{{프로그램/사업 풀네임}}</div>
+
+    <dl class="meta-block">
+      <div class="it"><dt>발주처</dt><dd><span class="fill">{{발주처}}</span></dd></div>
+      <div class="it"><dt>사업명</dt><dd>{{사업명}}<small>{{사업 부제}}</small></dd></div>
+      <div class="it"><dt>과정 구성</dt><dd>{{형식}}<small>{{규모·편성}}</small></dd></div>
+      <div class="it"><dt>총 견적</dt><dd><span class="fill">{{총견적}}원</span><small>공급가 {{공급가}} · VAT 포함</small></dd></div>
+    </dl>
+  </header>
+
+  <div class="pad">
+
+    <!-- ============ 1. OVERVIEW ============ -->
+    <section>
+      <h2><span class="num">1</span>사업 개요</h2>
+
+      <table class="compact">
+        <thead><tr><th style="width:24%">구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">대주제</td><td>{{대주제}}</td></tr>
+          <tr><td class="lbl">규모 · 편성</td><td>{{규모·편성}}</td></tr>
+          <tr><td class="lbl">진행 방식</td><td>{{진행 방식}}</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <span class="lab">📌 제안 범위</span>
+        <!-- 역할분담형: 우리 수행분만 산정하고 발주처 직접집행분은 §4.2에 별도 표기 -->
+        본 견적은 제안요청(RFP) 조건에 따라 <strong>{{수행 주체}} 수행분({{수행 범위 요약}})</strong>만 산정. {{발주처}} 자체 집행분({{발주처 집행 항목}})은 산출내역에서 제외, §4.2에 별도 표기.
+      </div>
+    </section>
+
+    <!-- ============ 2. DISCUSSION FRAME (선택 — 토의형이 아니면 삭제) ============ -->
+    <section>
+      <h2><span class="num">2</span>토의 프레임</h2>
+      <p>{{공통 주제}}를 중심으로, {{N}}개 분과 주제를 병행 토의</p>
+      <div class="ohi">
+        <!-- 칩 개수는 자유(5개 권장). 가운데(3번째) 칩만 gold 강조 -->
+        <div class="d"><div class="en">{{EN}}</div><div class="ko">{{주제1}}</div><div class="pt">{{설명}}</div></div>
+        <div class="d"><div class="en">{{EN}}</div><div class="ko">{{주제2}}</div><div class="pt">{{설명}}</div></div>
+        <div class="d"><div class="en">{{EN}}</div><div class="ko">{{주제3}}</div><div class="pt">{{설명}}</div></div>
+        <div class="d"><div class="en">{{EN}}</div><div class="ko">{{주제4}}</div><div class="pt">{{설명}}</div></div>
+        <div class="d"><div class="en">{{EN}}</div><div class="ko">{{주제5}}</div><div class="pt">{{설명}}</div></div>
+      </div>
+    </section>
+
+    <!-- ============ 3. STRUCTURE / SCHEDULE ============ -->
+    <section>
+      <h2><span class="num">3</span>운영 구성 · 일정</h2>
+
+      <div class="flow">
+        <div class="ph"><div class="tag">준비 · Prepare</div><div class="nm">{{1단계}}</div><ul><li>{{항목}}</li><li>{{항목}}</li><li>{{항목}}</li></ul></div>
+        <div class="arrow">→</div>
+        <div class="ph"><div class="tag">숙의 · Deliberate</div><div class="nm">{{2단계}}</div><ul><li>{{항목}}</li><li>{{항목}}</li><li>{{항목}}</li></ul></div>
+        <div class="arrow">→</div>
+        <div class="ph"><div class="tag">환류 · Follow-up</div><div class="nm">{{3단계}}</div><ul><li>{{항목}}</li><li>{{항목}}</li><li>{{항목}}</li></ul></div>
+      </div>
+
+      <h3><span class="num">3.1</span>당일 일정 ({{시작}}–{{종료}})</h3>
+      <table class="compact sched">
+        <thead><tr><th style="width:18%">시간</th><th style="width:28%">내용</th><th>세부</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">{{시간}}</td><td>{{내용}}</td><td>{{세부}}</td></tr>
+          <tr><td class="lbl">{{시간}}</td><td>{{내용}}</td><td>{{세부}}</td></tr>
+          <tr><td class="lbl">{{시간}}</td><td>{{내용}}</td><td>{{세부}}</td></tr>
+          <!-- 행 추가/삭제 -->
+        </tbody>
+      </table>
+
+      <h3><span class="num">3.2</span>운영 인력 구성</h3>
+      <ul class="bullets">
+        <li><strong>{{역할}} {{N}}</strong> — {{설명}}</li>
+        <li><strong>{{역할}} {{N}}</strong> — {{설명}}</li>
+        <li><strong>{{역할}} {{N}}</strong> — {{설명}}</li>
+        <li><strong>{{역할}} {{N}}</strong> — {{설명}}</li>
+      </ul>
+    </section>
+
+    <!-- ============ 4. COST BREAKDOWN (CORE) ============ -->
+    <section class="cost">
+      <h2><span class="num">4</span>산출내역서</h2>
+
+      <!-- .cost-keep: 인쇄 시 표 + 4.1 집계가 한 페이지에 떨어지도록 묶음 -->
+      <div class="cost-keep">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:10%">코드</th>
+            <th>항목 · 산출근거</th>
+            <th class="num" style="width:9%">수량</th>
+            <th style="width:9%">단위</th>
+            <th class="num" style="width:16%">금액(원)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 코드 컬러: 기본(F 인력)=파랑 / .code.i(D 산출물)=teal / .code.e(C 경비)=gold -->
+          <tr class="phase-row"><td colspan="5">운영 인력</td></tr>
+          <tr><td><span class="code">F-01</span></td><td class="lbl">{{역할}}<span class="ev">{{산출근거 · 월급여×투입율}}</span></td><td class="num">{{수량}}</td><td>인</td><td class="num">{{금액}}</td></tr>
+          <tr><td><span class="code">F-02</span></td><td class="lbl">{{역할}}<span class="ev">{{산출근거}}</span></td><td class="num">{{수량}}</td><td>인</td><td class="num">{{금액}}</td></tr>
+          <tr><td><span class="code">F-03</span></td><td class="lbl">{{역할}}<span class="ev">{{N}}개 조 × 1인 · {{단가}}/인</span></td><td class="num">{{수량}}</td><td>인</td><td class="num">{{금액}}</td></tr>
+          <tr><td><span class="code">F-04</span></td><td class="lbl">{{역할}}<span class="ev">{{산출근거}}</span></td><td class="num">{{수량}}</td><td>인</td><td class="num">{{금액}}</td></tr>
+
+          <tr class="phase-row"><td colspan="5">진행 · 경비</td></tr>
+          <tr><td><span class="code e">C-01</span></td><td class="lbl">기획 운영비<span class="ev">{{사전 답사·기획 회의·운영 제반 경비}}</span></td><td class="num">1</td><td>식</td><td class="num">{{금액}}</td></tr>
+          <tr><td><span class="code e">C-02</span></td><td class="lbl">교보재 등 진행비<span class="ev">{{교보재 마스터 · 조별 운영키트 · 토론 소모품}}</span></td><td class="num">1</td><td>식</td><td class="num">{{금액}}</td></tr>
+
+          <tr class="phase-row"><td colspan="5">제공 산출물</td></tr>
+          <!-- 산출물은 인력비에 포함하면 0, 별도 청구하면 금액, 옵션이면 ev에 "+금액(옵션)" 표기 -->
+          <tr><td><span class="code i">D-01</span></td><td class="lbl">{{산출물}}<span class="ev">{{산출근거}}</span></td><td class="num">1</td><td>식</td><td class="num">{{금액 또는 0}}</td></tr>
+          <tr><td><span class="code i">D-02</span></td><td class="lbl">{{산출물}}<span class="ev">{{설명}} — 인력비 포함</span></td><td class="num">1</td><td>식</td><td class="num">0</td></tr>
+          <tr><td><span class="code i">D-03</span></td><td class="lbl">{{산출물}}<span class="ev">{{설명}} — 협의 시 +{{금액}}(옵션)</span></td><td class="num">1</td><td>식</td><td class="num">0</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="4">공급가액 합계 <span class="vat">(VAT 별도)</span></td><td class="num">{{공급가}}</td></tr>
+        </tfoot>
+      </table>
+
+      <h3><span class="num">4.1</span>총괄 집계</h3>
+      <table class="summary">
+        <thead><tr><th>항목</th><th>산출근거</th><th class="num" style="width:20%">금액(원)</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">공급가액</td><td class="basis">산출내역 합계 (F · C · D)</td><td class="num">{{공급가}}</td></tr>
+          <tr><td class="lbl">부가가치세</td><td class="basis">공급가액 × 10%</td><td class="num">{{VAT}}</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2">총 견적금액</td><td class="num">{{총견적}}<span class="won">원</span></td></tr>
+        </tfoot>
+      </table>
+      </div><!-- /.cost-keep -->
+
+      <h3><span class="num">4.2</span>불포함 사항 ({{발주처}} 직접 집행)</h3>
+      <p class="note">아래 항목은 RFP 기준 {{발주처}} 자체 예산·시설로 집행 (본 견적 미포함)</p>
+      <table class="compact">
+        <thead><tr><th style="width:30%">항목</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">{{항목}}</td><td>{{비고}}</td></tr>
+          <tr><td class="lbl">{{항목}}</td><td>{{비고}}</td></tr>
+          <tr><td class="lbl">{{항목}}</td><td>{{비고}}</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============ 5. DELIVERABLES ============ -->
+    <section>
+      <h2><span class="num">5</span>산출물</h2>
+      <table class="compact">
+        <thead><tr><th style="width:30%">산출물</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">{{산출물}}</td><td>{{내용}}</td></tr>
+          <tr><td class="lbl">{{산출물}}</td><td>{{내용}}</td></tr>
+          <!-- 옵션 산출물은 끝에 "&nbsp;:&nbsp; 협의 후 추가 시 {{금액}}원 추가" 표기 -->
+          <tr><td class="lbl">{{산출물}}</td><td>{{내용}} &nbsp;:&nbsp; 협의 후 추가 시 {{금액}}원 추가</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============ 6. FACILITATOR ============ -->
+    <section>
+      <h2><span class="num">6</span>퍼실리테이터</h2>
+      <div class="bio">
+        <img class="portrait" src="../bdlee.jpg" alt="{{이름}} 퍼실리테이터">
+        <div>
+          <div class="name">{{이름}}</div>
+          <div class="role">{{현직 직함}}</div>
+          <ul class="bullets">
+            <li><strong>전문</strong> — {{전문 분야}}</li>
+            <li><strong>대표 실적</strong> — {{대표 실적}}</li>
+            <li><strong>(전) 경력</strong> — {{전 경력}}</li>
+            <li><strong>(전) 자문</strong> — {{자문 이력}}</li>
+            <li><strong>저서</strong> — {{저서}}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. ABOUT ============ -->
+    <section>
+      <h2><span class="num">7</span>기관 소개</h2>
+      <div class="grid2">
+        <div>
+          <h3 style="margin-top:8px">fKF (사) 한국퍼실리테이터연합회</h3>
+          <table class="compact">
+            <tbody>
+              <tr><td class="lbl" style="width:30%">설립</td><td>2013년</td></tr>
+              <tr><td class="lbl">전문</td><td>퍼실리테이션, 숙의민주주의, 조직개발</td></tr>
+              <tr><td class="lbl">네트워크</td><td>행정안전부 등록 유일의 퍼실리테이터 사단법인체</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h3 style="margin-top:8px">코리아스픽스</h3>
+          <table class="compact">
+            <tbody>
+              <tr><td class="lbl" style="width:30%">설립</td><td>2012년</td></tr>
+              <tr><td class="lbl">전문</td><td>공론화, 원탁회의, 시민참여</td></tr>
+              <tr><td class="lbl">실적</td><td>동덕여대 공학전환 공론화 리딩 퍼실리테이터 · 외교부 · 국제보건의료재단 · SH공사 등 다수</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="l">
+          <div class="lt">Contact</div>
+          <div class="org">fKF 한국퍼실리테이터연합회 · 코리아스픽스</div>
+        </div>
+        <div class="r">
+          <div><span class="k">TEL</span>02-814-7773</div>
+          <div><span class="k">MAIL</span>team@kspeaks.kr</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="doc-footer">
+    <span>{{발주처}} {{사업명}} · 운영 산출내역서</span>
+    <span><span class="fill">{{발주처}}</span><span class="g">●</span><span class="fill">{{제출연월}}</span><span class="g">●</span>대외비</span>
+  </footer>
+
+</article>
+</body>
+</html>
