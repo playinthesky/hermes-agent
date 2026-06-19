@@ -1,0 +1,72 @@
+name: "📋 컨설팅 아젠다 (Consulting Agenda)"
+description: "완료했거나 표준화할 아젠다를 검색 가능한 자산으로 적립합니다. (consulting-library 워크플로우)"
+title: "[Agenda] <도메인>: <한 줄 요약>"
+labels: ["agenda"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        이 이슈는 휴먼 컨설턴트가 **새 의뢰에서 재사용**할 아젠다를 적립하기 위한 양식입니다.
+        작성 가이드: `consulting-library/templates/agenda-entry.md` · 트리아지: `consulting-library/intake/triage-guide.md`
+
+  - type: dropdown
+    id: domain
+    attributes:
+      label: 주 도메인
+      description: 아젠다 카탈로그의 8개 도메인 중 하나
+      options:
+        - research — 리서치 & 인텔리전스
+        - creative — 콘텐츠 & 크리에이티브 제작
+        - productivity — 생산성 & 업무 자동화
+        - swe — 소프트웨어 엔지니어링 & DevOps
+        - ai-ml — AI/ML 엔지니어링 & 에이전트
+        - finance — 데이터·금융·Web3
+        - security — 보안 & 거버넌스
+        - smart-life — 스마트 라이프
+    validations:
+      required: true
+
+  - type: input
+    id: summary
+    attributes:
+      label: 의뢰 요약
+      description: 누가 / 무엇을 / 왜 (한 줄)
+      placeholder: "B2B SaaS 팀이 사내 문서 검색 챗봇을 고객지원 부담 절감을 위해"
+    validations:
+      required: true
+
+  - type: textarea
+    id: skills
+    attributes:
+      label: 사용한 핵심 스킬
+      description: "스킬명과 용도. 인덱스(consulting-library/index/skills-index.md) 기준."
+      placeholder: |
+        - chroma — 벡터 저장/검색
+        - fastmcp — 검색 도구를 MCP로 노출
+        - hermes-agent — 대화 에이전트 오케스트레이션
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: 산출물
+      placeholder: "RAG 파이프라인, MCP 서버, 운영 가이드"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reuse
+    attributes:
+      label: 재사용 포인트
+      description: 다음 유사 의뢰에서 그대로 가져다 쓸 수 있는 구성/설정/주의점
+    validations:
+      required: false
+
+  - type: input
+    id: planning_doc
+    attributes:
+      label: 기획문서 링크
+      description: 기획문서 PR 또는 파일 경로
+    validations:
+      required: false
