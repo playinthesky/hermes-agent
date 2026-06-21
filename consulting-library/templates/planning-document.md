@@ -1,5 +1,6 @@
 # 기획문서 — {{프로젝트명}}
 
+> **양식(Form)** · 소속 SOP: [SOP-001](../sop/SOP-001-consulting-intake-to-delivery.md) 5단계 산출물.
 > 사용법: 이 파일을 복사해 `{{...}}` 자리를 채웁니다.
 > 트리아지 결과와 [`AGENDA-CATALOG.md`](../AGENDA-CATALOG.md)·[`index/skills-index.md`](../index/skills-index.md)를 근거로 작성하세요.
 

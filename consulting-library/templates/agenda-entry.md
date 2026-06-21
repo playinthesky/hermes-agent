@@ -1,5 +1,6 @@
 # 아젠다 적립 양식 (Agenda Entry)
 
+> **양식(Form)** · 소속 SOP: [SOP-002](../sop/SOP-002-agenda-knowledge-capture.md).
 > 완료된(또는 표준화하고 싶은) 아젠다를 GitHub에 **검색 가능한 자산**으로 남기는 양식입니다.
 > 실제 등록은 `agenda` 이슈 폼([`.github/ISSUE_TEMPLATE/agenda.yml`](../../.github/ISSUE_TEMPLATE/agenda.yml))으로 하며,
 > 이 문서는 그 필드와 **라벨 규칙**의 레퍼런스입니다.
