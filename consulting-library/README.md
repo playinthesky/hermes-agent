@@ -27,6 +27,7 @@ hermes-agent에는 170개의 스킬이 8개 도메인에 걸쳐 있습니다. �
 | [`templates/planning-document.md`](./templates/planning-document.md) | **기획문서 템플릿** — 의뢰 → 기획서 초안 생성용 |
 | [`templates/agenda-entry.md`](./templates/agenda-entry.md) | 아젠다를 GitHub에 적립할 때 쓰는 항목 양식 |
 | [`playbooks/`](./playbooks/) | 도메인별 플레이북 — 실제 의뢰 예시 + 추천 역량 + 채워진 기획문서 샘플 |
+| [`agendas/`](./agendas/) | **아젠다 레지스트리** — 검색 가능한 시드 아젠다(파일 기반, Issues 비활성 대체) |
 | [`index/skills-index.md`](./index/skills-index.md) | **자동 생성** 스킬 인덱스(도메인 ↔ 스킬 ↔ 키워드) |
 | [`index/skills.json`](./index/skills.json) | 위 인덱스의 기계 판독용 데이터 |
 | [`build_index.py`](./build_index.py) | 스킬 frontmatter → 인덱스 생성 스크립트 |
