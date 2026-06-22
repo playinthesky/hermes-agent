@@ -154,6 +154,44 @@ class TestRenderers:
         assert "fields" in entry
 
 
+class TestPresskitBlueprint:
+    def test_blueprint_present_with_expected_slots(self):
+        bp = get_blueprint("presskit")
+        assert bp is not None
+        names = [s.name for s in bp.slots]
+        assert names == ["client", "project_type", "schedule", "deliver"]
+        assert bp.skills == ("presskit",)
+
+    def test_fill_defaults_to_oneshot_and_loads_skill(self):
+        spec = fill_blueprint(get_blueprint("presskit"), {"client": "서울교육공론화"})
+        # schedule slot passes through verbatim (one-shot duration handled downstream)
+        assert spec["schedule"] == "5m"
+        assert spec["skills"] == ["presskit"]
+        assert "서울교육공론화" in spec["prompt"]
+        # default project_type renders into the prompt
+        assert "입찰" in spec["prompt"]
+        # the escaped {{slug}} placeholder survives .format() as a literal
+        assert "presskits/{slug}/" in spec["prompt"]
+
+    def test_client_is_required(self):
+        with pytest.raises(BlueprintFillError, match="client"):
+            fill_blueprint(get_blueprint("presskit"), {})
+
+    def test_recurring_schedule_passes_through(self):
+        spec = fill_blueprint(
+            get_blueprint("presskit"),
+            {"client": "X", "schedule": "every 1d"},
+        )
+        assert spec["schedule"] == "every 1d"
+
+    def test_bad_project_type_rejected(self):
+        with pytest.raises(BlueprintFillError, match="not allowed"):
+            fill_blueprint(
+                get_blueprint("presskit"),
+                {"client": "X", "project_type": "수의계약"},
+            )
+
+
 @pytest.fixture
 def isolated_home(tmp_path, monkeypatch):
     home = tmp_path / ".hermes"
