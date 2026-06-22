@@ -476,6 +476,49 @@ CATALOG: List[AutomationBlueprint] = [
         ],
         tags=("daily", "curiosity"),
     ),
+    AutomationBlueprint(
+        key="presskit",
+        title="프레스킷 생성·수집",
+        description="클라이언트 프레스킷을 만든다: _TEMPLATE 복제 → 매체별 자료 "
+        "자동수집 → 0~4 섹션 채움 → GAP 체크리스트를 컨설턴트에게 인계. "
+        "기본은 즉시 1회 실행이고, 미완성 프레스킷의 GAP을 주기적으로 다시 "
+        "메우려면 recurrence 형태의 schedule을 준다.",
+        category="consulting",
+        # On-demand by default (one-shot via the free-text schedule slot); the
+        # same blueprint doubles as a recurring GAP-sweep when given a cadence.
+        schedule_template="{schedule}",
+        prompt_template=(
+            "presskit 스킬을 사용한다. 클라이언트 '{client}'의 프레스킷을 "
+            "만든다 (사업 유형: {project_type}). presskits/{{slug}}/ 폴더가 없으면 "
+            "_TEMPLATE을 복제해 만들고, 있으면 비어 있는 칸만 다시 채운다. "
+            "프레스킷 0~4 섹션 자리표시자를 채우되, 매체 A(공식보도) B(언론) "
+            "C(참여) D(영상SNS) E(연구) F(브랜드자산)를 수집한다. 없으면 GAP로 "
+            "남기고 URL을 추측하지 않는다. 공식 SNS는 역링크 확인 후에만 "
+            "verified로 표시한다. 용어 표준 고정: 발주측=주최, 수행측=수행기관, "
+            "공동수행=컨소시엄. 파일명은 영문+버전 suffix, 한글 파일명 금지. "
+            "끝나면 채운 결과와 GAP 체크리스트를 정리해 전달한다."
+        ),
+        slots=[
+            BlueprintSlot(
+                name="client", type="text", label="클라이언트(사업명)?",
+                help="프레스킷을 만들 클라이언트 또는 사업명",
+            ),
+            BlueprintSlot(
+                name="project_type", type="enum", label="사업 유형?",
+                default="입찰", options=("입찰", "숙의"),
+                help="입찰=RFP 단계부터, 숙의=계약 체결 이후",
+            ),
+            BlueprintSlot(
+                name="schedule", type="text", label="언제 실행?",
+                default="5m",
+                help="'5m' = 5분 뒤 1회 실행(지금 생성). 'every 1d' 처럼 주면 "
+                "미완성 GAP을 주기적으로 다시 메운다.",
+            ),
+            _DELIVER,
+        ],
+        skills=("presskit",),
+        tags=("consulting", "presskit"),
+    ),
 ]
 
 _CATALOG_BY_KEY = {r.key: r for r in CATALOG}
