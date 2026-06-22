@@ -10,6 +10,7 @@
 | [SOP-001](./SOP-001-consulting-intake-to-delivery.md) | 컨설팅 의뢰 접수~기획문서 인도 | 발효 | 의뢰 → 트리아지 → 검색 → 역량 매핑 → 기획문서 → 검수 → 인도 |
 | [SOP-002](./SOP-002-agenda-knowledge-capture.md) | 아젠다 지식 적립 | 발효 | 완료 아젠다를 검색 가능한 GitHub 이슈로 자산화 |
 | [SOP-003](./SOP-003-skills-index-maintenance.md) | 스킬 인덱스 유지보수 | 발효 | 스킬 추가/변경 시 인덱스 재생성·검증·커밋 |
+| [SOP-004](./SOP-004-daily-document-watch.md) | 일일 문서 변경 감시 | 발효 | 매일 19:00 flow+Google Drive 변경 문서 자동 수집·전달 |
 
 ## 문서 체계 (SOP / WI / Form / Record)
 

@@ -28,6 +28,8 @@ hermes-agent에는 170개의 스킬이 8개 도메인에 걸쳐 있습니다. �
 | [`templates/agenda-entry.md`](./templates/agenda-entry.md) | 아젠다를 GitHub에 적립할 때 쓰는 항목 양식 |
 | [`playbooks/`](./playbooks/) | 도메인별 플레이북 — 실제 의뢰 예시 + 추천 역량 + 채워진 기획문서 샘플 |
 | [`agendas/`](./agendas/) | **아젠다 레지스트리** — 검색 가능한 시드 아젠다(파일 기반, Issues 비활성 대체) |
+| [`routines/`](./routines/) | 자동 루틴 실행 지침 (예: 일일 문서 감시 — SOP-004) |
+| [`scripts/`](./scripts/) | 보조 스크립트 (flow 문서 변경 스캐너 등) |
 | [`index/skills-index.md`](./index/skills-index.md) | **자동 생성** 스킬 인덱스(도메인 ↔ 스킬 ↔ 키워드) |
 | [`index/skills.json`](./index/skills.json) | 위 인덱스의 기계 판독용 데이터 |
 | [`build_index.py`](./build_index.py) | 스킬 frontmatter → 인덱스 생성 스크립트 |
