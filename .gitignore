@@ -136,3 +136,6 @@ RELEASE_v*.md
 # Desktop demo-run scratch output (hermes writes demo/*.txt during recorded
 # walkthroughs). Throwaway artifacts, never part of the app.
 apps/desktop/demo/
+
+# 일일 문서 감시 다이제스트는 Drive 내부자료가 포함될 수 있어 커밋 금지 (SOP-004)
+consulting-library/agendas/inbox/

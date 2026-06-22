@@ -1,0 +1,2826 @@
+[
+  {
+    "name": "apple-notes",
+    "description": "Manage Apple Notes via memo CLI: create, search, edit.",
+    "tags": [
+      "Notes",
+      "Apple",
+      "macOS",
+      "note-taking"
+    ],
+    "top": "apple",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/apple/apple-notes/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "apple-reminders",
+    "description": "Apple Reminders via remindctl: add, list, complete.",
+    "tags": [
+      "Reminders",
+      "tasks",
+      "todo",
+      "macOS",
+      "Apple"
+    ],
+    "top": "apple",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/apple/apple-reminders/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "findmy",
+    "description": "Track Apple devices/AirTags via FindMy.app on macOS.",
+    "tags": [
+      "FindMy",
+      "AirTag",
+      "location",
+      "tracking",
+      "macOS",
+      "Apple"
+    ],
+    "top": "apple",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/apple/findmy/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "imessage",
+    "description": "Send and receive iMessages/SMS via the imsg CLI on macOS.",
+    "tags": [
+      "iMessage",
+      "SMS",
+      "messaging",
+      "macOS",
+      "Apple"
+    ],
+    "top": "apple",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/apple/imessage/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "macos-computer-use",
+    "description": "|",
+    "tags": [
+      "computer-use",
+      "macos",
+      "desktop",
+      "automation",
+      "gui"
+    ],
+    "top": "apple",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/apple/macos-computer-use/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "claude-code",
+    "description": "Delegate coding to Claude Code CLI (features, PRs).",
+    "tags": [
+      "Coding-Agent",
+      "Claude",
+      "Anthropic",
+      "Code-Review",
+      "Refactoring",
+      "PTY",
+      "Automation"
+    ],
+    "top": "autonomous-ai-agents",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/autonomous-ai-agents/claude-code/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "codex",
+    "description": "Delegate coding to OpenAI Codex CLI (features, PRs).",
+    "tags": [
+      "Coding-Agent",
+      "Codex",
+      "OpenAI",
+      "Code-Review",
+      "Refactoring"
+    ],
+    "top": "autonomous-ai-agents",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/autonomous-ai-agents/codex/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "hermes-agent",
+    "description": "Configure, extend, or contribute to Hermes Agent.",
+    "tags": [
+      "hermes",
+      "setup",
+      "configuration",
+      "multi-agent",
+      "spawning",
+      "cli",
+      "gateway",
+      "development"
+    ],
+    "top": "autonomous-ai-agents",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/autonomous-ai-agents/hermes-agent/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "opencode",
+    "description": "Delegate coding to OpenCode CLI (features, PR review).",
+    "tags": [
+      "Coding-Agent",
+      "OpenCode",
+      "Autonomous",
+      "Refactoring",
+      "Code-Review"
+    ],
+    "top": "autonomous-ai-agents",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/autonomous-ai-agents/opencode/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "architecture-diagram",
+    "description": "Dark-themed SVG architecture/cloud/infra diagrams as HTML.",
+    "tags": [
+      "architecture",
+      "diagrams",
+      "SVG",
+      "HTML",
+      "visualization",
+      "infrastructure",
+      "cloud"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/architecture-diagram/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "ascii-art",
+    "description": "ASCII art: pyfiglet, cowsay, boxes, image-to-ascii.",
+    "tags": [
+      "ASCII",
+      "Art",
+      "Banners",
+      "Creative",
+      "Unicode",
+      "Text-Art",
+      "pyfiglet",
+      "figlet",
+      "cowsay",
+      "boxes"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/ascii-art/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "ascii-video",
+    "description": "ASCII video: convert video/audio to colored ASCII MP4/GIF.",
+    "tags": [],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/ascii-video/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "baoyu-infographic",
+    "description": "Infographics: 21 layouts x 21 styles (信息图, 可视化).",
+    "tags": [
+      "infographic",
+      "visual-summary",
+      "creative",
+      "image-generation"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/baoyu-infographic/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "claude-design",
+    "description": "Design one-off HTML artifacts (landing, deck, prototype).",
+    "tags": [
+      "design",
+      "html",
+      "prototype",
+      "ux",
+      "ui",
+      "creative",
+      "artifact",
+      "deck",
+      "motion",
+      "design-system"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/claude-design/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "comfyui",
+    "description": "Generate images, video, and audio with ComfyUI — install, launch, manage nodes/models, run workflows with parameter injection. Uses the official comfy-cli for lifecycle and direct REST/WebSocket API for execution.",
+    "tags": [],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/comfyui/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "design-md",
+    "description": "Author/validate/export Google's DESIGN.md token spec files.",
+    "tags": [
+      "design",
+      "design-system",
+      "tokens",
+      "ui",
+      "accessibility",
+      "wcag",
+      "tailwind",
+      "dtcg",
+      "google"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/design-md/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "excalidraw",
+    "description": "Hand-drawn Excalidraw JSON diagrams (arch, flow, seq).",
+    "tags": [
+      "Excalidraw",
+      "Diagrams",
+      "Flowcharts",
+      "Architecture",
+      "Visualization",
+      "JSON"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/excalidraw/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "humanizer",
+    "description": "Humanize text: strip AI-isms and add real voice.",
+    "tags": [
+      "writing",
+      "editing",
+      "humanize",
+      "anti-ai-slop",
+      "voice",
+      "prose",
+      "text"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/humanizer/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "manim-video",
+    "description": "Manim CE animations: 3Blue1Brown math/algo videos.",
+    "tags": [],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/manim-video/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "p5js",
+    "description": "p5.js sketches: gen art, shaders, interactive, 3D.",
+    "tags": [
+      "creative-coding",
+      "generative-art",
+      "p5js",
+      "canvas",
+      "interactive",
+      "visualization",
+      "webgl",
+      "shaders",
+      "animation"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/p5js/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "popular-web-designs",
+    "description": "54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.",
+    "tags": [
+      "design",
+      "css",
+      "html",
+      "ui",
+      "web-development",
+      "design-systems",
+      "templates"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/popular-web-designs/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "pretext",
+    "description": "Use when building creative browser demos with @chenglou/pretext — DOM-free text layout for ASCII art, typographic flow around obstacles, text-as-geometry games, kinetic typography, and text-powered generative art. Produces single-file HTML demos by default.",
+    "tags": [
+      "creative-coding",
+      "typography",
+      "pretext",
+      "ascii-art",
+      "canvas",
+      "generative",
+      "text-layout",
+      "kinetic-typography"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/pretext/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "sketch",
+    "description": "Throwaway HTML mockups: 2-3 design variants to compare.",
+    "tags": [
+      "sketch",
+      "mockup",
+      "design",
+      "ui",
+      "prototype",
+      "html",
+      "variants",
+      "exploration",
+      "wireframe",
+      "comparison"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/sketch/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "songwriting-and-ai-music",
+    "description": "Songwriting craft and Suno AI music prompts.",
+    "tags": [
+      "songwriting",
+      "music",
+      "suno",
+      "parody",
+      "lyrics",
+      "creative"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/songwriting-and-ai-music/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "touchdesigner-mcp",
+    "description": "Control a running TouchDesigner instance via twozero MCP — create operators, set parameters, wire connections, execute Python, build real-time visuals. 36 native tools.",
+    "tags": [
+      "TouchDesigner",
+      "MCP",
+      "twozero",
+      "creative-coding",
+      "real-time-visuals",
+      "generative-art",
+      "audio-reactive",
+      "VJ",
+      "installation",
+      "GLSL"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/creative/touchdesigner-mcp/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "jupyter-live-kernel",
+    "description": "Iterative Python via live Jupyter kernel (hamelnb).",
+    "tags": [
+      "jupyter",
+      "notebook",
+      "repl",
+      "data-science",
+      "exploration",
+      "iterative"
+    ],
+    "top": "data-science",
+    "domain": "리서치 & 인텔리전스",
+    "path": "skills/data-science/jupyter-live-kernel/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "kanban-orchestrator",
+    "description": "Decomposition playbook + anti-temptation rules for an orchestrator profile routing work through Kanban. The \"don't do the work yourself\" rule and the basic lifecycle are auto-injected into every kanban worker's system prompt; this skill is the deeper playbook when you're specifically playing the orchestrator role.",
+    "tags": [
+      "kanban",
+      "multi-agent",
+      "orchestration",
+      "routing"
+    ],
+    "top": "devops",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/devops/kanban-orchestrator/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "kanban-worker",
+    "description": "Pitfalls, examples, and edge cases for Hermes Kanban workers. The lifecycle itself is auto-injected into every worker's system prompt as KANBAN_GUIDANCE (from agent/prompt_builder.py); this skill is what you load when you want deeper detail on specific scenarios.",
+    "tags": [
+      "kanban",
+      "multi-agent",
+      "collaboration",
+      "workflow",
+      "pitfalls"
+    ],
+    "top": "devops",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/devops/kanban-worker/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "dogfood",
+    "description": "Exploratory QA of web apps: find bugs, evidence, reports.",
+    "tags": [
+      "qa",
+      "testing",
+      "browser",
+      "web",
+      "dogfood"
+    ],
+    "top": "dogfood",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/dogfood/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "himalaya",
+    "description": "Himalaya CLI: IMAP/SMTP email from terminal.",
+    "tags": [
+      "Email",
+      "IMAP",
+      "SMTP",
+      "CLI",
+      "Communication"
+    ],
+    "top": "email",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/email/himalaya/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "codebase-inspection",
+    "description": "Inspect codebases w/ pygount: LOC, languages, ratios.",
+    "tags": [
+      "LOC",
+      "Code Analysis",
+      "pygount",
+      "Codebase",
+      "Metrics",
+      "Repository"
+    ],
+    "top": "github",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/github/codebase-inspection/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "github-auth",
+    "description": "GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login.",
+    "tags": [
+      "GitHub",
+      "Authentication",
+      "Git",
+      "gh-cli",
+      "SSH",
+      "Setup"
+    ],
+    "top": "github",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/github/github-auth/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "github-code-review",
+    "description": "Review PRs: diffs, inline comments via gh or REST.",
+    "tags": [
+      "GitHub",
+      "Code-Review",
+      "Pull-Requests",
+      "Git",
+      "Quality"
+    ],
+    "top": "github",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/github/github-code-review/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "github-issues",
+    "description": "Create, triage, label, assign GitHub issues via gh or REST.",
+    "tags": [
+      "GitHub",
+      "Issues",
+      "Project-Management",
+      "Bug-Tracking",
+      "Triage"
+    ],
+    "top": "github",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/github/github-issues/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "github-pr-workflow",
+    "description": "GitHub PR lifecycle: branch, commit, open, CI, merge.",
+    "tags": [
+      "GitHub",
+      "Pull-Requests",
+      "CI/CD",
+      "Git",
+      "Automation",
+      "Merge"
+    ],
+    "top": "github",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/github/github-pr-workflow/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "github-repo-management",
+    "description": "Clone/create/fork repos; manage remotes, releases.",
+    "tags": [
+      "GitHub",
+      "Repositories",
+      "Git",
+      "Releases",
+      "Secrets",
+      "Configuration"
+    ],
+    "top": "github",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/github/github-repo-management/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "gif-search",
+    "description": "Search/download GIFs from Tenor via curl + jq.",
+    "tags": [
+      "GIF",
+      "Media",
+      "Search",
+      "Tenor",
+      "API"
+    ],
+    "top": "media",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/media/gif-search/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "heartmula",
+    "description": "HeartMuLa: Suno-like song generation from lyrics + tags.",
+    "tags": [
+      "music",
+      "audio",
+      "generation",
+      "ai",
+      "heartmula",
+      "heartcodec",
+      "lyrics",
+      "songs"
+    ],
+    "top": "media",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/media/heartmula/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "songsee",
+    "description": "Audio spectrograms/features (mel, chroma, MFCC) via CLI.",
+    "tags": [
+      "Audio",
+      "Visualization",
+      "Spectrogram",
+      "Music",
+      "Analysis"
+    ],
+    "top": "media",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/media/songsee/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "youtube-content",
+    "description": "YouTube transcripts to summaries, threads, blogs.",
+    "tags": [],
+    "top": "media",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/media/youtube-content/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "evaluating-llms-harness",
+    "description": "lm-eval-harness: benchmark LLMs (MMLU, GSM8K, etc.).",
+    "tags": [
+      "Evaluation",
+      "LM Evaluation Harness",
+      "Benchmarking",
+      "MMLU",
+      "HumanEval",
+      "GSM8K",
+      "EleutherAI",
+      "Model Quality",
+      "Academic Benchmarks",
+      "Industry Standard"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/mlops/evaluation/lm-evaluation-harness/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "weights-and-biases",
+    "description": "W&B: log ML experiments, sweeps, model registry, dashboards.",
+    "tags": [
+      "MLOps",
+      "Weights And Biases",
+      "WandB",
+      "Experiment Tracking",
+      "Hyperparameter Tuning",
+      "Model Registry",
+      "Collaboration",
+      "Real-Time Visualization",
+      "PyTorch",
+      "TensorFlow",
+      "HuggingFace"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/mlops/evaluation/weights-and-biases/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "huggingface-hub",
+    "description": "HuggingFace hf CLI: search/download/upload models, datasets.",
+    "tags": [
+      "huggingface",
+      "hf",
+      "models",
+      "datasets",
+      "hub",
+      "mlops"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/mlops/huggingface-hub/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "llama-cpp",
+    "description": "llama.cpp local GGUF inference + HF Hub model discovery.",
+    "tags": [
+      "llama.cpp",
+      "GGUF",
+      "Quantization",
+      "Hugging Face Hub",
+      "CPU Inference",
+      "Apple Silicon",
+      "Edge Deployment",
+      "AMD GPUs",
+      "Intel GPUs",
+      "NVIDIA",
+      "URL-first"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/mlops/inference/llama-cpp/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "serving-llms-vllm",
+    "description": "vLLM: high-throughput LLM serving, OpenAI API, quantization.",
+    "tags": [
+      "vLLM",
+      "Inference Serving",
+      "PagedAttention",
+      "Continuous Batching",
+      "High Throughput",
+      "Production",
+      "OpenAI API",
+      "Quantization",
+      "Tensor Parallelism"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/mlops/inference/vllm/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "audiocraft-audio-generation",
+    "description": "AudioCraft: MusicGen text-to-music, AudioGen text-to-sound.",
+    "tags": [
+      "Multimodal",
+      "Audio Generation",
+      "Text-to-Music",
+      "Text-to-Audio",
+      "MusicGen"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/mlops/models/audiocraft/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "segment-anything-model",
+    "description": "SAM: zero-shot image segmentation via points, boxes, masks.",
+    "tags": [
+      "Multimodal",
+      "Image Segmentation",
+      "Computer Vision",
+      "SAM",
+      "Zero-Shot"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "skills/mlops/models/segment-anything/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "obsidian",
+    "description": "Read, search, create, and edit notes in the Obsidian vault.",
+    "tags": [],
+    "top": "note-taking",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/note-taking/obsidian/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "airtable",
+    "description": "Airtable REST API via curl. Records CRUD, filters, upserts.",
+    "tags": [
+      "Airtable",
+      "Productivity",
+      "Database",
+      "API"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/productivity/airtable/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "google-workspace",
+    "description": "Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python.",
+    "tags": [
+      "Google",
+      "Gmail",
+      "Calendar",
+      "Drive",
+      "Sheets",
+      "Docs",
+      "Contacts",
+      "Email",
+      "OAuth"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/productivity/google-workspace/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "maps",
+    "description": "Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.",
+    "tags": [
+      "maps",
+      "geocoding",
+      "places",
+      "routing",
+      "distance",
+      "directions",
+      "nearby",
+      "location",
+      "openstreetmap",
+      "nominatim",
+      "overpass",
+      "osrm"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/productivity/maps/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "nano-pdf",
+    "description": "Edit PDF text/typos/titles via nano-pdf CLI (NL prompts).",
+    "tags": [
+      "PDF",
+      "Documents",
+      "Editing",
+      "NLP",
+      "Productivity"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/productivity/nano-pdf/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "notion",
+    "description": "Notion API + ntn CLI: pages, databases, markdown, Workers.",
+    "tags": [
+      "Notion",
+      "Productivity",
+      "Notes",
+      "Database",
+      "API",
+      "CLI",
+      "Workers"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/productivity/notion/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "ocr-and-documents",
+    "description": "Extract text from PDFs/scans (pymupdf, marker-pdf).",
+    "tags": [
+      "PDF",
+      "Documents",
+      "Research",
+      "Arxiv",
+      "Text-Extraction",
+      "OCR"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/productivity/ocr-and-documents/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "powerpoint",
+    "description": "Create, read, edit .pptx decks, slides, notes, templates.",
+    "tags": [],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/productivity/powerpoint/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "teams-meeting-pipeline",
+    "description": "Operate the Teams meeting summary pipeline via Hermes CLI — summarize meetings, inspect pipeline status, replay jobs, manage Microsoft Graph subscriptions.",
+    "tags": [
+      "Teams",
+      "Microsoft Graph",
+      "Meetings",
+      "Productivity",
+      "Operations"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/productivity/teams-meeting-pipeline/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "arxiv",
+    "description": "Search arXiv papers by keyword, author, category, or ID.",
+    "tags": [
+      "Research",
+      "Arxiv",
+      "Papers",
+      "Academic",
+      "Science",
+      "API"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "skills/research/arxiv/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "blogwatcher",
+    "description": "Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.",
+    "tags": [
+      "RSS",
+      "Blogs",
+      "Feed-Reader",
+      "Monitoring"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "skills/research/blogwatcher/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "llm-wiki",
+    "description": "Karpathy's LLM Wiki: build/query interlinked markdown KB.",
+    "tags": [
+      "wiki",
+      "knowledge-base",
+      "research",
+      "notes",
+      "markdown",
+      "rag-alternative"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "skills/research/llm-wiki/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "polymarket",
+    "description": "Query Polymarket: markets, prices, orderbooks, history.",
+    "tags": [
+      "polymarket",
+      "prediction-markets",
+      "market-data",
+      "trading"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "skills/research/polymarket/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "research-paper-writing",
+    "description": "Write ML papers for NeurIPS/ICML/ICLR: design→submit.",
+    "tags": [
+      "Research",
+      "Paper Writing",
+      "Experiments",
+      "ML",
+      "AI",
+      "NeurIPS",
+      "ICML",
+      "ICLR",
+      "ACL",
+      "AAAI",
+      "COLM",
+      "LaTeX",
+      "Citations",
+      "Statistical Analysis"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "skills/research/research-paper-writing/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "openhue",
+    "description": "Control Philips Hue lights, scenes, rooms via OpenHue CLI.",
+    "tags": [
+      "Smart-Home",
+      "Hue",
+      "Lights",
+      "IoT",
+      "Automation"
+    ],
+    "top": "smart-home",
+    "domain": "스마트 라이프 (홈·헬스·게임)",
+    "path": "skills/smart-home/openhue/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "xurl",
+    "description": "X/Twitter via xurl CLI: post, search, DM, media, v2 API.",
+    "tags": [
+      "twitter",
+      "x",
+      "social-media",
+      "xurl",
+      "official-api"
+    ],
+    "top": "social-media",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "skills/social-media/xurl/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "hermes-agent-skill-authoring",
+    "description": "Author in-repo SKILL.md: frontmatter, validator, structure.",
+    "tags": [
+      "skills",
+      "authoring",
+      "hermes-agent",
+      "conventions",
+      "skill-md"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/software-development/hermes-agent-skill-authoring/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "node-inspect-debugger",
+    "description": "Debug Node.js via --inspect + Chrome DevTools Protocol CLI.",
+    "tags": [
+      "debugging",
+      "nodejs",
+      "node-inspect",
+      "cdp",
+      "breakpoints",
+      "ui-tui"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/software-development/node-inspect-debugger/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "plan",
+    "description": "Plan mode: write an actionable markdown plan to .hermes/plans/, no execution. Bite-sized tasks, exact paths, complete code.",
+    "tags": [
+      "planning",
+      "plan-mode",
+      "implementation",
+      "workflow",
+      "design",
+      "documentation"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/software-development/plan/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "python-debugpy",
+    "description": "Debug Python: pdb REPL + debugpy remote (DAP).",
+    "tags": [
+      "debugging",
+      "python",
+      "pdb",
+      "debugpy",
+      "breakpoints",
+      "dap",
+      "post-mortem"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/software-development/python-debugpy/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "requesting-code-review",
+    "description": "Pre-commit review: security scan, quality gates, auto-fix.",
+    "tags": [
+      "code-review",
+      "security",
+      "verification",
+      "quality",
+      "pre-commit",
+      "auto-fix"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/software-development/requesting-code-review/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "simplify-code",
+    "description": "Parallel 3-agent cleanup of recent code changes.",
+    "tags": [
+      "code-review",
+      "cleanup",
+      "refactor",
+      "delegation",
+      "subagent",
+      "parallel",
+      "simplify"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/software-development/simplify-code/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "spike",
+    "description": "Throwaway experiments to validate an idea before build.",
+    "tags": [
+      "spike",
+      "prototype",
+      "experiment",
+      "feasibility",
+      "throwaway",
+      "exploration",
+      "research",
+      "planning",
+      "mvp",
+      "proof-of-concept"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/software-development/spike/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "systematic-debugging",
+    "description": "4-phase root cause debugging: understand bugs before fixing.",
+    "tags": [
+      "debugging",
+      "troubleshooting",
+      "problem-solving",
+      "root-cause",
+      "investigation"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/software-development/systematic-debugging/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "test-driven-development",
+    "description": "TDD: enforce RED-GREEN-REFACTOR, tests before code.",
+    "tags": [
+      "testing",
+      "tdd",
+      "development",
+      "quality",
+      "red-green-refactor"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "skills/software-development/test-driven-development/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "yuanbao",
+    "description": "Yuanbao (元宝) groups: @mention users, query info/members.",
+    "tags": [
+      "yuanbao",
+      "mention",
+      "at",
+      "group",
+      "members",
+      "元宝",
+      "派",
+      "艾特"
+    ],
+    "top": "yuanbao",
+    "domain": "생산성 & 업무 자동화",
+    "path": "skills/yuanbao/SKILL.md",
+    "active": true
+  },
+  {
+    "name": "antigravity-cli",
+    "description": "Operate the Antigravity CLI (agy): plugins, auth, sandbox.",
+    "tags": [
+      "Coding-Agent",
+      "Antigravity",
+      "CLI",
+      "Auth",
+      "Plugins",
+      "Sandbox"
+    ],
+    "top": "autonomous-ai-agents",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/autonomous-ai-agents/antigravity-cli/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "blackbox",
+    "description": "Delegate coding tasks to Blackbox AI CLI agent. Multi-model agent with built-in judge that runs tasks through multiple LLMs and picks the best result. Requires the blackbox CLI and a Blackbox AI API key.",
+    "tags": [
+      "Coding-Agent",
+      "Blackbox",
+      "Multi-Agent",
+      "Judge",
+      "Multi-Model"
+    ],
+    "top": "autonomous-ai-agents",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/autonomous-ai-agents/blackbox/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "grok",
+    "description": "Delegate coding to xAI Grok Build CLI (features, PRs).",
+    "tags": [
+      "Coding-Agent",
+      "Grok",
+      "xAI",
+      "Code-Review",
+      "Refactoring",
+      "Automation"
+    ],
+    "top": "autonomous-ai-agents",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/autonomous-ai-agents/grok/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "honcho",
+    "description": "Configure and use Honcho memory with Hermes -- cross-session user modeling, multi-profile peer isolation, observation config, dialectic reasoning, session summaries, and context budget enforcement. Use when setting up Honcho, troubleshooting memory, managing profiles with Honcho peers, or tuning observation, recall, and dialectic settings.",
+    "tags": [
+      "Honcho",
+      "Memory",
+      "Profiles",
+      "Observation",
+      "Dialectic",
+      "User-Modeling",
+      "Session-Summary"
+    ],
+    "top": "autonomous-ai-agents",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/autonomous-ai-agents/honcho/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "openhands",
+    "description": "Delegate coding to OpenHands CLI (model-agnostic, LiteLLM).",
+    "tags": [
+      "Coding-Agent",
+      "OpenHands",
+      "Model-Agnostic",
+      "LiteLLM"
+    ],
+    "top": "autonomous-ai-agents",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/autonomous-ai-agents/openhands/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "evm",
+    "description": "Read-only EVM client: wallets, tokens, gas across 8 chains.",
+    "tags": [
+      "EVM",
+      "Ethereum",
+      "BNB",
+      "BSC",
+      "Base",
+      "Arbitrum",
+      "Polygon",
+      "Optimism",
+      "Avalanche",
+      "zkSync",
+      "Blockchain",
+      "Crypto",
+      "Web3",
+      "DeFi",
+      "NFT",
+      "ENS",
+      "Whale",
+      "Security"
+    ],
+    "top": "blockchain",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/blockchain/evm/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "hyperliquid",
+    "description": "Hyperliquid market data, account history, trade review.",
+    "tags": [
+      "Hyperliquid",
+      "Blockchain",
+      "Crypto",
+      "Trading",
+      "Perpetuals",
+      "Spot",
+      "DeFi"
+    ],
+    "top": "blockchain",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/blockchain/hyperliquid/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "solana",
+    "description": "Query Solana blockchain data with USD pricing — wallet balances, token portfolios with values, transaction details, NFTs, whale detection, and live network stats. Uses Solana RPC + CoinGecko. No API key required.",
+    "tags": [
+      "Solana",
+      "Blockchain",
+      "Crypto",
+      "Web3",
+      "RPC",
+      "DeFi",
+      "NFT"
+    ],
+    "top": "blockchain",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/blockchain/solana/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "one-three-one-rule",
+    "description": ">",
+    "tags": [
+      "communication",
+      "decision-making",
+      "proposals",
+      "trade-offs"
+    ],
+    "top": "communication",
+    "domain": "생산성 & 업무 자동화",
+    "path": "optional-skills/communication/one-three-one-rule/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "baoyu-article-illustrator",
+    "description": "Article illustrations: type × style × palette consistency.",
+    "tags": [
+      "article-illustration",
+      "creative",
+      "image-generation"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "optional-skills/creative/baoyu-article-illustrator/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "baoyu-comic",
+    "description": "Knowledge comics (知识漫画): educational, biography, tutorial.",
+    "tags": [
+      "comic",
+      "knowledge-comic",
+      "creative",
+      "image-generation"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "optional-skills/creative/baoyu-comic/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "blender-mcp",
+    "description": "Control Blender directly from Hermes via socket connection to the blender-mcp addon. Create 3D objects, materials, animations, and run arbitrary Blender Python (bpy) code. Use when user wants to create or modify anything in Blender.",
+    "tags": [
+      "blender",
+      "3d",
+      "animation",
+      "modeling",
+      "bpy",
+      "mcp"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "optional-skills/creative/blender-mcp/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "concept-diagrams",
+    "description": "Generate flat, minimal light/dark-aware SVG diagrams as standalone HTML files, using a unified educational visual language with 9 semantic color ramps, sentence-case typography, and automatic dark mode. Best suited for educational and non-software visuals — physics setups, chemistry mechanisms, math curves, physical objects (aircraft, turbines, smartphones, mechanical watches), anatomy, floor plans, cross-sections, narrative journeys (lifecycle of X, process of Y), hub-spoke system integrations (smart city, IoT), and exploded layer views. If a more specialized skill exists for the subject (dedicated software/cloud architecture, hand-drawn sketches, animated explainers, etc.), prefer that — otherwise this skill can also serve as a general-purpose SVG diagram fallback with a clean educational look. Ships with 15 example diagrams.",
+    "tags": [
+      "diagrams",
+      "svg",
+      "visualization",
+      "education",
+      "physics",
+      "chemistry",
+      "engineering"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "optional-skills/creative/concept-diagrams/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "ideation",
+    "description": "Generate project ideas via creative constraints.",
+    "tags": [
+      "Creative",
+      "Ideation",
+      "Projects",
+      "Brainstorming",
+      "Inspiration"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "optional-skills/creative/creative-ideation/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "hyperframes",
+    "description": "Create HTML-based video compositions, animated title cards, social overlays, captioned talking-head videos, audio-reactive visuals, and shader transitions using HyperFrames. HTML is the source of truth for video. Use when the user wants a rendered MP4/WebM from an HTML composition, wants to animate text/logos/charts over media, needs captions synced to audio, wants TTS narration, or wants to convert a website into a video.",
+    "tags": [
+      "creative",
+      "video",
+      "animation",
+      "html",
+      "gsap",
+      "motion-graphics"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "optional-skills/creative/hyperframes/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "kanban-video-orchestrator",
+    "description": "Plan, set up, and monitor a multi-agent video production pipeline backed by Hermes Kanban. Use when the user wants to make ANY video — narrative film, product/marketing, music video, explainer, ASCII/terminal art, abstract/generative loop, comic, 3D, real-time/installation — and the work warrants decomposition into specialized profiles (writer, designer, animator, renderer, voice, editor, etc.) coordinated through a kanban board. Performs adaptive discovery to scope the brief, designs an appropriate team for the requested style, generates the setup script that creates Hermes profiles + initial kanban task, then helps monitor execution and intervene when tasks stall or fail. Routes scenes to whichever Hermes rendering / audio / design skill fits each beat (`ascii-video`, `manim-video`, `p5js`, `comfyui`, `touchdesigner-mcp`, `blender-mcp`, `pixel-art`, `baoyu-comic`, `claude-design`, `excalidraw`, `songsee`, `heartmula`, …) plus external APIs for TTS, image-gen, and image-to-video as needed.",
+    "tags": [
+      "video",
+      "kanban",
+      "multi-agent",
+      "orchestration",
+      "production-pipeline"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "optional-skills/creative/kanban-video-orchestrator/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "meme-generation",
+    "description": "Generate real meme images by picking a template and overlaying text with Pillow. Produces actual .png meme files.",
+    "tags": [
+      "creative",
+      "memes",
+      "humor",
+      "images"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "optional-skills/creative/meme-generation/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "pixel-art",
+    "description": "Pixel art w/ era palettes (NES, Game Boy, PICO-8).",
+    "tags": [
+      "creative",
+      "pixel-art",
+      "arcade",
+      "snes",
+      "nes",
+      "gameboy",
+      "retro",
+      "image",
+      "video"
+    ],
+    "top": "creative",
+    "domain": "콘텐츠 & 크리에이티브 제작",
+    "path": "optional-skills/creative/pixel-art/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "inference-sh-cli",
+    "description": "Run 150+ AI apps via inference.sh CLI (infsh) — image generation, video creation, LLMs, search, 3D, social automation. Uses the terminal tool. Triggers: inference.sh, infsh, ai apps, flux, veo, image generation, video generation, seedream, seedance, tavily",
+    "tags": [
+      "AI",
+      "image-generation",
+      "video",
+      "LLM",
+      "search",
+      "inference",
+      "FLUX",
+      "Veo",
+      "Claude"
+    ],
+    "top": "devops",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/devops/cli/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "docker-management",
+    "description": "Manage Docker containers, images, volumes, networks, and Compose stacks — lifecycle ops, debugging, cleanup, and Dockerfile optimization.",
+    "tags": [
+      "docker",
+      "containers",
+      "devops",
+      "infrastructure",
+      "compose",
+      "images",
+      "volumes",
+      "networks",
+      "debugging"
+    ],
+    "top": "devops",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/devops/docker-management/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "hermes-s6-container-supervision",
+    "description": "Modify, debug, or extend the s6-overlay supervision tree inside the Hermes Agent Docker image — adding new services, debugging profile gateways, understanding the Architecture B main-program pattern.",
+    "tags": [
+      "docker",
+      "s6",
+      "supervision",
+      "gateway",
+      "profiles"
+    ],
+    "top": "devops",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/devops/hermes-s6-container-supervision/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "pinggy-tunnel",
+    "description": "Zero-install localhost tunnels over SSH via Pinggy.",
+    "tags": [
+      "Pinggy",
+      "Tunnel",
+      "Networking",
+      "SSH",
+      "Webhook",
+      "Localhost"
+    ],
+    "top": "devops",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/devops/pinggy-tunnel/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "watchers",
+    "description": "Poll RSS, JSON APIs, and GitHub with watermark dedup.",
+    "tags": [
+      "cron",
+      "polling",
+      "rss",
+      "github",
+      "http",
+      "automation",
+      "monitoring"
+    ],
+    "top": "devops",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/devops/watchers/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "adversarial-ux-test",
+    "description": "Roleplay the most difficult, tech-resistant user for your product. Browse the app as that persona, find every UX pain point, then filter complaints through a pragmatism layer to separate real problems from noise. Creates actionable tickets from genuine issues only.",
+    "tags": [
+      "qa",
+      "ux",
+      "testing",
+      "adversarial",
+      "dogfood",
+      "personas",
+      "user-testing"
+    ],
+    "top": "dogfood",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/dogfood/adversarial-ux-test/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "agentmail",
+    "description": "Give the agent its own dedicated email inbox via AgentMail. Send, receive, and manage email autonomously using agent-owned email addresses (e.g. hermes-agent@agentmail.to).",
+    "tags": [
+      "email",
+      "communication",
+      "agentmail",
+      "mcp"
+    ],
+    "top": "email",
+    "domain": "생산성 & 업무 자동화",
+    "path": "optional-skills/email/agentmail/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "3-statement-model",
+    "description": "Build fully-integrated 3-statement models (IS, BS, CF) in Excel with working capital schedules, D&A roll-forwards, debt schedule, and the plugs that make cash and retained earnings tie. Pairs with excel-author.",
+    "tags": [
+      "finance",
+      "three-statement",
+      "income-statement",
+      "balance-sheet",
+      "cash-flow",
+      "excel",
+      "openpyxl",
+      "modeling"
+    ],
+    "top": "finance",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/finance/3-statement-model/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "comps-analysis",
+    "description": "Build comparable company analysis in Excel — operating metrics, valuation multiples, statistical benchmarking vs peer sets. Pairs with excel-author. Use for public-company valuation, IPO pricing, sector benchmarking, or outlier detection.",
+    "tags": [
+      "finance",
+      "valuation",
+      "comps",
+      "excel",
+      "openpyxl",
+      "modeling",
+      "investment-banking"
+    ],
+    "top": "finance",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/finance/comps-analysis/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "dcf-model",
+    "description": "Build institutional-quality DCF valuation models in Excel — revenue projections, FCF build, WACC, terminal value, Bear/Base/Bull scenarios, 5x5 sensitivity tables. Pairs with excel-author. Use for intrinsic-value equity analysis.",
+    "tags": [
+      "finance",
+      "valuation",
+      "dcf",
+      "excel",
+      "openpyxl",
+      "modeling",
+      "investment-banking"
+    ],
+    "top": "finance",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/finance/dcf-model/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "excel-author",
+    "description": "Build auditable Excel workbooks headless with openpyxl — blue/black/green cell conventions, formulas over hardcodes, named ranges, balance checks, sensitivity tables. Use for financial models, audit outputs, reconciliations.",
+    "tags": [
+      "excel",
+      "openpyxl",
+      "finance",
+      "spreadsheet",
+      "modeling"
+    ],
+    "top": "finance",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/finance/excel-author/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "lbo-model",
+    "description": "Build leveraged buyout models in Excel — sources & uses, debt schedule, cash sweep, exit multiple, IRR/MOIC sensitivity. Pairs with excel-author. Use for PE screening, sponsor-case valuation, or illustrative LBO in a pitch.",
+    "tags": [
+      "finance",
+      "valuation",
+      "lbo",
+      "private-equity",
+      "excel",
+      "openpyxl",
+      "modeling"
+    ],
+    "top": "finance",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/finance/lbo-model/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "merger-model",
+    "description": "Build accretion/dilution (merger) models in Excel — pro-forma P&L, synergies, financing mix, EPS impact. Pairs with excel-author. Use for M&A pitches, board materials, or deal evaluation.",
+    "tags": [
+      "finance",
+      "m-and-a",
+      "merger",
+      "accretion-dilution",
+      "excel",
+      "openpyxl",
+      "modeling",
+      "investment-banking"
+    ],
+    "top": "finance",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/finance/merger-model/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "pptx-author",
+    "description": "Build PowerPoint decks headless with python-pptx. Pairs with excel-author for model-backed decks where every number traces to a workbook cell. Use for pitch decks, IC memos, earnings notes.",
+    "tags": [
+      "powerpoint",
+      "pptx",
+      "python-pptx",
+      "presentation",
+      "finance"
+    ],
+    "top": "finance",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/finance/pptx-author/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "stocks",
+    "description": "Stock quotes, history, search, compare, crypto via Yahoo.",
+    "tags": [
+      "Stocks",
+      "Finance",
+      "Market",
+      "Crypto",
+      "Investing"
+    ],
+    "top": "finance",
+    "domain": "데이터·금융·Web3",
+    "path": "optional-skills/finance/stocks/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "minecraft-modpack-server",
+    "description": "Host modded Minecraft servers (CurseForge, Modrinth).",
+    "tags": [
+      "minecraft",
+      "gaming",
+      "server",
+      "neoforge",
+      "forge",
+      "modpack"
+    ],
+    "top": "gaming",
+    "domain": "스마트 라이프 (홈·헬스·게임)",
+    "path": "optional-skills/gaming/minecraft-modpack-server/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "pokemon-player",
+    "description": "Play Pokemon via headless emulator + RAM reads.",
+    "tags": [
+      "gaming",
+      "pokemon",
+      "emulator",
+      "pyboy",
+      "gameplay",
+      "gameboy"
+    ],
+    "top": "gaming",
+    "domain": "스마트 라이프 (홈·헬스·게임)",
+    "path": "optional-skills/gaming/pokemon-player/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "fitness-nutrition",
+    "description": ">",
+    "tags": [
+      "health",
+      "fitness",
+      "nutrition",
+      "gym",
+      "workout",
+      "diet",
+      "exercise"
+    ],
+    "top": "health",
+    "domain": "스마트 라이프 (홈·헬스·게임)",
+    "path": "optional-skills/health/fitness-nutrition/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "neuroskill-bci",
+    "description": ">",
+    "tags": [
+      "BCI",
+      "neurofeedback",
+      "health",
+      "focus",
+      "EEG",
+      "cognitive-state",
+      "biometrics",
+      "neuroskill"
+    ],
+    "top": "health",
+    "domain": "스마트 라이프 (홈·헬스·게임)",
+    "path": "optional-skills/health/neuroskill-bci/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "fastmcp",
+    "description": "Build, test, inspect, install, and deploy MCP servers with FastMCP in Python. Use when creating a new MCP server, wrapping an API or database as MCP tools, exposing resources or prompts, or preparing a FastMCP server for Claude Code, Cursor, or HTTP deployment.",
+    "tags": [
+      "MCP",
+      "FastMCP",
+      "Python",
+      "Tools",
+      "Resources",
+      "Prompts",
+      "Deployment"
+    ],
+    "top": "mcp",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mcp/fastmcp/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "mcporter",
+    "description": "Use the mcporter CLI to list, configure, auth, and call MCP servers/tools directly (HTTP or stdio), including ad-hoc servers, config edits, and CLI/type generation.",
+    "tags": [
+      "MCP",
+      "Tools",
+      "API",
+      "Integrations",
+      "Interop"
+    ],
+    "top": "mcp",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mcp/mcporter/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "openclaw-migration",
+    "description": "Migrate a user's OpenClaw customization footprint into Hermes Agent. Imports Hermes-compatible memories, SOUL.md, command allowlists, user skills, and selected workspace assets from ~/.openclaw, then reports exactly what could not be migrated and why.",
+    "tags": [
+      "Migration",
+      "OpenClaw",
+      "Hermes",
+      "Memory",
+      "Persona",
+      "Import"
+    ],
+    "top": "migration",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/migration/openclaw-migration/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "huggingface-accelerate",
+    "description": "Simplest distributed training API. 4 lines to add distributed support to any PyTorch script. Unified API for DeepSpeed/FSDP/Megatron/DDP. Automatic device placement, mixed precision (FP16/BF16/FP8). Interactive config, single launch command. HuggingFace ecosystem standard.",
+    "tags": [
+      "Distributed Training",
+      "HuggingFace",
+      "Accelerate",
+      "DeepSpeed",
+      "FSDP",
+      "Mixed Precision",
+      "PyTorch",
+      "DDP",
+      "Unified API",
+      "Simple"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/accelerate/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "chroma",
+    "description": "Open-source embedding database for AI applications. Store embeddings and metadata, perform vector and full-text search, filter by metadata. Simple 4-function API. Scales from notebooks to production clusters. Use for semantic search, RAG applications, or document retrieval. Best for local development and open-source projects.",
+    "tags": [
+      "RAG",
+      "Chroma",
+      "Vector Database",
+      "Embeddings",
+      "Semantic Search",
+      "Open Source",
+      "Self-Hosted",
+      "Document Retrieval",
+      "Metadata Filtering"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/chroma/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "clip",
+    "description": "OpenAI's model connecting vision and language. Enables zero-shot image classification, image-text matching, and cross-modal retrieval. Trained on 400M image-text pairs. Use for image search, content moderation, or vision-language tasks without fine-tuning. Best for general-purpose image understanding.",
+    "tags": [
+      "Multimodal",
+      "CLIP",
+      "Vision-Language",
+      "Zero-Shot",
+      "Image Classification",
+      "OpenAI",
+      "Image Search",
+      "Cross-Modal Retrieval",
+      "Content Moderation"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/clip/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "faiss",
+    "description": "Facebook's library for efficient similarity search and clustering of dense vectors. Supports billions of vectors, GPU acceleration, and various index types (Flat, IVF, HNSW). Use for fast k-NN search, large-scale vector retrieval, or when you need pure similarity search without metadata. Best for high-performance applications.",
+    "tags": [
+      "RAG",
+      "FAISS",
+      "Similarity Search",
+      "Vector Search",
+      "Facebook AI",
+      "GPU Acceleration",
+      "Billion-Scale",
+      "K-NN",
+      "HNSW",
+      "High Performance",
+      "Large Scale"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/faiss/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "optimizing-attention-flash",
+    "description": "Optimizes transformer attention with Flash Attention for 2-4x speedup and 10-20x memory reduction. Use when training/running transformers with long sequences (>512 tokens), encountering GPU memory issues with attention, or need faster inference. Supports PyTorch native SDPA, flash-attn library, H100 FP8, and sliding window attention.",
+    "tags": [
+      "Optimization",
+      "Flash Attention",
+      "Attention Optimization",
+      "Memory Efficiency",
+      "Speed Optimization",
+      "Long Context",
+      "PyTorch",
+      "SDPA",
+      "H100",
+      "FP8",
+      "Transformers"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/flash-attention/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "guidance",
+    "description": "Control LLM output with regex and grammars, guarantee valid JSON/XML/code generation, enforce structured formats, and build multi-step workflows with Guidance - Microsoft Research's constrained generation framework",
+    "tags": [
+      "Prompt Engineering",
+      "Guidance",
+      "Constrained Generation",
+      "Structured Output",
+      "JSON Validation",
+      "Grammar",
+      "Microsoft Research",
+      "Format Enforcement",
+      "Multi-Step Workflows"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/guidance/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "huggingface-tokenizers",
+    "description": "Fast tokenizers optimized for research and production. Rust-based implementation tokenizes 1GB in <20 seconds. Supports BPE, WordPiece, and Unigram algorithms. Train custom vocabularies, track alignments, handle padding/truncation. Integrates seamlessly with transformers. Use when you need high-performance tokenization or custom tokenizer training.",
+    "tags": [
+      "Tokenization",
+      "HuggingFace",
+      "BPE",
+      "WordPiece",
+      "Unigram",
+      "Fast Tokenization",
+      "Rust",
+      "Custom Tokenizer",
+      "Alignment Tracking",
+      "Production"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/huggingface-tokenizers/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "outlines",
+    "description": "Outlines: structured JSON/regex/Pydantic LLM generation.",
+    "tags": [
+      "Prompt Engineering",
+      "Outlines",
+      "Structured Generation",
+      "JSON Schema",
+      "Pydantic",
+      "Local Models",
+      "Grammar-Based Generation",
+      "vLLM",
+      "Transformers",
+      "Type Safety"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/inference/outlines/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "instructor",
+    "description": "Extract structured data from LLM responses with Pydantic validation, retry failed extractions automatically, parse complex JSON with type safety, and stream partial results with Instructor - battle-tested structured output library",
+    "tags": [
+      "Prompt Engineering",
+      "Instructor",
+      "Structured Output",
+      "Pydantic",
+      "Data Extraction",
+      "JSON Parsing",
+      "Type Safety",
+      "Validation",
+      "Streaming",
+      "OpenAI",
+      "Anthropic"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/instructor/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "lambda-labs-gpu-cloud",
+    "description": "Reserved and on-demand GPU cloud instances for ML training and inference. Use when you need dedicated GPU instances with simple SSH access, persistent filesystems, or high-performance multi-node clusters for large-scale training.",
+    "tags": [
+      "Infrastructure",
+      "GPU Cloud",
+      "Training",
+      "Inference",
+      "Lambda Labs"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/lambda-labs/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "llava",
+    "description": "Large Language and Vision Assistant. Enables visual instruction tuning and image-based conversations. Combines CLIP vision encoder with Vicuna/LLaMA language models. Supports multi-turn image chat, visual question answering, and instruction following. Use for vision-language chatbots or image understanding tasks. Best for conversational image analysis.",
+    "tags": [
+      "LLaVA",
+      "Vision-Language",
+      "Multimodal",
+      "Visual Question Answering",
+      "Image Chat",
+      "CLIP",
+      "Vicuna",
+      "Conversational AI",
+      "Instruction Tuning",
+      "VQA"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/llava/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "modal-serverless-gpu",
+    "description": "Serverless GPU cloud platform for running ML workloads. Use when you need on-demand GPU access without infrastructure management, deploying ML models as APIs, or running batch jobs with automatic scaling.",
+    "tags": [
+      "Infrastructure",
+      "Serverless",
+      "GPU",
+      "Cloud",
+      "Deployment",
+      "Modal"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/modal/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "nemo-curator",
+    "description": "GPU-accelerated data curation for LLM training. Supports text/image/video/audio. Features fuzzy deduplication (16× faster), quality filtering (30+ heuristics), semantic deduplication, PII redaction, NSFW detection. Scales across GPUs with RAPIDS. Use for preparing high-quality training datasets, cleaning web data, or deduplicating large corpora.",
+    "tags": [
+      "Data Processing",
+      "NeMo Curator",
+      "Data Curation",
+      "GPU Acceleration",
+      "Deduplication",
+      "Quality Filtering",
+      "NVIDIA",
+      "RAPIDS",
+      "PII Redaction",
+      "Multimodal",
+      "LLM Training Data"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/nemo-curator/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "obliteratus",
+    "description": "OBLITERATUS: abliterate LLM refusals (diff-in-means).",
+    "tags": [
+      "Abliteration",
+      "Uncensoring",
+      "Refusal-Removal",
+      "LLM",
+      "Weight-Projection",
+      "SVD",
+      "Mechanistic-Interpretability",
+      "HuggingFace",
+      "Model-Surgery"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/obliteratus/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "peft-fine-tuning",
+    "description": "Parameter-efficient fine-tuning for LLMs using LoRA, QLoRA, and 25+ methods. Use when fine-tuning large models (7B-70B) with limited GPU memory, when you need to train <1% of parameters with minimal accuracy loss, or for multi-adapter serving. HuggingFace's official library integrated with transformers ecosystem.",
+    "tags": [
+      "Fine-Tuning",
+      "PEFT",
+      "LoRA",
+      "QLoRA",
+      "Parameter-Efficient",
+      "Adapters",
+      "Low-Rank",
+      "Memory Optimization",
+      "Multi-Adapter"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/peft/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "pinecone",
+    "description": "Managed vector database for production AI applications. Fully managed, auto-scaling, with hybrid search (dense + sparse), metadata filtering, and namespaces. Low latency (<100ms p95). Use for production RAG, recommendation systems, or semantic search at scale. Best for serverless, managed infrastructure.",
+    "tags": [
+      "RAG",
+      "Pinecone",
+      "Vector Database",
+      "Managed Service",
+      "Serverless",
+      "Hybrid Search",
+      "Production",
+      "Auto-Scaling",
+      "Low Latency",
+      "Recommendations"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/pinecone/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "pytorch-fsdp",
+    "description": "Expert guidance for Fully Sharded Data Parallel training with PyTorch FSDP - parameter sharding, mixed precision, CPU offloading, FSDP2",
+    "tags": [
+      "Distributed Training",
+      "PyTorch",
+      "FSDP",
+      "Data Parallel",
+      "Sharding",
+      "Mixed Precision",
+      "CPU Offloading",
+      "FSDP2",
+      "Large-Scale Training"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/pytorch-fsdp/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "pytorch-lightning",
+    "description": "High-level PyTorch framework with Trainer class, automatic distributed training (DDP/FSDP/DeepSpeed), callbacks system, and minimal boilerplate. Scales from laptop to supercomputer with same code. Use when you want clean training loops with built-in best practices.",
+    "tags": [
+      "PyTorch Lightning",
+      "Training Framework",
+      "Distributed Training",
+      "DDP",
+      "FSDP",
+      "DeepSpeed",
+      "High-Level API",
+      "Callbacks",
+      "Best Practices",
+      "Scalable"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/pytorch-lightning/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "qdrant-vector-search",
+    "description": "High-performance vector similarity search engine for RAG and semantic search. Use when building production RAG systems requiring fast nearest neighbor search, hybrid search with filtering, or scalable vector storage with Rust-powered performance.",
+    "tags": [
+      "RAG",
+      "Vector Search",
+      "Qdrant",
+      "Semantic Search",
+      "Embeddings",
+      "Similarity Search",
+      "HNSW",
+      "Production",
+      "Distributed"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/qdrant/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "dspy",
+    "description": "DSPy: declarative LM programs, auto-optimize prompts, RAG.",
+    "tags": [
+      "Prompt Engineering",
+      "DSPy",
+      "Declarative Programming",
+      "RAG",
+      "Agents",
+      "Prompt Optimization",
+      "LM Programming",
+      "Stanford NLP",
+      "Automatic Optimization",
+      "Modular AI"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/research/dspy/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "sparse-autoencoder-training",
+    "description": "Provides guidance for training and analyzing Sparse Autoencoders (SAEs) using SAELens to decompose neural network activations into interpretable features. Use when discovering interpretable features, analyzing superposition, or studying monosemantic representations in language models.",
+    "tags": [
+      "Sparse Autoencoders",
+      "SAE",
+      "Mechanistic Interpretability",
+      "Feature Discovery",
+      "Superposition"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/saelens/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "simpo-training",
+    "description": "Simple Preference Optimization for LLM alignment. Reference-free alternative to DPO with better performance (+6.4 points on AlpacaEval 2.0). No reference model needed, more efficient than DPO. Use for preference alignment when want simpler, faster training than DPO/PPO.",
+    "tags": [
+      "Post-Training",
+      "SimPO",
+      "Preference Optimization",
+      "Alignment",
+      "DPO Alternative",
+      "Reference-Free",
+      "LLM Alignment",
+      "Efficient Training"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/simpo/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "slime-rl-training",
+    "description": "Provides guidance for LLM post-training with RL using slime, a Megatron+SGLang framework. Use when training GLM models, implementing custom data generation workflows, or needing tight Megatron-LM integration for RL scaling.",
+    "tags": [
+      "Reinforcement Learning",
+      "Megatron-LM",
+      "SGLang",
+      "GRPO",
+      "Post-Training",
+      "GLM"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/slime/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "stable-diffusion-image-generation",
+    "description": "State-of-the-art text-to-image generation with Stable Diffusion models via HuggingFace Diffusers. Use when generating images from text prompts, performing image-to-image translation, inpainting, or building custom diffusion pipelines.",
+    "tags": [
+      "Image Generation",
+      "Stable Diffusion",
+      "Diffusers",
+      "Text-to-Image",
+      "Multimodal",
+      "Computer Vision"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/stable-diffusion/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "tensorrt-llm",
+    "description": "Optimizes LLM inference with NVIDIA TensorRT for maximum throughput and lowest latency. Use for production deployment on NVIDIA GPUs (A100/H100), when you need 10-100x faster inference than PyTorch, or for serving models with quantization (FP8/INT4), in-flight batching, and multi-GPU scaling.",
+    "tags": [
+      "Inference Serving",
+      "TensorRT-LLM",
+      "NVIDIA",
+      "Inference Optimization",
+      "High Throughput",
+      "Low Latency",
+      "Production",
+      "FP8",
+      "INT4",
+      "In-Flight Batching",
+      "Multi-GPU"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/tensorrt-llm/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "distributed-llm-pretraining-torchtitan",
+    "description": "Provides PyTorch-native distributed LLM pretraining using torchtitan with 4D parallelism (FSDP2, TP, PP, CP). Use when pretraining Llama 3.1, DeepSeek V3, or custom models at scale from 8 to 512+ GPUs with Float8, torch.compile, and distributed checkpointing.",
+    "tags": [
+      "Model Architecture",
+      "Distributed Training",
+      "TorchTitan",
+      "FSDP2",
+      "Tensor Parallel",
+      "Pipeline Parallel",
+      "Context Parallel",
+      "Float8",
+      "Llama",
+      "Pretraining"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/torchtitan/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "axolotl",
+    "description": "Axolotl: YAML LLM fine-tuning (LoRA, DPO, GRPO).",
+    "tags": [
+      "Fine-Tuning",
+      "Axolotl",
+      "LLM",
+      "LoRA",
+      "QLoRA",
+      "DPO",
+      "KTO",
+      "ORPO",
+      "GRPO",
+      "YAML",
+      "HuggingFace",
+      "DeepSpeed",
+      "Multimodal"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/training/axolotl/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "fine-tuning-with-trl",
+    "description": "TRL: SFT, DPO, PPO, GRPO, reward modeling for LLM RLHF.",
+    "tags": [
+      "Post-Training",
+      "TRL",
+      "Reinforcement Learning",
+      "Fine-Tuning",
+      "SFT",
+      "DPO",
+      "PPO",
+      "GRPO",
+      "RLHF",
+      "Preference Alignment",
+      "HuggingFace"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/training/trl-fine-tuning/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "unsloth",
+    "description": "Unsloth: 2-5x faster LoRA/QLoRA fine-tuning, less VRAM.",
+    "tags": [
+      "Fine-Tuning",
+      "Unsloth",
+      "Fast Training",
+      "LoRA",
+      "QLoRA",
+      "Memory-Efficient",
+      "Optimization",
+      "Llama",
+      "Mistral",
+      "Gemma",
+      "Qwen"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/training/unsloth/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "whisper",
+    "description": "OpenAI's general-purpose speech recognition model. Supports 99 languages, transcription, translation to English, and language identification. Six model sizes from tiny (39M params) to large (1550M params). Use for speech-to-text, podcast transcription, or multilingual audio processing. Best for robust, multilingual ASR.",
+    "tags": [
+      "Whisper",
+      "Speech Recognition",
+      "ASR",
+      "Multimodal",
+      "Multilingual",
+      "OpenAI",
+      "Speech-To-Text",
+      "Transcription",
+      "Translation",
+      "Audio Processing"
+    ],
+    "top": "mlops",
+    "domain": "AI/ML 엔지니어링 & 에이전트",
+    "path": "optional-skills/mlops/whisper/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "canvas",
+    "description": "Canvas LMS integration — fetch enrolled courses and assignments using API token authentication.",
+    "tags": [
+      "Canvas",
+      "LMS",
+      "Education",
+      "Courses",
+      "Assignments"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "optional-skills/productivity/canvas/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "here.now",
+    "description": "Publish static sites to {slug}.here.now and store private files in cloud Drives for agent-to-agent handoff.",
+    "tags": [
+      "here.now",
+      "herenow",
+      "publish",
+      "deploy",
+      "hosting",
+      "static-site",
+      "web",
+      "share",
+      "URL",
+      "drive",
+      "storage"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "optional-skills/productivity/here-now/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "memento-flashcards",
+    "description": ">-",
+    "tags": [
+      "Education",
+      "Flashcards",
+      "Spaced Repetition",
+      "Learning",
+      "Quiz",
+      "YouTube"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "optional-skills/productivity/memento-flashcards/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "shop-app",
+    "description": "Shop.app: product search, order tracking, returns, reorder.",
+    "tags": [
+      "Shopping",
+      "E-commerce",
+      "Shop.app",
+      "Products",
+      "Orders",
+      "Returns"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "optional-skills/productivity/shop-app/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "shopify",
+    "description": "Shopify Admin & Storefront GraphQL APIs via curl. Products, orders, customers, inventory, metafields.",
+    "tags": [
+      "Shopify",
+      "E-commerce",
+      "Commerce",
+      "API",
+      "GraphQL"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "optional-skills/productivity/shopify/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "siyuan",
+    "description": "SiYuan Note API for searching, reading, creating, and managing blocks and documents in a self-hosted knowledge base via curl.",
+    "tags": [
+      "SiYuan",
+      "Notes",
+      "Knowledge Base",
+      "PKM",
+      "API"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "optional-skills/productivity/siyuan/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "telephony",
+    "description": "Give Hermes phone capabilities without core tool changes. Provision and persist a Twilio number, send and receive SMS/MMS, make direct calls, and place AI-driven outbound calls through Bland.ai or Vapi.",
+    "tags": [
+      "telephony",
+      "phone",
+      "sms",
+      "mms",
+      "voice",
+      "twilio",
+      "bland.ai",
+      "vapi",
+      "calling",
+      "texting"
+    ],
+    "top": "productivity",
+    "domain": "생산성 & 업무 자동화",
+    "path": "optional-skills/productivity/telephony/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "bioinformatics",
+    "description": "Gateway to 400+ bioinformatics skills from bioSkills and ClawBio. Covers genomics, transcriptomics, single-cell, variant calling, pharmacogenomics, metagenomics, structural biology, and more. Fetches domain-specific reference material on demand.",
+    "tags": [
+      "bioinformatics",
+      "genomics",
+      "sequencing",
+      "biology",
+      "research",
+      "science"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/bioinformatics/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "darwinian-evolver",
+    "description": "Evolve prompts/regex/SQL/code with Imbue's evolution loop.",
+    "tags": [
+      "evolution",
+      "optimization",
+      "prompt-engineering",
+      "research"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/darwinian-evolver/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "domain-intel",
+    "description": "Passive domain reconnaissance using Python stdlib. Subdomain discovery, SSL certificate inspection, WHOIS lookups, DNS records, domain availability checks, and bulk multi-domain analysis. No API keys required.",
+    "tags": [],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/domain-intel/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "drug-discovery",
+    "description": ">",
+    "tags": [
+      "science",
+      "chemistry",
+      "pharmacology",
+      "research",
+      "health"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/drug-discovery/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "duckduckgo-search",
+    "description": "Free web search via DuckDuckGo — text, news, images, videos. No API key needed. Prefer the `ddgs` CLI when installed; use the Python DDGS library only after verifying that `ddgs` is available in the current runtime.",
+    "tags": [
+      "search",
+      "duckduckgo",
+      "web-search",
+      "free",
+      "fallback"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/duckduckgo-search/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "gitnexus-explorer",
+    "description": "Index a codebase with GitNexus and serve an interactive knowledge graph via web UI + Cloudflare tunnel.",
+    "tags": [
+      "gitnexus",
+      "code-intelligence",
+      "knowledge-graph",
+      "visualization"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/gitnexus-explorer/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "osint-investigation",
+    "description": "Public-records OSINT investigation framework — SEC EDGAR filings, USAspending contracts, Senate lobbying, OFAC sanctions, ICIJ offshore leaks, NYC property records (ACRIS), OpenCorporates registries, CourtListener court records, Wayback Machine archives, Wikipedia + Wikidata, GDELT news monitoring. Entity resolution across sources, cross-link analysis, timing correlation, evidence chains. Python stdlib only.",
+    "tags": [
+      "osint",
+      "investigation",
+      "public-records",
+      "sec",
+      "sanctions",
+      "corporate-registry",
+      "property",
+      "courts",
+      "due-diligence",
+      "journalism"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/osint-investigation/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "parallel-cli",
+    "description": "Optional vendor skill for Parallel CLI — agent-native web search, extraction, deep research, enrichment, FindAll, and monitoring. Prefer JSON output and non-interactive flows.",
+    "tags": [
+      "Research",
+      "Web",
+      "Search",
+      "Deep-Research",
+      "Enrichment",
+      "CLI"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/parallel-cli/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "qmd",
+    "description": "Search personal knowledge bases, notes, docs, and meeting transcripts locally using qmd — a hybrid retrieval engine with BM25, vector search, and LLM reranking. Supports CLI and MCP integration.",
+    "tags": [
+      "Search",
+      "Knowledge-Base",
+      "RAG",
+      "Notes",
+      "MCP",
+      "Local-AI"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/qmd/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "scrapling",
+    "description": "Web scraping with Scrapling - HTTP fetching, stealth browser automation, Cloudflare bypass, and spider crawling via CLI and Python.",
+    "tags": [
+      "Web Scraping",
+      "Browser",
+      "Cloudflare",
+      "Stealth",
+      "Crawling",
+      "Spider"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/scrapling/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "searxng-search",
+    "description": "Free meta-search via SearXNG — aggregates results from 70+ search engines. Self-hosted or use a public instance. No API key needed. Falls back automatically when the web search toolset is unavailable.",
+    "tags": [
+      "search",
+      "searxng",
+      "meta-search",
+      "self-hosted",
+      "free",
+      "fallback"
+    ],
+    "top": "research",
+    "domain": "리서치 & 인텔리전스",
+    "path": "optional-skills/research/searxng-search/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "1password",
+    "description": "Set up and use 1Password CLI (op). Use when installing the CLI, enabling desktop app integration, signing in, and reading/injecting secrets for commands.",
+    "tags": [
+      "security",
+      "secrets",
+      "1password",
+      "op",
+      "cli"
+    ],
+    "top": "security",
+    "domain": "보안 & 거버넌스",
+    "path": "optional-skills/security/1password/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "godmode",
+    "description": "Jailbreak LLMs: Parseltongue, GODMODE, ULTRAPLINIAN.",
+    "tags": [
+      "jailbreak",
+      "red-teaming",
+      "G0DM0D3",
+      "Parseltongue",
+      "GODMODE",
+      "uncensoring",
+      "safety-bypass",
+      "prompt-engineering",
+      "L1B3RT4S"
+    ],
+    "top": "security",
+    "domain": "보안 & 거버넌스",
+    "path": "optional-skills/security/godmode/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "oss-forensics",
+    "description": "|",
+    "tags": [],
+    "top": "security",
+    "domain": "보안 & 거버넌스",
+    "path": "optional-skills/security/oss-forensics/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "sherlock",
+    "description": "OSINT username search across 400+ social networks. Hunt down social media accounts by username.",
+    "tags": [
+      "osint",
+      "security",
+      "username",
+      "social-media",
+      "reconnaissance"
+    ],
+    "top": "security",
+    "domain": "보안 & 거버넌스",
+    "path": "optional-skills/security/sherlock/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "web-pentest",
+    "description": "|",
+    "tags": [],
+    "top": "security",
+    "domain": "보안 & 거버넌스",
+    "path": "optional-skills/security/web-pentest/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "code-wiki",
+    "description": "Generate wiki docs + Mermaid diagrams for any codebase.",
+    "tags": [
+      "Documentation",
+      "Mermaid",
+      "Architecture",
+      "Diagrams",
+      "Wiki",
+      "Code-Analysis"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/software-development/code-wiki/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "rest-graphql-debug",
+    "description": "Debug REST/GraphQL APIs: status codes, auth, schemas, repro.",
+    "tags": [
+      "api",
+      "rest",
+      "graphql",
+      "http",
+      "debugging",
+      "testing",
+      "curl",
+      "integration"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/software-development/rest-graphql-debug/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "subagent-driven-development",
+    "description": "Execute plans via delegate_task subagents (2-stage review).",
+    "tags": [
+      "delegation",
+      "subagent",
+      "implementation",
+      "workflow",
+      "parallel"
+    ],
+    "top": "software-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/software-development/subagent-driven-development/SKILL.md",
+    "active": false
+  },
+  {
+    "name": "page-agent",
+    "description": "Embed alibaba/page-agent into your own web application — a pure-JavaScript in-page GUI agent that ships as a single <script> tag or npm package and lets end-users of your site drive the UI with natural language (\"click login, fill username as John\"). No Python, no headless browser, no extension required. Use this skill when the user is a web developer who wants to add an AI copilot to their SaaS / admin panel / B2B tool, make a legacy web app accessible via natural language, or evaluate page-agent against a local (Ollama) or cloud (Qwen / OpenAI / OpenRouter) LLM. NOT for server-side browser automation — point those users to Hermes' built-in browser tool instead.",
+    "tags": [
+      "web",
+      "javascript",
+      "agent",
+      "browser",
+      "gui",
+      "alibaba",
+      "embed",
+      "copilot",
+      "saas"
+    ],
+    "top": "web-development",
+    "domain": "소프트웨어 엔지니어링 & DevOps",
+    "path": "optional-skills/web-development/page-agent/SKILL.md",
+    "active": false
+  }
+]
