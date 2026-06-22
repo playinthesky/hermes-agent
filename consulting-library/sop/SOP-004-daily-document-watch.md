@@ -66,18 +66,23 @@
 
 ## 8. 스케줄 설치 (영구 호스트 필요)
 
-> 이 웹 세션 컨테이너는 일회성이라 스케줄을 **유지하지 못한다.** 아래는 영구 hermes 배포 또는
-> 웹 예약 트리거에서 1회 설치한다.
+> 이 웹 세션 컨테이너는 일회성이라 스케줄을 **유지하지 못한다.** 아래 방식으로 1회 설치한다.
+> **채택: Claude Code 웹 예약 트리거 + Slack 전달.**
 
-**hermes cron (저장소 내장 기능):**
+**Claude Code 웹 예약 트리거 (채택):**
+- 트리거: 매일 19:00 (사용자 시간대)
+- 대상 저장소: `playinthesky/hermes-agent`
+- 실행 프롬프트:
+  > `consulting-library/routines/daily-document-watch.md`의 지침대로 flow와 Google Drive의
+  > 최근 24시간 변경 문서를 스캔하고, 다이제스트를 Slack `#consulting-digest` 채널로 전달하라.
+
+**대안 — hermes cron (영구 hermes 배포가 있을 때):**
 ```bash
 hermes cron create "0 19 * * *" \
   "consulting-library/routines/daily-document-watch.md 의 지침을 수행하라." \
   --name "일일 문서 감시(flow+Drive)" \
   --deliver slack
 ```
-
-**Claude Code 웹 예약 트리거:** 매일 19:00 스케줄로 세션을 시작해 위 실행 지침을 수행하도록 구성.
 
 ## 9. 개정 이력
 

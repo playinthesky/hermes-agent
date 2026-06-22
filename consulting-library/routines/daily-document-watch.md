@@ -30,8 +30,9 @@
    ```
    각 문서는 [triage-guide](../intake/triage-guide.md)의 키워드 표로 도메인을 추정해 붙인다.
 
-4. **전달** — 다이제스트를 설정된 비공개 채널로 전달한다(Slack/메일 등).
-   변경이 flow·Drive 모두 0건이면 "변경 없음"만 전달하거나 생략(소음 방지).
+4. **Slack 전달** — Slack MCP `slack_send_message`로 지정 채널에 다이제스트를 전송한다.
+   - 대상 채널: `{{SLACK_CHANNEL}}` (예: `#consulting-digest`) — 비공개 채널 권장.
+   - 변경이 flow·Drive 모두 0건이면 "오늘 변경 없음" 한 줄만 보내거나 생략(소음 방지).
 
 5. **(선택) 후보 아젠다 초안** — 명백히 새 의뢰로 보이는 문서가 있으면
    [SOP-002](../sop/SOP-002-agenda-knowledge-capture.md) 절차로 `status/wip` 후보 아젠다를 초안화한다.
