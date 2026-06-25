@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang='ko'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>AI-BDL 기능명세서 v0.2</title><style>
+body{font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;max-width:900px;margin:0 auto;padding:2.5rem 2rem;line-height:1.7;color:#1f2937;background:#fff}
+h1{font-size:1.7rem;border-bottom:3px solid #6366f1;padding-bottom:.4rem}
+h2{font-size:1.3rem;margin-top:2rem;border-bottom:1px solid #e5e7eb;padding-bottom:.3rem;color:#4338ca}
+h3{font-size:1.08rem;margin-top:1.4rem;color:#374151}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem}
+th,td{border:1px solid #d1d5db;padding:.45rem .6rem;text-align:left;vertical-align:top}
+th{background:#f3f4f6;font-weight:700}
+tr:nth-child(even) td{background:#fafafa}
+code{background:#f1f5f9;padding:.1rem .35rem;border-radius:.25rem;font-size:.88em;color:#be123c}
+pre{background:#0f172a;color:#e2e8f0;padding:1rem;border-radius:.5rem;overflow-x:auto;line-height:1.5}
+pre code{background:none;color:inherit;padding:0}
+blockquote{border-left:4px solid #a5b4fc;background:#eef2ff;margin:.8rem 0;padding:.5rem 1rem;color:#4338ca;border-radius:0 .35rem .35rem 0}
+hr{border:none;border-top:1px solid #e5e7eb;margin:1.6rem 0}
+ul{padding-left:1.4rem}
+li{margin:.2rem 0}
+</style></head><body><h1>AI-BDL 발명 설명자료 (변리사 제공용) v2 — 통합본</h1>
+<p><strong>발명 명칭(가제)</strong>: 실시간 AI 분석 기반 숙의공론 토론 진행 시스템 및 방법</p>
+<p><strong>출원인/연락</strong>: 코리아스픽스 (담당: playinthesky@kspeaks.kr)</p>
+<p><strong>작성일</strong>: 2026-06-23 · <strong>버전</strong>: v2.0 (구편수 기술설명서 + 발명설명자료 통합)</p>
+<p><strong>시스템 코드명</strong>: AI-BDL (kspeaks-agora)</p>
+<blockquote>⚠️ 본 자료는 발명자(구편수·빙허각 협업 정리) 작성 상담용 자료입니다. 청구범위의 신규성·진보성 판단과 최종 명세서는 변리사 검토·보정을 전제로 합니다.</blockquote>
+<blockquote>⚠️ <strong>발명의 단일성 주의</strong>: 본문(§1~§9, 토론시스템)과 부록 A(HWPX 서식검증)는 기술적으로 별개 발명이므로 <strong>별도 출원</strong>을 권장합니다.</blockquote>
+<hr>
+<h2>목차</h2>
+<p>1. 발명의 배경 및 목적</p>
+<p>2. 발명의 핵심 요약 및 신규성</p>
+<p>3. 운영 흐름 (랜덤배정 → 입론 → 상호토론 → 집계)</p>
+<p>4. 제1 기술영역: 다차원 가중치 기반 참가자 층화 배정</p>
+<p>5. 제2 기술영역: 비동기 LLM 발언 구조화 분석 (쟁점 조건화)</p>
+<p>6. 제3 기술영역: 실시간 교차집계 + 동적 토픽 클러스터링</p>
+<p>7. 제4 기술영역(지향): 입론 기반 상호토론 쟁점 생성</p>
+<p>8. 특허 청구항 초안</p>
+<p>9. 해외 확장 및 출원 전략 (PCT)</p>
+<p>10. 변리사 예상 질문 &amp; 답변</p>
+<ul><li>부록 A. HWPX 공문서 서식 자동 검증 (별도 출원 후보)</li><li>부록 B. 기능명세 요약 / 선행기술 키워드</li></ul>
+<hr>
+<h2>1. 발명의 배경 및 목적</h2>
+<h3>1.1 배경 기술의 한계</h3>
+<p>기존 오프라인 숙의 토론회·대규모 모임의 한계:</p>
+<p>1. <strong>편향된 소그룹 구성</strong> — 임의/신청순 배정 시 특정 테이블에 동질 성향(성별·연령·입장)이 몰려 다양한 의견 교환이 차단됨.</p>
+<p>2. <strong>실시간 분석 불가</strong> — 발언을 수기 기록하거나 종료 후 녹취 전사하여 사후 분석 → 진행 중 흐름 파악·동적 운영 불가.</p>
+<p>3. <strong>분석 데이터 구조화 부재</strong> — 녹취록은 텍스트 나열에 불과해 &#x27;관점·입장·맥락&#x27;의 다차원 분류·통계화 곤란.</p>
+<p>4. <strong>비조건화 분석</strong> — 분석 시 토론 쟁점을 명시 기준으로 삼지 않으면 입장(찬/반)을 쟁점에 상대적으로 정확히 판정하기 어려움.</p>
+<h3>1.2 해결 과제</h3>
+<ul><li>인구통계·의견 <strong>다양성 극대화</strong> (2축·2단계 자동 배정)</li><li>진행 흐름을 막지 않는 <strong>실시간 비동기 발언 구조화 분석</strong></li><li>쟁점에 조건화된 <strong>일관된 입장 판정</strong></li><li>실시간 <strong>교차집계 + 동적 토픽 모델링</strong></li><li>입론 결과 기반 <strong>상호토론 진행자료 생성</strong>(지향)</li></ul>
+<hr>
+<h2>2. 발명의 핵심 요약 및 신규성</h2>
+<h3>2.1 전제 (변리사 최우선 확인)</h3>
+<blockquote>새로운 AI 모델 개발이 아니라, <strong>사전학습 대규모 언어모델(LLM)</strong> 과 <strong>음성인식(ASR)</strong> 을 토론 진행 맥락에서 <strong>조건화·연쇄·배치</strong>한 시스템/방법. 신규성은 *모델*이 아니라 <strong>*운용 구조</strong>*에 있음.</blockquote>
+<h3>2.2 도입 AI 기능 4종 (기호)</h3>
+<table><thead><tr><th>기호</th><th>기능(기술명)</th><th>입력 → 출력</th><th>적용</th></tr></thead><tbody><tr><td>Ⓐ</td><td>음성인식(ASR/STT)</td><td>음성→텍스트</td><td>발언 입력</td></tr><tr><td>Ⓑ</td><td>대상 조건화 입장·논증 추출 (target-conditioned stance detection + argument mining)</td><td>(쟁점+발언)→관점·입장·맥락·요약(JSON)</td><td>입론 분석(핵심)</td></tr><tr><td>Ⓒ</td><td>의미 군집·토픽 + 추상요약</td><td>발언집합→토픽 3~5개</td><td>실시간 집계</td></tr><tr><td>Ⓓ</td><td>제어된 자연어 생성</td><td>입론분석→상호토론 쟁점·질문</td><td>진행지원(지향)</td></tr><tr><td>∅</td><td>(AI 아님) 규칙·알고리즘</td><td>—</td><td>배정·수치집계</td></tr></tbody></table>
+<h3>2.3 신규성 5요소 (운용 구조)</h3>
+<p>1. <strong>쟁점 조건화</strong> — 입장을 쟁점에 상대적으로 판정</p>
+<p>2. <strong>입력 비차단 비동기 파이프라인</strong></p>
+<p>3. <strong>미시(개별 발언) → 거시(집계·군집) 2층 분석</strong></p>
+<p>4. <strong>분석 → 생성 연쇄</strong> (이해를 넘어 진행자료 생성)</p>
+<p>5. <strong>사람(퍼실리테이터) 검수 루프</strong> (human-in-the-loop)</p>
+<hr>
+<h2>3. 운영 흐름</h2>
+<pre><code>[회원·인증] → ① 랜덤 배정 → ② 입론 → ③ 상호토론 → (실시간 분석·집계)</code></pre>
+<ul><li><strong>① 랜덤 배정</strong> — NGT 기반, 2축(인구통계 × 의제 태도) 다양성을 테이블 간 균형 배정</li><li><strong>② 입론</strong> — 제시된 쟁점에 대한 참여자의 <strong>[입장 + 근거] 진술</strong>(음성→텍스트). 단순 전사가 아님. (인식조사=사전/현장 투표는 별개 단계)</li><li><strong>③ 상호토론</strong> — 입론 기반 쟁점 정리(Ⓓ, 지향) + 발언 기록</li><li><strong>집계</strong> — 쟁점별·속성별 분포 + 토픽 군집</li></ul>
+<h3>랜덤 배정 2축 (기본/심화)</h3>
+<ul><li><strong>인구통계 축</strong> — 기본: 성별·연령대·지역 / 심화: 추가속성(직업·학력 등, 해외는 인종·국적 등)</li><li><strong>의제 태도 축</strong> — 기본: 긍정·부정·유보 / 심화: 세분 척도</li></ul>
+<hr>
+<h2>4. 제1 기술영역: 다차원 가중치 기반 참가자 층화 배정</h2>
+<p>2단계 하이브리드 최적화 알고리즘.</p>
+<p><strong>흐름</strong>: 참가자·테이블 입력 → [Phase1 씨앗배정: 테이블마다 다양성 점수 최대 조합 선정] → [Phase2 균형배분: 남은 인원을 속성중복 패널티 최소 테이블에 배정] → 배정결과·불균형 통계 출력.</p>
+<h3>4.1 1단계: 씨앗 배정 (Seed Assignment)</h3>
+<ul><li>테이블 수용력에 따라 씨앗 크기 결정 (수용력 ≥7 → seed_size=3, &lt;7 → 2)</li><li>풀 앞부분(예: 40명)에서 seed_size 조합 생성(연산 타임아웃 방지)</li><li><strong>다양성 점수 = UniqueCount(성별) + UniqueCount(연령대) + UniqueCount(입장)</strong></li><li>3명 조합이 모두 다르면 최대 9점(3+3+3)</li><li>최고 점수 조합을 테이블에 배정·풀에서 제거 (테이블 수만큼 반복)</li></ul>
+<h3>4.2 2단계: 균형 배분 (Balanced Distribution)</h3>
+<ul><li>남은 풀 무작위 셔플 (순서 편향 제거)</li><li>각 참가자 p에 대해 테이블 T별 배정점수:</li><li><strong>Score(T,p) = −(pos_dup×4 + gen_dup×2 + age_dup×2) − |T|×0.1</strong></li><li>pos_dup/gen_dup/age_dup = T 내 입장/성별/연령 동일 인원 수, |T| = 현재 인원</li><li>가중치: 입장 4(의견 다양성 우선), 성별 2, 연령 2, 인원수 0.1</li><li>수용 한도 미초과 테이블 중 점수 최대 테이블에 배정</li></ul>
+<h3>4.3 수도코드</h3>
+<pre><code>def run_stratified_assignment(participants, num_tables, table_capacity):
+    seed_size = 3 if table_capacity &gt;= 7 else 2
+    pool = list(participants)
+    assignments = {i + 1: [] for i in range(num_tables)}
+
+    def diversity_score(sel):
+        return (len(set(m.get(&#x27;성별&#x27;) for m in sel))
+              + len(set(m.get(&#x27;연령대&#x27;) for m in sel))
+              + len(set(m.get(&#x27;입장&#x27;) for m in sel)))
+
+    # Phase 1: 씨앗 배정
+    for t in range(1, num_tables + 1):
+        if not pool: break
+        if len(pool) &lt; seed_size:
+            assignments[t].extend(pool); pool = []; break
+        search_pool = pool[:min(len(pool), 40)]
+        best_combo, best = None, -1
+        for combo in combinations(range(len(search_pool)), seed_size):
+            sel = [search_pool[i] for i in combo]
+            s = diversity_score(sel)
+            if s &gt; best:
+                best, best_combo = s, combo
+                if s == seed_size * 3: break   # 완벽 다양성 조기 종료
+        if best_combo:
+            chosen = [search_pool[i] for i in best_combo]
+            assignments[t].extend(chosen)
+            pool = [p for p in pool if p not in chosen]
+
+    # Phase 2: 가중치 균형 배분
+    random.shuffle(pool)
+    for p in pool:
+        best_table, best = None, -float(&#x27;inf&#x27;)
+        for t in range(1, num_tables + 1):
+            if len(assignments[t]) &gt;= table_capacity: continue
+            m = assignments[t]
+            pos = sum(1 for x in m if x.get(&#x27;입장&#x27;)   == p.get(&#x27;입장&#x27;))
+            gen = sum(1 for x in m if x.get(&#x27;성별&#x27;)   == p.get(&#x27;성별&#x27;))
+            age = sum(1 for x in m if x.get(&#x27;연령대&#x27;) == p.get(&#x27;연령대&#x27;))
+            score = -(pos*4 + gen*2 + age*2) - len(m)*0.1
+            if score &gt; best: best, best_table = score, t
+        if best_table: assignments[best_table].append(p)
+    return assignments</code></pre>
+<hr>
+<h2>5. 제2 기술영역: 비동기 LLM 발언 구조화 분석 (쟁점 조건화) — *핵심*</h2>
+<p>발언 입력 → DB 임시행(분석중⏳) 생성 → 즉시 응답 → 백그라운드 스레드가 LLM 분석 → 결과로 행 갱신 → 집계 트리거.</p>
+<p><strong>흐름(시퀀스)</strong>:</p>
+<p>1. 클라이언트 → 서버: <code>POST /api/analyze</code> (발언, 쟁점, 테이블, 참가자)</p>
+<p>2. 서버 → DB: 로우 추가 (&quot;분석 중 ⏳&quot;)</p>
+<p>3. 서버 → 클라이언트: 즉시 응답(비차단)</p>
+<p>4. (백그라운드) 서버 → LLM: <strong>쟁점 컨텍스트 + 발언 원문</strong></p>
+<p>5. LLM → 서버: 구조화 JSON (관점·입장·맥락·요약)</p>
+<p>6. 서버 → DB: 해당 로우 E~H열 갱신 → 대시보드 통계 트리거</p>
+<h3>5.1 작동 메커니즘</h3>
+<p>1. <strong>동기 기록</strong> — 상태 &quot;분석 중 ⏳&quot;으로 행 즉시 추가</p>
+<p>2. <strong>비동기 분기</strong> — 메인 스레드는 즉시 응답, <code>threading.Thread</code>로 분석 분기(응답 차단 방지)</p>
+<p>3. <strong>쟁점 조건화 프롬프트</strong> — LLM에 현재 <strong>쟁점(Agenda)</strong> + 발언 원문 주입, 4차원 구조 출력 강제:</p>
+<ul><li><strong>관점(Perspective)</strong>: 문제를 보는 시각의 축 (예: 경제적 실효성, 사회적 형평성)</li><li><strong>입장(Position)</strong>: 해당 쟁점에 대한 찬/반/중립 — *쟁점에 상대적으로 판정*</li><li><strong>맥락(Context)</strong>: 관점·입장을 지지하는 근거·논리적 배경</li><li><strong>요약(Summary)</strong>: 한 줄 요약</li></ul>
+<p>4. <strong>파싱·갱신</strong> — 구조화 JSON 파싱 후 시트 Row ID 매핑하여 칼럼 실시간 갱신</p>
+<blockquote><strong>신규성 포인트(§2.3-①)</strong>: 일반 요약과 달리 &quot;이 쟁점에 대해&quot;를 명시 기준으로 넣어 입장을 쟁점 상대적으로 판정 → 쟁점별 정량 집계의 기반.</blockquote>
+<hr>
+<h2>6. 제3 기술영역: 실시간 교차집계 + 동적 토픽 클러스터링</h2>
+<p><strong>흐름</strong>: 발언 DB → (참가자 인구통계 조인) → 교차집계(성별×입장, 연령×입장, 지역×입장) / 최근 N개 발언 → LLM 토픽 군집(3~5개) → 통계탭 갱신·대시보드 표출.</p>
+<h3>6.1 실시간 교차 집계</h3>
+<ul><li>발언 결과의 참가자 ID로 참가자 시트(인구통계)를 <strong>조인</strong></li><li>성별×입장 / 연령대×입장 / 지역×입장 분포 집계 → 통계 리포트 구성</li></ul>
+<h3>6.2 LLM 동적 토픽 클러스터링</h3>
+<ul><li><strong>데이터 윈도윙</strong> — 최근 N개(예: 50개) 발언 슬라이딩 윈도우 추출</li><li><strong>논점 군집화</strong> — LLM이 관통 토픽 3~5개를 군집·마크다운 요약</li><li><strong>자동 동기화</strong> — 교차집계 + 토픽 요약을 통계탭에 실시간 기록 → 운영진·분석팀 실시간 파악</li></ul>
+<hr>
+<h2>7. 제4 기술영역(지향): 입론 기반 상호토론 쟁점 생성 (Ⓓ)</h2>
+<p>입론(§5) 분석과 집계(§6)를 <strong>종합·재구성</strong>하여, 퍼실리테이터가 상호토론을 진행하는 데 필요한 <strong>쟁점·질문을 생성</strong>해 제시. 추출·요약(이해)을 넘어 <strong>생성(generation)</strong> 으로 전환되는 지점. *(현재 미구현, 필수 보강 항목)*</p>
+<hr>
+<h2>8. 특허 청구항 초안</h2>
+<blockquote>구편수 초안(청구항 1~4) + 신규성 보강 청구항(5~7). HWPX(구 청구항4)는 <strong>부록 A·별도 출원</strong>으로 이관.</blockquote>
+<p><strong>[청구항 1] (독립) 다차원 속성 최적화 기반 토론 참가자 소그룹 배정 시스템</strong></p>
+<p>참가자의 인구통계학적 정보 및 사전 토론 입장을 포함하는 복수 속성을 수집하는 데이터 입력부; 복수 소그룹 테이블에 참가자를 배정하는 알고리즘 연산부;를 포함하되, 상기 연산부는 (가) 소그룹별 씨앗 크기에 대응하는 조합을 탐색 서브풀에서 생성하고 조합 내 속성 고유값 개수 기반 다양성 점수를 산출하여 최대 조합을 우선 배정하는 1단계 씨앗 배정 모듈; (나) 잔여 참가자를 셔플 후 각 참가자별로 기존 멤버와의 속성 중복 패널티를 차감한 배정 점수를 계산하여 최대 테이블에 순차 배분하는 2단계 균형 배분 모듈;을 포함하는 것을 특징으로 하는 시스템.</p>
+<p><strong>[청구항 2] (종속)</strong> 청구항 1에서, 배정 점수는 입장 중복도·성별 중복도·연령 중복도 및 테이블 현재 인원수에 <strong>서로 다른 패널티 가중치</strong>(입장 &gt; 성별=연령 &gt; 인원수)를 곱해 음의 값으로 합산하여 산출하는 것을 특징으로 하는 시스템.</p>
+<p><strong>[청구항 3] (독립) 비동기 LLM 분석 파이프라인 및 실시간 대시보드 숙의 토론 지원 방법</strong></p>
+<p>웹 서버가 발언 데이터와 토론 쟁점 정보를 포함하는 분석 요청을 수신하는 단계; DB에 신규 로우 생성·진행상태 기록(동기 저장) 단계; 클라이언트에 즉시 응답 후 백그라운드 비동기 스레드를 분기하는 단계; 상기 스레드가 LLM에 쟁점 정보 및 발언을 주입하여 관점·입장·맥락·요약을 추출(구조화)하는 단계; 결과를 해당 로우에 칼럼별 갱신하고 전체 DB 기반 통계·동적 토픽 군집을 재집계하여 대시보드 탭에 갱신하는 단계;를 포함하는 방법.</p>
+<p><strong>[청구항 4] (종속)</strong> 청구항 3에서, 상기 입장은 <strong>상기 토론 쟁점을 분석 기준 컨텍스트로 명시</strong>하여 해당 쟁점에 상대적으로 판정되는 것을 특징으로 하는 방법. *(신규성 핵심)*</p>
+<p><strong>[청구항 5] (종속)</strong> 청구항 3에서, 상기 비동기 스레드 분기 시 상기 로우의 분석 항목 영역에 분석 진행중 자리표시자를 기록하고 분석 완료 시 해당 영역을 갱신하여, 발언 입력 흐름이 분석 완료를 대기하지 않는 것을 특징으로 하는 방법.</p>
+<p><strong>[청구항 6] (종속)</strong> 청구항 3에서, 상기 추출된 분석 결과 및 집계 결과를 종합하여 후속 상호토론을 위한 쟁점 또는 질문을 생성하여 진행자 단말에 제공하는 단계를 더 포함하는 방법. *(Ⓓ)*</p>
+<p><strong>[청구항 7] (종속)</strong> 청구항 3에서, 상기 발언은 음성인식으로 전사된 텍스트이며, 상기 입장 판정은 발언 언어와 무관하게 상기 쟁점을 기준으로 수행되는 것을 특징으로 하는 방법. *(해외·교차언어)*</p>
+<hr>
+<h2>9. 해외 확장 및 출원 전략 (PCT)</h2>
+<h3>9.1 해외 수출 시 추가 기능</h3>
+<ul><li><strong>다국어 AI</strong> — Ⓐ다국어 ASR / Ⓑ교차언어 입장판정(cross-lingual stance) / Ⓒ다국어 군집 / Ⓓ다국어 생성 / 🆕실시간 번역</li><li><strong>i18n/L10n</strong> — 다국어 UI, 날짜·통화·시간대, RTL</li><li><strong>다양성 축 현지화</strong> — 미국=인종·민족, 유럽=국적·언어 등</li><li><strong>규제·데이터 주권</strong> — GDPR, 데이터 레지던시, 접근성(WCAG/ADA)</li><li><strong>글로벌 인증/결제</strong> — Google·Apple·SSO / Stripe·다통화·VAT</li></ul>
+<h3>9.2 출원 전략</h3>
+<ul><li>공개(출시·시연·논문) <strong>이전 출원</strong> → 신규성 상실 방지</li><li>수출 대비 <strong>PCT 국제출원</strong> (국내 특허만으론 해외 보호 불가)</li><li>청구항 보강: 교차언어 입장 판정(청구항 7) · 실시간 번역 · NGT 2축</li></ul>
+<hr>
+<h2>10. 변리사 예상 질문 &amp; 답변</h2>
+<p><strong>Q1. 직접 만든 AI 모델인가요?</strong> → 아니오. 사전학습 LLM·ASR 활용, 발명은 조건화·연쇄·배치한 시스템/방법.</p>
+<p><strong>Q2. 범용 LLM과 뭐가 다른가요? 신규성은?</strong> → ①쟁점 조건화 ②비차단 비동기 ③미시→거시 2층 ④분석→생성 연쇄 ⑤사람 검수 루프의 통합 구성.</p>
+<p><strong>Q3. AI 출력은?</strong> → 발언별 관점·입장·맥락·요약(JSON), 쟁점별 입장 분포, 토픽 3~5개. (지향: 상호토론 쟁점·질문)</p>
+<p><strong>Q4. 입장 판정 기준은?</strong> → 발언이 아니라 <strong>제시된 쟁점 기준</strong>. 같은 발언도 쟁점 다르면 결과 달라짐.</p>
+<p><strong>Q5. 학습/정확도는?</strong> → 별도 학습 없이 프롬프트 운용 + 사람 검수 루프로 신뢰성 보완.</p>
+<p><strong>Q6. AI 기술적 필수성은?</strong> → 대규모·실시간 자연어 발언을 일관 기준으로 구조화·집계하는 것은 수작업 불가 → AI가 필수 수단.</p>
+<p><strong>Q7. 배정도 AI인가요?</strong> → 아니오, 규칙/알고리즘. 단 NGT 2축 다양성 최적화 자체도 별도 청구 대상.</p>
+<p><strong>Q8. HWPX 검증은 왜 별도인가요?</strong> → 토론시스템과 무관한 문서서식 검증 발명이라 <strong>발명의 단일성</strong> 상 별도 출원 권장.</p>
+<hr>
+<h2>부록 A. HWPX 공문서 서식 자동 검증 기술 (별도 출원 후보)</h2>
+<blockquote>한국 공문서(HWPX) 내부 XML을 파싱해 서식 표준(폰트·크기·자간·행간·여백)을 자동 검증·등급 산출. <strong>본 토론시스템과 별개 발명</strong> — 독립 출원 권장.</blockquote>
+<p><strong>메커니즘</strong></p>
+<p>1. <strong>컨테이너 해제</strong> — HWPX(OWPML, ZIP)에서 <code>Contents/header.xml</code>(글자모양 메타)·<code>Contents/section0.xml</code>(문장 서식) 로드 → XML 트리</p>
+<p>2. <strong>표준 검증</strong> (한국 공문서 표준과 대조)</p>
+<ul><li>본문/제목 폰트: header.xml <code>fontface</code> → 표준(본문 함초롱바탕 등) 대조</li><li>글자크기·자간: section0.xml <code>charPr</code>의 height(1/100pt)·letterSpacing → 본문 11pt, 자간 −3%</li><li>행간·정렬: <code>paraPr</code>의 lineSpacing·정렬 → 160~180%, 양쪽정렬</li><li>용지 여백: <code>pagePr</code> margin → HWPUNIT(1mm=283) → mm 환산, 기준 비교</li></ul>
+<p>3. <strong>등급 산출</strong> — Ratio = Pass÷전체</p>
+<ul><li>≥0.95 → 5등급 / 0.80~0.95 → 4 / 0.60~0.80 → 3 / 0.40~0.60 → 2 / &lt;0.40 또는 치명 Fail → 1등급</li></ul>
+<p><strong>[별도 청구항] OWPML XML 파싱 기반 HWPX 서식 표준 검증 시스템</strong> — 파일 해제부 / 서식 파싱부 / 표준 검증부 / 등급 연산부를 포함.</p>
+<hr>
+<h2>부록 B. 기능명세 요약 / 선행기술 키워드</h2>
+<p><strong>구현 현황 요약</strong>: 회원·인증, 랜덤배정(2단계), 입론(STT·시간관리·AI분석), 상호토론 기록, 교차집계·토픽군집 = 구현 / 상호토론 쟁점생성(Ⓓ)·다국어·멀티테넌트 = 지향.</p>
+<p><strong>선행기술 조사 키워드</strong>: deliberative discussion + LLM/NLP · real-time argument mining · topic-conditioned stance detection · meeting transcription + structured summarization · group formation diversity optimization · cross-lingual stance detection</p></body></html>
