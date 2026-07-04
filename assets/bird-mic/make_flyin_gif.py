@@ -22,30 +22,32 @@ AR = H / W
 # ---- split the wing from the body ----
 # generous wing polygon (includes a junction band into the body fluff)
 WING_POLY = [
-    (1000, 545), (900, 560), (800, 610), (700, 625), (600, 595),
-    (500, 460), (300, 400), (100, 395), (-50, 460),
+    (955, 570), (870, 590), (785, 630), (700, 645), (600, 610),
+    (500, 465), (300, 402), (100, 397), (-50, 462),
     (-50, 780), (60, 950), (160, 1080), (300, 1170),
-    (480, 1180), (650, 1160), (820, 1080), (950, 950),
-    (1020, 800), (1030, 650),
+    (480, 1180), (650, 1160), (820, 1080), (935, 950),
+    (995, 800), (1000, 655),
 ]
-# same polygon with the junction edge pulled ~45px toward the wing, so the
-# body keeps a static band of fluff that covers the rotation seam
+# same polygon with the junction edge pulled toward the wing; the body keeps
+# a fully OPAQUE static band that covers the seam (a feathered band here lets
+# the moving wing show through the face)
 WING_ONLY_POLY = [
-    (955, 585), (880, 600), (790, 650), (700, 665), (600, 635),
-    (500, 460), (300, 400), (100, 395), (-50, 460),
-    (-50, 780), (60, 950), (160, 1080), (300, 1170),
-    (480, 1180), (640, 1120), (780, 1040), (905, 915),
-    (975, 790), (985, 655),
+    (930, 600), (860, 618), (778, 658), (700, 672), (605, 640),
+    (505, 472), (300, 410), (100, 405), (-45, 468),
+    (-45, 775), (65, 945), (165, 1075), (302, 1165),
+    (478, 1175), (640, 1130), (795, 1050), (905, 920),
+    (965, 790), (970, 668),
 ]
 PIVOT = (960, 640)         # wing shoulder
 
 wing_mask = Image.new("L", (W, H), 0)
 ImageDraw.Draw(wing_mask).polygon(WING_POLY, fill=255)
-wing_mask = wing_mask.filter(ImageFilter.GaussianBlur(12))
+wing_mask = wing_mask.filter(ImageFilter.GaussianBlur(3))
 
 only_mask = Image.new("L", (W, H), 0)
 ImageDraw.Draw(only_mask).polygon(WING_ONLY_POLY, fill=255)
-only_mask = only_mask.filter(ImageFilter.GaussianBlur(8))
+only_mask = only_mask.filter(ImageFilter.GaussianBlur(2))
+only_mask = only_mask.point(lambda v: 255 if v > 200 else 0)
 
 wing = Image.new("RGBA", (W, H), (0, 0, 0, 0))
 wing.paste(src, mask=wing_mask)
