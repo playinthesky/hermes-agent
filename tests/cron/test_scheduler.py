@@ -2759,3 +2759,77 @@ class TestHomeTargetEnvVarRegistry:
         from cron.scheduler import _HOME_TARGET_ENV_VARS
 
         assert _HOME_TARGET_ENV_VARS.get("whatsapp") == "WHATSAPP_HOME_CHANNEL"
+
+
+class TestFailureNoticeAutoPause:
+    """When a recurring job's failure crosses the auto-pause threshold, the
+    delivered failure message includes a one-time notice telling the user the
+    job has been paused and how to resume it."""
+
+    def _run_tick_capturing_delivery(self, job, tmp_path, run_result):
+        from cron.scheduler import tick
+
+        captured = {}
+
+        def _fake_deliver(j, content, **kwargs):
+            captured["content"] = content
+            return None
+
+        with patch("cron.scheduler._hermes_home", tmp_path), \
+             patch("cron.scheduler.get_due_jobs", return_value=[job]), \
+             patch("cron.scheduler.advance_next_run"), \
+             patch("cron.scheduler.mark_job_run"), \
+             patch("cron.scheduler.save_job_output", return_value="/tmp/out.md"), \
+             patch("cron.scheduler._resolve_origin", return_value=None), \
+             patch("cron.scheduler._deliver_result", side_effect=_fake_deliver), \
+             patch("cron.scheduler.run_job", return_value=run_result):
+            tick(verbose=False)
+
+        return captured.get("content")
+
+    def _base_job(self, **overrides):
+        job = {
+            "id": "auth-job",
+            "name": "캠프 인박스 — 빙허각",
+            "prompt": "check inbox",
+            "schedule": {"kind": "cron", "expr": "0 * * * *", "display": "0 * * * *"},
+            "enabled": True,
+            "next_run_at": "2020-01-01T00:00:00",
+            "deliver": "local",
+            "last_status": None,
+            "consecutive_failures": 0,
+        }
+        job.update(overrides)
+        return job
+
+    def test_notice_appended_on_threshold_crossing_failure(self, tmp_path, monkeypatch):
+        monkeypatch.setattr("cron.scheduler.get_max_consecutive_failures", lambda: 3)
+        # Two prior failures already recorded; this run is the third.
+        job = self._base_job(consecutive_failures=2)
+        content = self._run_tick_capturing_delivery(
+            job, tmp_path, (False, "out", "", "No access token found for Nous Portal login")
+        )
+        assert content is not None
+        assert "failed" in content
+        assert "paused it" in content
+        assert "resume reminder 캠프 인박스 — 빙허각" in content
+        assert "3 times in a row" in content
+
+    def test_no_notice_before_threshold(self, tmp_path, monkeypatch):
+        monkeypatch.setattr("cron.scheduler.get_max_consecutive_failures", lambda: 3)
+        job = self._base_job(consecutive_failures=0)
+        content = self._run_tick_capturing_delivery(
+            job, tmp_path, (False, "out", "", "boom")
+        )
+        assert content is not None
+        assert "failed" in content
+        assert "paused it" not in content
+
+    def test_no_notice_when_threshold_disabled(self, tmp_path, monkeypatch):
+        monkeypatch.setattr("cron.scheduler.get_max_consecutive_failures", lambda: 0)
+        job = self._base_job(consecutive_failures=99)
+        content = self._run_tick_capturing_delivery(
+            job, tmp_path, (False, "out", "", "boom")
+        )
+        assert content is not None
+        assert "paused it" not in content

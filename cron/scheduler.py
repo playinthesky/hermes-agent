@@ -149,7 +149,13 @@ _LEGACY_HOME_TARGET_ENV_VARS = {
     "QQBOT_HOME_CHANNEL": "QQ_HOME_CHANNEL",
 }
 
-from cron.jobs import get_due_jobs, mark_job_run, save_job_output, advance_next_run
+from cron.jobs import (
+    get_due_jobs,
+    mark_job_run,
+    save_job_output,
+    advance_next_run,
+    get_max_consecutive_failures,
+)
 
 # Sentinel: when a cron agent has nothing new to report, it can start its
 # response with this marker to suppress delivery.  Output is still saved
@@ -2056,7 +2062,29 @@ def tick(verbose: bool = True, adapters=None, loop=None, sync: bool = True) -> i
                 # Deliver the final response to the origin/target chat.
                 # If the agent responded with [SILENT], skip delivery (but
                 # output is already saved above).  Failed jobs always deliver.
-                deliver_content = final_response if success else f"⚠️ Cron job '{job.get('name', job['id'])}' failed:\n{error}"
+                if success:
+                    deliver_content = final_response
+                else:
+                    job_label = job.get("name", job["id"])
+                    deliver_content = f"⚠️ Cron job '{job_label}' failed:\n{error}"
+                    # If this failure will cross the auto-pause threshold,
+                    # append a one-time notice so the user knows the job has
+                    # been paused and won't keep alerting. mark_job_run() below
+                    # performs the actual pause using the same threshold and the
+                    # streak it maintains, so the two stay in agreement.
+                    threshold = get_max_consecutive_failures()
+                    _sched = job.get("schedule")
+                    kind = _sched.get("kind") if isinstance(_sched, dict) else None
+                    if threshold > 0 and kind in {"cron", "interval"}:
+                        prior_failures = int(job.get("consecutive_failures", 0) or 0)
+                        if prior_failures + 1 >= threshold:
+                            deliver_content += (
+                                f"\n\nThis job has now failed {prior_failures + 1} times in a row, "
+                                f"so I've paused it to stop repeated alerts. "
+                                f"Fix the underlying cause, then resume it with "
+                                f"\"resume reminder {job_label}\" — or remove it with "
+                                f"\"stop reminder {job_label}\"."
+                            )
                 # Treat whitespace-only final responses the same as empty
                 # responses: do not deliver a blank message, and let the
                 # empty-response guard below mark the run as a soft failure.
