@@ -45,6 +45,43 @@ _jobs_file_lock = threading.Lock()
 OUTPUT_DIR = CRON_DIR / "output"
 ONESHOT_GRACE_SECONDS = 120
 
+# After this many *consecutive* failed runs, a recurring job is auto-paused so
+# it stops re-firing (and re-alerting) forever on a persistent error — e.g. an
+# expired API token that never self-heals. The counter resets to 0 on any
+# successful run, so brief/transient failures do not trip it. Set to 0 (env
+# HERMES_CRON_MAX_CONSECUTIVE_FAILURES=0 or cron.max_consecutive_failures: 0)
+# to restore the old "retry and alert forever" behaviour.
+DEFAULT_MAX_CONSECUTIVE_FAILURES = 3
+
+
+def get_max_consecutive_failures() -> int:
+    """Resolve the consecutive-failure auto-pause threshold.
+
+    Precedence: env HERMES_CRON_MAX_CONSECUTIVE_FAILURES > config.yaml
+    ``cron.max_consecutive_failures`` > DEFAULT_MAX_CONSECUTIVE_FAILURES.
+    A value of 0 (or negative) disables auto-pausing.
+    """
+    raw = os.getenv("HERMES_CRON_MAX_CONSECUTIVE_FAILURES", "").strip()
+    if raw:
+        try:
+            return max(0, int(raw))
+        except (ValueError, TypeError):
+            logger.warning(
+                "Invalid HERMES_CRON_MAX_CONSECUTIVE_FAILURES=%r; ignoring", raw
+            )
+    try:
+        # Lazy import keeps jobs.py free of a hard config dependency.
+        from hermes_cli.config import load_config
+
+        cfg = load_config() or {}
+        cron_cfg = cfg.get("cron", {}) if isinstance(cfg, dict) else {}
+        val = cron_cfg.get("max_consecutive_failures")
+        if val is not None:
+            return max(0, int(val))
+    except Exception:
+        logger.debug("Could not read cron.max_consecutive_failures from config", exc_info=True)
+    return DEFAULT_MAX_CONSECUTIVE_FAILURES
+
 # Fields on a cron job that must never change after creation. ``id`` is used
 # as a filesystem path component under ``OUTPUT_DIR``; allowing it to be
 # updated lets an unsafe value (``../escape``, absolute path, nested) leak
@@ -663,6 +700,7 @@ def create_job(
         "last_status": None,
         "last_error": None,
         "last_delivery_error": None,
+        "consecutive_failures": 0,
         # Delivery configuration
         "deliver": deliver,
         "origin": origin,  # Tracks where job was created for "origin" delivery
@@ -884,7 +922,15 @@ def mark_job_run(job_id: str, success: bool, error: Optional[str] = None,
                 job["last_error"] = error if not success else None
                 # Track delivery failures separately — cleared on successful delivery
                 job["last_delivery_error"] = delivery_error
-                
+
+                # Track consecutive failures so a persistently-broken recurring
+                # job can be auto-paused instead of re-firing (and re-alerting)
+                # forever. Any success resets the streak.
+                if success:
+                    job["consecutive_failures"] = 0
+                else:
+                    job["consecutive_failures"] = int(job.get("consecutive_failures", 0) or 0) + 1
+
                 # Increment completed count
                 if job.get("repeat"):
                     job["repeat"]["completed"] = job["repeat"].get("completed", 0) + 1
@@ -929,6 +975,34 @@ def mark_job_run(job_id: str, success: bool, error: Optional[str] = None,
                         job["state"] = "completed"
                 elif job.get("state") != "paused":
                     job["state"] = "scheduled"
+
+                # Auto-pause a recurring job that keeps failing, so it stops
+                # re-firing and re-alerting forever on a persistent error.
+                # One-shot jobs are already terminal; only cron/interval jobs
+                # can loop. The scheduler emits a one-time notice on the run
+                # that crosses the threshold (see cron/scheduler.py).
+                threshold = get_max_consecutive_failures()
+                kind = job.get("schedule", {}).get("kind")
+                if (
+                    not success
+                    and threshold > 0
+                    and kind in {"cron", "interval"}
+                    and job.get("state") != "paused"
+                    and int(job.get("consecutive_failures", 0) or 0) >= threshold
+                ):
+                    job["enabled"] = False
+                    job["state"] = "paused"
+                    job["next_run_at"] = None
+                    job["paused_at"] = now
+                    job["paused_reason"] = (
+                        f"Auto-paused after {job['consecutive_failures']} consecutive failures"
+                    )
+                    logger.warning(
+                        "Job '%s' auto-paused after %d consecutive failures; last error: %s",
+                        job.get("name", job["id"]),
+                        job["consecutive_failures"],
+                        job.get("last_error"),
+                    )
 
                 save_jobs(jobs)
                 return

@@ -585,6 +585,144 @@ class TestMarkJobRun:
         assert updated["state"] == "completed"
 
 
+class TestAutoPauseOnConsecutiveFailures:
+    """A recurring job that keeps failing must auto-pause so it stops
+    re-firing (and re-alerting) forever on a persistent error."""
+
+    def test_new_job_starts_with_zero_failures(self, tmp_cron_dir):
+        job = create_job(prompt="Test", schedule="every 1h")
+        assert job["consecutive_failures"] == 0
+
+    def test_success_resets_streak(self, tmp_cron_dir):
+        job = create_job(prompt="Flaky", schedule="every 1h")
+        mark_job_run(job["id"], success=False, error="blip")
+        mark_job_run(job["id"], success=False, error="blip")
+        assert get_job(job["id"])["consecutive_failures"] == 2
+        mark_job_run(job["id"], success=True)
+        assert get_job(job["id"])["consecutive_failures"] == 0
+
+    def test_recurring_job_auto_pauses_at_threshold(self, tmp_cron_dir, monkeypatch):
+        monkeypatch.setattr("cron.jobs.get_max_consecutive_failures", lambda: 3)
+        job = create_job(prompt="Broken", schedule="every 1h")
+
+        # First two failures do not pause the job.
+        for _ in range(2):
+            mark_job_run(job["id"], success=False, error="auth expired")
+            updated = get_job(job["id"])
+            assert updated["enabled"] is True
+            assert updated["state"] != "paused"
+
+        # The third consecutive failure trips the auto-pause.
+        mark_job_run(job["id"], success=False, error="auth expired")
+        updated = get_job(job["id"])
+        assert updated["consecutive_failures"] == 3
+        assert updated["enabled"] is False
+        assert updated["state"] == "paused"
+        assert updated["next_run_at"] is None
+        assert updated["paused_at"]
+        assert "3" in updated["paused_reason"]
+
+    def test_paused_recurring_job_can_be_resumed(self, tmp_cron_dir, monkeypatch):
+        monkeypatch.setattr("cron.jobs.get_max_consecutive_failures", lambda: 2)
+        job = create_job(prompt="Broken", schedule="every 1h")
+        mark_job_run(job["id"], success=False, error="boom")
+        mark_job_run(job["id"], success=False, error="boom")
+        assert get_job(job["id"])["state"] == "paused"
+
+        resumed = resume_job(job["id"])
+        assert resumed["enabled"] is True
+        assert resumed["state"] == "scheduled"
+        assert resumed["next_run_at"] is not None
+
+    def test_threshold_zero_disables_auto_pause(self, tmp_cron_dir, monkeypatch):
+        monkeypatch.setattr("cron.jobs.get_max_consecutive_failures", lambda: 0)
+        job = create_job(prompt="Broken", schedule="every 1h")
+        for _ in range(5):
+            mark_job_run(job["id"], success=False, error="boom")
+        updated = get_job(job["id"])
+        assert updated["enabled"] is True
+        assert updated["state"] != "paused"
+        assert updated["consecutive_failures"] == 5
+
+    def test_oneshot_job_is_never_auto_paused(self, tmp_cron_dir, monkeypatch):
+        """One-shot jobs are terminal, not looping — the auto-pause branch
+        (which targets cron/interval) must leave them alone."""
+        monkeypatch.setattr("cron.jobs.get_max_consecutive_failures", lambda: 1)
+        jobs = [{
+            "id": "oneshot-fail",
+            "prompt": "Once",
+            "schedule": {"kind": "once", "run_at": "2020-01-01T00:00:00+00:00", "display": "once"},
+            "repeat": {"times": None, "completed": 0},
+            "enabled": True,
+            "state": "scheduled",
+            "next_run_at": "2020-01-01T00:00:00+00:00",
+            "last_run_at": None,
+            "last_status": None,
+            "last_error": None,
+            "last_delivery_error": None,
+            "consecutive_failures": 0,
+            "created_at": "2020-01-01T00:00:00+00:00",
+        }]
+        save_jobs(jobs)
+        mark_job_run("oneshot-fail", success=False, error="boom")
+        updated = get_job("oneshot-fail")
+        # One-shot terminal completion path owns enabled/state here; the
+        # auto-pause branch must not have set paused_reason.
+        assert updated["state"] != "paused"
+        assert not updated.get("paused_reason")
+
+    def test_legacy_job_without_field_counts_from_zero(self, tmp_cron_dir, monkeypatch):
+        """A job persisted before this feature has no consecutive_failures
+        key; mark_job_run must treat the missing field as 0."""
+        monkeypatch.setattr("cron.jobs.get_max_consecutive_failures", lambda: 2)
+        jobs = [{
+            "id": "legacy-job",
+            "prompt": "Legacy",
+            "schedule": {"kind": "interval", "minutes": 60, "display": "every 60m"},
+            "repeat": {"times": None, "completed": 0},
+            "enabled": True,
+            "state": "scheduled",
+            "next_run_at": "2020-01-01T00:00:00+00:00",
+            "last_run_at": None,
+            "last_status": None,
+            "last_error": None,
+            "created_at": "2020-01-01T00:00:00+00:00",
+        }]
+        save_jobs(jobs)
+        mark_job_run("legacy-job", success=False, error="boom")
+        assert get_job("legacy-job")["consecutive_failures"] == 1
+        mark_job_run("legacy-job", success=False, error="boom")
+        updated = get_job("legacy-job")
+        assert updated["consecutive_failures"] == 2
+        assert updated["state"] == "paused"
+
+
+class TestGetMaxConsecutiveFailures:
+    """Resolution of the auto-pause threshold from env / config / default."""
+
+    def test_default(self, monkeypatch):
+        from cron.jobs import get_max_consecutive_failures, DEFAULT_MAX_CONSECUTIVE_FAILURES
+        monkeypatch.delenv("HERMES_CRON_MAX_CONSECUTIVE_FAILURES", raising=False)
+        # Config lookup may or may not be present; default is the floor.
+        assert get_max_consecutive_failures() >= 0
+
+    def test_env_override(self, monkeypatch):
+        from cron.jobs import get_max_consecutive_failures
+        monkeypatch.setenv("HERMES_CRON_MAX_CONSECUTIVE_FAILURES", "7")
+        assert get_max_consecutive_failures() == 7
+
+    def test_env_zero_disables(self, monkeypatch):
+        from cron.jobs import get_max_consecutive_failures
+        monkeypatch.setenv("HERMES_CRON_MAX_CONSECUTIVE_FAILURES", "0")
+        assert get_max_consecutive_failures() == 0
+
+    def test_env_invalid_falls_back(self, monkeypatch):
+        from cron.jobs import get_max_consecutive_failures, DEFAULT_MAX_CONSECUTIVE_FAILURES
+        monkeypatch.setenv("HERMES_CRON_MAX_CONSECUTIVE_FAILURES", "not-a-number")
+        # Invalid env is ignored; falls through to config/default (>= 0).
+        assert get_max_consecutive_failures() >= 0
+
+
 class TestAdvanceNextRun:
     """Tests for advance_next_run() — crash-safety for recurring jobs."""
 
