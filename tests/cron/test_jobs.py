@@ -386,6 +386,56 @@ class TestResolveJobRef:
         assert resolve_job_ref(j1["id"])["id"] == j1["id"]
         assert resolve_job_ref(j1["id"])["id"] != j2["id"]
 
+    def test_resolve_name_tolerates_surrounding_noise(self, tmp_cron_dir):
+        """A 'stop reminder <name>' reply resolves despite quotes/whitespace.
+
+        The name the user echoes back rarely matches byte-for-byte — it picks up
+        surrounding quotes, stray spaces, or a trailing newline. Those must not
+        cause the job to be silently 'not found' and keep firing.
+        """
+        from cron.jobs import resolve_job_ref
+
+        job = create_job(prompt="A", schedule="1h", name="캠프 인박스")
+        jid = job["id"]
+        for ref in (
+            "캠프 인박스 ",
+            " 캠프 인박스",
+            "캠프 인박스\n",
+            '"캠프 인박스"',
+            "「캠프 인박스」",
+            "캠프  인박스",  # doubled internal space
+        ):
+            assert resolve_job_ref(ref)["id"] == jid, f"failed for {ref!r}"
+
+    def test_resolve_name_tolerates_unicode_equivalents(self, tmp_cron_dir):
+        """Visually-identical Unicode forms resolve to the same job.
+
+        Korean names copied out of chat clients routinely arrive as decomposed
+        Hangul (NFD) or with full-width / non-breaking spaces — different bytes,
+        same glyphs. Exact matching would drop them and the reminder would never
+        stop.
+        """
+        import unicodedata
+
+        from cron.jobs import resolve_job_ref
+
+        job = create_job(
+            prompt="A", schedule="1h", name=unicodedata.normalize("NFC", "캠프 인박스")
+        )
+        jid = job["id"]
+        assert resolve_job_ref(unicodedata.normalize("NFD", "캠프 인박스"))["id"] == jid
+        assert resolve_job_ref("캠프　인박스")["id"] == jid  # full-width space
+        assert resolve_job_ref("캠프 인박스")["id"] == jid  # non-breaking space
+
+    def test_resolve_does_not_match_substring_or_unrelated(self, tmp_cron_dir):
+        """Tolerant matching must not become fuzzy — no substring/partial hits."""
+        from cron.jobs import resolve_job_ref
+
+        create_job(prompt="A", schedule="1h", name="캠프 인박스")
+        assert resolve_job_ref("캠프") is None
+        assert resolve_job_ref("인박스") is None
+        assert resolve_job_ref("회의 알림") is None
+
     def test_resolve_ambiguous_name_raises(self, tmp_cron_dir):
         """Two jobs sharing a name → refuse to pick, surface both IDs."""
         from cron.jobs import AmbiguousJobReference, resolve_job_ref

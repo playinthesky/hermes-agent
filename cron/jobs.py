@@ -13,6 +13,7 @@ import tempfile
 import threading
 import os
 import re
+import unicodedata
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -699,22 +700,54 @@ class AmbiguousJobReference(LookupError):
         )
 
 
+# Quote characters (straight, curly, and CJK corner brackets) that users or
+# the model routinely wrap a job name in when echoing it back.
+_JOB_REF_QUOTE_CHARS = "\"'`“”‘’「」"
+
+
+def _normalize_job_name_key(text: Any) -> str:
+    """Fold a job name / reference to a stable key for tolerant matching.
+
+    A "stop reminder <name>" reply — especially for non-ASCII (e.g. Korean)
+    names — routinely differs from the stored name by things that are visually
+    invisible, so an exact string match silently fails and the job is never
+    stopped. Normalize those away:
+
+    - Unicode NFC, so decomposed vs composed Hangul/accents compare equal.
+    - Collapse any run of Unicode whitespace (incl. full-width U+3000 and
+      non-breaking U+00A0) to a single ASCII space.
+    - Drop surrounding quotes and outer whitespace.
+    - Case-fold, so ASCII names stay case-insensitive.
+    """
+    norm = unicodedata.normalize("NFC", str(text or ""))
+    norm = " ".join(norm.split())  # collapse all Unicode whitespace runs
+    norm = norm.strip(_JOB_REF_QUOTE_CHARS).strip()
+    return norm.casefold()
+
+
 def resolve_job_ref(ref: str) -> Optional[Dict[str, Any]]:
     """Resolve a job reference (ID or name) to a job record.
 
     - Exact ID match wins (works even if a different job's name equals this ID).
-    - Otherwise, case-insensitive name match.
+    - Otherwise, tolerant name match (see ``_normalize_job_name_key``) so a name
+      the user clearly meant still resolves despite NFC/NFD, full-width or
+      non-breaking spaces, stray quotes, or surrounding whitespace.
     - If a name matches more than one job, raises AmbiguousJobReference so the
       caller can surface the matching IDs rather than silently picking one.
     """
     if not ref:
         return None
     jobs = load_jobs()
+    ref_stripped = str(ref).strip()
     for job in jobs:
-        if job["id"] == ref:
+        if job["id"] == ref or job["id"] == ref_stripped:
             return _normalize_job_record(job)
-    ref_lower = ref.lower()
-    name_matches = [j for j in jobs if (j.get("name") or "").lower() == ref_lower]
+    ref_key = _normalize_job_name_key(ref)
+    if not ref_key:
+        return None
+    name_matches = [
+        j for j in jobs if _normalize_job_name_key(j.get("name")) == ref_key
+    ]
     if not name_matches:
         return None
     if len(name_matches) > 1:
